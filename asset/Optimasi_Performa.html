@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Optimasi Performa Web</title>
+  <meta name="description" content="Portofolio M. Hasymi Somaida — developer / designer dengan fokus pada front-end, UI/UX, dan project modern." />
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%92%BB%3C/text%3E%3C/svg%3E">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #ff5722; /* Oranye untuk energi/kecepatan */
+            text-align: center;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #ff5722;
+        }
+        h2 {
+            color: #00796b; /* Hijau toska untuk efisiensi */
+            margin-top: 30px;
+            padding: 10px 0;
+            border-bottom: 2px solid #4db6ac;
+        }
+        h3 {
+            color: #3f51b5; /* Biru gelap untuk fokus */
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3f51b5;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+        .tip-box {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e3f2fd;
+            border: 1px solid #90caf9;
+            border-radius: 8px;
+        }
+        .tip-box h3 {
+            color: #1976d2;
+            margin-top: 0;
+            border-bottom: 1px solid #1976d2;
+            padding-bottom: 5px;
+        }
+        strong {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+ <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">MHS</a>
+      <nav class="nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="#">Roadmap Optimasi Performa Web</a></li>
+    
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-pressed="false" aria-label="Toggle dark mode">🌙</button>
+        <button class="burger" aria-label="Buka navigasi" aria-expanded="false" id="burger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+
+    <div class="container">
+        <h1>🚀 Roadmap Belajar Optimasi Performa Web</h1>
+
+        <p>Roadmap ini memandu Anda untuk meningkatkan kecepatan situs, yang merupakan kunci untuk User Experience (UX) dan Search Engine Optimization (SEO).</p>
+
+        <h2>Fase 1: Alat Ukur & Metrik (Tools & Metrics)</h2>
+        <h3>Fokus: Memahami Cara Mengukur Performa</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fokus</th>
+                    <th>Materi yang Dipelajari</th>
+                    <th>Keterampilan Utama</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Metrik Kritis</strong></td>
+                    <td>1. **Core Web Vitals:** Memahami **LCP** (*Largest Contentful Paint*), **FID** (*First Input Delay*), dan **CLS** (*Cumulative Layout Shift*).<br>2. Metrik Lain: FCP, TTI, dan Total Blocking Time (TBT).</td>
+                    <td>Mengetahui target dan standar performa yang baik.</td>
+                </tr>
+                <tr>
+                    <td><strong>Alat Analisis</strong></td>
+                    <td>1. **Lighthouse:** Menggunakan fitur *audit* di Chrome DevTools.<br>2. **PageSpeed Insights:** Menganalisis data *real-world* (Field Data) dan *lab* (Lab Data).<br>3. **Chrome DevTools (Network Tab):** Membaca *waterfall chart* dan mengidentifikasi *bottleneck*.</td>
+                    <td>Mendiagnosis sumber masalah performa dan urutan pemuatan aset.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Fase 2: Optimasi Aset & Pemuatan (Assets & Loading)</h2>
+        <h3>Fokus: Mengurangi Ukuran File dan Memprioritaskan Muatan</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fokus</th>
+                    <th>Materi yang Dipelajari</th>
+                    <th>Keterampilan Utama</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Optimasi Gambar</strong></td>
+                    <td>1. **Format Modern:** Menggunakan **WebP** atau **AVIF**.<br>2. **Resizing & Compression:** Menyediakan ukuran yang tepat (`srcset`, `<picture>`).<br>3. **Lazy Loading:** Menggunakan `loading="lazy"` untuk gambar yang tidak langsung terlihat.</td>
+                    <td>Mengurangi ukuran aset visual dan mempercepat LCP.</td>
+                </tr>
+                <tr>
+                    <td><strong>Optimasi Kode (CSS/JS)</strong></td>
+                    <td>1. **Minifikasi & Bundling:** Menghilangkan spasi/komentar (menggunakan Webpack/Vite).<br>2. **Code Splitting:** Membagi kode JS menjadi *chunk* yang lebih kecil.<br>3. **Critical CSS:** Menyisipkan CSS penting (*above-the-fold*) langsung di `<head>`.</td>
+                    <td>Mengurangi TBT dan mempercepat First Contentful Paint (FCP).</td>
+                </tr>
+                <tr>
+                    <td><strong>Caching</strong></td>
+                    <td>**Browser Caching:** Menggunakan *Cache-Control* HTTP *header* untuk efisiensi muat ulang (*subsequent loads*).</td>
+                    <td>Memastikan pengguna tidak mengunduh ulang aset statis yang sama.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Fase 3: Pemuatan Lanjutan & UX (Advanced Loading & UX)</h2>
+        <h3>Fokus: Stabilitas Tata Letak dan Interaksi</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fokus</th>
+                    <th>Materi yang Dipelajari</th>
+                    <th>Keterampilan Utama</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Pre-Loading & Prioritas</strong></td>
+                    <td>**Resource Hint:** Menggunakan `<link rel="preload">` (aset penting) dan `<link rel="preconnect">` (domain eksternal).</td>
+                    <td>Mengatur urutan dan memprioritaskan pemuatan aset krusial.</td>
+                </tr>
+                <tr>
+                    <td><strong>Layout Stability (CLS)</strong></td>
+                    <td>1. **Set Dimensi:** Selalu menentukan `width` dan `height` pada gambar.<br>2. Menghindari *Font Shifting* (Menggunakan `font-display: swap`).</td>
+                    <td>Mengurangi Cumulative Layout Shift (CLS) atau pergeseran tata letak yang mengganggu.</td>
+                </tr>
+                <tr>
+                    <td><strong>Interaksi (FID)</strong></td>
+                    <td>**Web Workers:** Menggunakan *thread* latar belakang untuk memproses tugas JavaScript berat.</td>
+                    <td>Menjaga *Main Thread* agar responsif terhadap input pengguna (mengurangi FID/TBT).</td>
+                </tr>
+                <tr>
+                    <td><strong>Server-Side Rendering (SSR)</strong></td>
+                    <td>Memahami konsep dan Framework (Next.js/Nuxt.js) untuk mengirim HTML yang sudah dirender.</td>
+                    <td>Mempercepat Largest Contentful Paint (LCP) di awal muatan.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip-box">
+            <h3>💡 Tips Penting untuk Belajar</h3>
+            <ul>
+                <li><strong>Proyek Praktik:</strong> Ambil proyek Front-end yang sudah jadi, lalu uji dan tingkatkan skor **Lighthouse**-nya. Jadikan target untuk mencapai skor >90.</li>
+                <li><strong>Simulasi Kondisi Nyata:</strong> Selalu gunakan **Throttle** di Chrome DevTools (Network Tab) untuk menguji performa pada koneksi seluler lambat.</li>
+                <li><strong>Fokus pada CWV:</strong> Jadikan **LCP, FID, dan CLS** sebagai fokus utama. Optimasi lainnya akan mengikuti.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
