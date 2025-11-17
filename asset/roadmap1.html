@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Roadmap jadi Progremer</title>
+  <meta name="description" content="Portofolio M. Hasymi Somaida — developer / designer dengan fokus pada front-end, UI/UX, dan project modern." />
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%92%BB%3C/text%3E%3C/svg%3E">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artikel Interaktif: Pengantar Full-Stack</title>
+    <style>
+        /* --- Bagian CSS (Styling) --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        /* Styling untuk Accordion Header */
+        .accordion {
+            background-color: #f8f8f8;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 18px;
+            transition: 0.4s;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Warna saat aktif/hover */
+        .active, .accordion:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Styling untuk Panel Konten */
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0; /* Awalnya tersembunyi */
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-left: 3px solid #007bff;
+            margin-bottom: 10px;
+        }
+
+        .panel p {
+            padding-top: 10px;
+        }
+
+        /* Styling untuk simbol */
+        .accordion::after {
+            content: '\002B'; /* Simbol Plus */
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active::after {
+            content: "\2212"; /* Simbol Minus */
+        }
+    </style>
+</head>
+<body>
+
+
+ <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">MHS</a>
+      <nav class="nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="#">Roadmap Jadi Progremer</a></li>
+    
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-pressed="false" aria-label="Toggle dark mode">🌙</button>
+        <button class="burger" aria-label="Buka navigasi" aria-expanded="false" id="burger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+
+    <div class="container">
+        <h1>🚀 Pengantar Full-Stack Web Development</h1>
+        <p>Full-Stack Developer adalah pengembang yang mampu bekerja baik di sisi **Frontend** (apa yang dilihat pengguna) maupun **Backend** (logika server dan database).</p>
+
+        <button class="accordion">1. Frontend: Wajah Aplikasi Anda</button>
+        <div class="panel">
+            <p><strong>Frontend</strong> adalah sisi klien (browser). Fokusnya adalah pada tata letak, desain, dan interaksi visual pengguna.</p>
+            <ul>
+                <li>**HTML:** Kerangka struktural konten.</li>
+                <li>**CSS:** Untuk styling dan estetika (warna, tata letak).</li>
+                <li>**JavaScript:** Untuk menambahkan interaktivitas dinamis (tombol, animasi).</li>
+            </ul>
+            <p>Tanpa Frontend, tidak ada yang dapat dilihat atau diklik oleh pengguna akhir.</p>
+        </div>
+
+        <button class="accordion">2. Backend: Otak dan Logika Server</button>
+        <div class="panel">
+            <p><strong>Backend</strong> berjalan di server dan bertanggung jawab atas semua logika di balik layar.</p>
+            <ul>
+                <li>**Tugas Utama:** Memproses permintaan, mengautentikasi pengguna (login), dan menjalankan logika bisnis.</li>
+                <li>**Bahasa Populer:** Python (Django/Flask), JavaScript (Node.js/Express), PHP (Laravel).</li>
+                <li>**Hasil:** Menyediakan data yang terstruktur (seringkali dalam format JSON) melalui **API** ke Frontend.</li>
+            </ul>
+            <p>Ini adalah bagian yang menentukan bagaimana data diproses dan disimpan dengan aman.</p>
+        </div>
+
+        <button class="accordion">3. Database: Penyimpanan Data Permanen</button>
+        <div class="panel">
+            <p>Database adalah tempat aplikasi menyimpan semua data secara permanen, seperti informasi pengguna, produk, atau transaksi.</p>
+            <ul>
+                <li>**Relasional (SQL):** Data disimpan dalam tabel yang saling terhubung. Contoh: MySQL, PostgreSQL. Cocok untuk data terstruktur.</li>
+                <li>**Non-Relasional (NoSQL):** Data disimpan dalam format fleksibel (dokumen/key-value). Contoh: MongoDB, Redis. Cocok untuk data yang berubah cepat.</li>
+            </ul>
+            <p>Backend bertanggung jawab untuk berkomunikasi dengan Database, menggunakan bahasa query khusus seperti SQL.</p>
+        </div>
+
+        <p style="margin-top: 30px; text-align: right; font-style: italic;">Klik pada setiap judul untuk melihat detailnya!</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function() {
+                    // Toggle class 'active' pada tombol yang diklik
+                    this.classList.toggle("active");
+
+                    // Ambil elemen panel (konten) yang ada setelah tombol ini
+                    var panel = this.nextElementSibling;
+
+                    // Logika untuk menampilkan atau menyembunyikan panel
+                    if (panel.style.maxHeight) {
+                        // Jika sudah terbuka, tutup
+                        panel.style.maxHeight = null;
+                    } else {
+                        // Tutup semua panel lain yang mungkin terbuka (opsional, untuk tampilan bersih)
+                        var allPanels = document.getElementsByClassName("panel");
+                        var allAccordions = document.getElementsByClassName("accordion");
+                        
+                        for (var j = 0; j < allPanels.length; j++) {
+                            allPanels[j].style.maxHeight = null;
+                            allAccordions[j].classList.remove("active");
+                        }
+                        
+                        // Buka panel yang diklik
+                        // Gunakan 'scrollHeight' agar max-height sesuai dengan tinggi konten
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                        this.classList.add("active"); // Pastikan class 'active' diaktifkan kembali
+                    } 
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
