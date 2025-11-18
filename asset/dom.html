@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <meta name="description" content="Portofolio M. Hasymi Somaida — developer / designer dengan fokus pada front-end, UI/UX, dan project modern." />
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%92%BB%3C/text%3E%3C/svg%3E">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <style>
+        /* --- Bagian CSS (Styling) --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        /* Styling untuk Accordion Header */
+        .accordion {
+            background-color: #f8f8f8;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 18px;
+            transition: 0.4s;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Warna saat aktif/hover */
+        .active, .accordion:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Styling untuk Panel Konten */
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0; /* Awalnya tersembunyi */
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-left: 3px solid #007bff;
+            margin-bottom: 10px;
+        }
+
+        .panel p {
+            padding-top: 10px;
+        }
+
+        /* Styling untuk simbol */
+        .accordion::after {
+            content: '\002B'; /* Simbol Plus */
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active::after {
+            content: "\2212"; /* Simbol Minus */
+        }
+    </style>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teori DOM (Document Object Model)</title>
+<style>
+    body { font-family: Arial, sans-serif; line-height: 1.7; margin: 20px; background: #f9f9f9; }
+    h1,  h3 { color: #333; }
+    code { background: #eaeaea; padding: 3px 6px; border-radius: 4px; }
+    pre { background: #272822; color: #f8f8f2; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    .section { background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+</style>
+</head>
+<body>
+
+
+      <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">MHS</a>
+      <nav class="nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="#">Mudah Progremer</a></li>
+    
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-pressed="false" aria-label="Toggle dark mode">🌙</button>
+        <button class="burger" aria-label="Buka navigasi" aria-expanded="false" id="burger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+<h1>📘 Teori DOM (Document Object Model)</h1>
+
+<div class="section">
+<h2>🔎 Apa itu DOM?</h2>
+<p><strong>DOM (Document Object Model)</strong> adalah representasi struktur dokumen HTML sebagai objek yang dapat diakses dan dimodifikasi menggunakan JavaScript.</p>
+</div>
+
+<div class="section">
+<h2>🌳 Struktur DOM sebagai Pohon</h2>
+<ul>
+<li><code>document</code> sebagai root</li>
+<li>Node merepresentasikan elemen, teks, komentar, dll.</li>
+<li>Elemen dapat memiliki child (anak) sehingga membentuk tree.</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>🧭 Node vs Element</h2>
+<p><strong>Node</strong> mencakup semua entitas dalam DOM, sedangkan <strong>Element</strong> hanya node yang merupakan elemen HTML.</p>
+</div>
+
+<div class="section">
+<h2>🛠 Cara Mengakses Elemen</h2>
+<pre><code>document.getElementById("id")
+document.getElementsByClassName("class")
+document.querySelector("selector")
+document.querySelectorAll("selector")
+</code></pre>
+</div>
+
+<div class="section">
+<h2>✏️ Membaca & Mengubah Konten</h2>
+<pre><code>element.textContent = "Halo!";
+element.innerHTML = "&lt;b&gt;Halo&lt;/b&gt;";
+</code></pre>
+</div>
+
+<div class="section">
+<h2>🧩 Manipulasi Elemen</h2>
+<pre><code>const div = document.createElement("div");
+div.textContent = "Elemen baru";
+document.body.appendChild(div);
+</code></pre>
+</div>
+
+<div class="section">
+<h2>⚡ Event Handling & Propagation</h2>
+<pre><code>element.addEventListener("click", function(){
+  alert("Clicked!");
+});
+</code></pre>
+</div>
+
+<div class="section">
+<h2>⏱ DOMContentLoaded vs load</h2>
+<pre><code>document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM Ready");
+});
+</code></pre>
+</div>
+
+<div class="section">
+<h2>🧭 Contoh Todo List Sederhana</h2>
+<pre><code>&lt;ul id="list"&gt;&lt;/ul&gt;
+&lt;input id="txt"&gt;
+&lt;button id="add"&gt;Add&lt;/button&gt;
+
+&lt;script&gt;
+  const list = document.getElementById('list');
+  const txt = document.getElementById('txt');
+  document.getElementById('add').addEventListener('click', () => {
+    const li = document.createElement('li');
+    li.textContent = txt.value;
+    li.addEventListener('click', () => li.remove());
+    list.appendChild(li);
+    txt.value = '';
+  });
+&lt;/script&gt;
+</code></pre>
+</div>
+
+</body>
+</html>

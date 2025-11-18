@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+
+
+ <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <meta name="description" content="Portofolio M. Hasymi Somaida — developer / designer dengan fokus pada front-end, UI/UX, dan project modern." />
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%92%BB%3C/text%3E%3C/svg%3E">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <style>
+        /* --- Bagian CSS (Styling) --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        /* Styling untuk Accordion Header */
+        .accordion {
+            background-color: #f8f8f8;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 18px;
+            transition: 0.4s;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Warna saat aktif/hover */
+        .active, .accordion:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Styling untuk Panel Konten */
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0; /* Awalnya tersembunyi */
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-left: 3px solid #007bff;
+            margin-bottom: 10px;
+        }
+
+        .panel p {
+            padding-top: 10px;
+        }
+
+        /* Styling untuk simbol */
+        .accordion::after {
+            content: '\002B'; /* Simbol Plus */
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active::after {
+            content: "\2212"; /* Simbol Minus */
+        }
+    </style>
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Teori JavaScript (ES6+)</title>
+<style>
+  :root{
+    --bg:#f8fafc;
+    --card:#ffffff;
+    --muted:#6b7280;
+    --accent:#0f172a;
+    --primary:#2563eb;
+  }
+  body{
+    margin:0;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:var(--bg);
+    color:var(--accent);
+    line-height:1.6;
+    padding:28px;
+  }
+  .container{
+    max-width:980px;
+    margin:0 auto;
+  }
+  header h1{
+    margin:0 0 8px 0;
+    font-size:1.6rem;
+  }
+  header p{
+    margin:0 0 18px 0;
+    color:var(--muted);
+  }
+  .card{
+    background:var(--card);
+    padding:18px;
+    border-radius:10px;
+    box-shadow:0 6px 20px rgba(2,6,23,0.06);
+    margin-bottom:18px;
+  }
+  h2{ margin-top:0; color:var(--primary); }
+  pre{
+    background:#0b1220;
+    color:#e6eef8;
+    padding:14px;
+    border-radius:8px;
+    overflow:auto;
+  }
+  code{ background:#eef2ff; padding:2px 6px; border-radius:6px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace; }
+  table{ width:100%; border-collapse:collapse; margin:8px 0; }
+  th, td { border:1px solid #e6e9ef; padding:8px; text-align:left; }
+  th { background:#f1f5f9; }
+  .small{ font-size:0.95rem; color:var(--muted); }
+  ul{ margin:6px 0 12px 20px; }
+  footer{ text-align:right; color:var(--muted); font-size:0.9rem; margin-top:8px; }
+  @media (max-width:600px){
+    body{ padding:16px; }
+  }
+</style>
+</head>
+<body>
+
+    <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">MHS</a>
+      <nav class="nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="#">Mudah Progremer</a></li>
+    
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-pressed="false" aria-label="Toggle dark mode">🌙</button>
+        <button class="burger" aria-label="Buka navigasi" aria-expanded="false" id="burger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <div class="container">
+    <header>
+      <h1>Teori JavaScript Modern (ES6+)</h1>
+      <p class="small">Ringkasan fitur-fitur penting ES6 ke atas (ES6+), penjelasan singkat, dan contoh kode yang mudah dipahami.</p>
+    </header>
+
+    <section class="card">
+      <h2>🔰 Apa itu JavaScript ES6+?</h2>
+      <p>ES6 (ECMAScript 2015) adalah versi standar JavaScript modern yang memperkenalkan fitur-fitur baru untuk membuat kode lebih efisien, modular, dan mudah dibaca. Istilah <strong>ES6+</strong> mencakup ES6 dan rilis selanjutnya.</p>
+      <p class="small"><strong>Tujuan pembaruan:</strong> meningkatkan struktur kode, dukungan modular & asynchronous, dan mempermudah pengembangan aplikasi skala besar.</p>
+    </section>
+
+    <section class="card">
+      <h2>🧩 Fitur-fitur Utama ES6+</h2>
+
+      <h3>1. <code>let</code> &amp; <code>const</code> (Deklarasi variabel modern)</h3>
+      <table>
+        <tr><th>Keyword</th><th>Sifat</th><th>Keterangan</th></tr>
+        <tr><td><code>var</code></td><td>Function scope</td><td>Bisa redeclare &amp; reassign (lama)</td></tr>
+        <tr><td><code>let</code></td><td>Block scope</td><td>Bisa reassign</td></tr>
+        <tr><td><code>const</code></td><td>Block scope</td><td>Tidak bisa reassign (konstan)</td></tr>
+      </table>
+
+      <pre>// contoh
+let age = 21;
+age = 22; // boleh
+
+const pi = 3.14;
+pi = 3.15; // error (tidak boleh diubah)
+</pre>
+
+      <h3>2. Arrow Function (Fungsi ringkas)</h3>
+      <pre>// versi lama
+function greet(name) {
+  return `Hello ${name}`;
+}
+
+// ES6 (arrow function)
+const greet = name => `Hello ${name}`;</pre>
+      <p class="small">Arrow function <em>lebih singkat</em> dan <strong>tidak mengikat</strong> nilai <code>this</code> seperti function biasa.</p>
+
+      <h3>3. Template Literals</h3>
+      <pre>const name = "Raka";
+console.log(`Hai nama saya ${name}`);</pre>
+
+      <h3>4. Default Parameter</h3>
+      <pre>function sayHello(name = "Guest") {
+  console.log(`Hello ${name}`);
+}
+sayHello(); // Hello Guest</pre>
+
+      <h3>5. Destructuring (Unpacking data)</h3>
+      <pre>// Array
+const colors = ["red","green","blue"];
+const [a,b] = colors; // a = "red", b = "green"
+
+// Object
+const user = { name: "Alya", age: 19 };
+const { name, age } = user;</pre>
+
+      <h3>6. Spread &amp; Rest Operator (<code>...</code>)</h3>
+      <pre>// Spread (menggabung / menyalin)
+const arr1 = [1,2];
+const arr2 = [...arr1, 3, 4]; // [1,2,3,4]
+
+// Rest (mengumpulkan parameter)
+function sum(...nums) {
+  return nums.reduce((a,b) => a + b, 0);
+}
+console.log(sum(1,2,3,4)); // 10</pre>
+
+      <h3>7. Modules (<code>import</code> &amp; <code>export</code>)</h3>
+      <pre>// export.js
+export const name = "JavaScript";
+
+// import.js
+import { name } from "./export.js";</pre>
+
+      <h3>8. Class (Gaya OOP)</h3>
+      <pre>class Person {
+  constructor(name) {
+    this.name = name;
+  }
+  intro() {
+    console.log(`Hello, I'm ${this.name}`);
+  }
+}
+const p1 = new Person("Nia");
+p1.intro();</pre>
+
+      <h3>9. Promise &amp; Async/Await (Asynchronous modern)</h3>
+      <pre>// Promise
+const getData = new Promise(resolve => {
+  setTimeout(() => resolve("Data Loaded"), 1000);
+});
+getData.then(result => console.log(result));
+
+// Async / Await
+async function fetchData() {
+  const data = await getData;
+  console.log(data);
+}
+fetchData();</pre>
+    </section>
+
+    <section class="card">
+      <h2>🥊 Perbandingan Singkat</h2>
+      <table>
+        <tr><th>Fitur</th><th>Kelebihan</th><th>Contoh Penggunaan</th></tr>
+        <tr><td>let / const</td><td>Aman &amp; jelas scope</td><td>Variabel modern</td></tr>
+        <tr><td>arrow function</td><td>Ringkas &amp; cepat</td><td>Callback, event handler</td></tr>
+        <tr><td>destructuring</td><td>Mudah ambil data</td><td>Object &amp; array</td></tr>
+        <tr><td>spread / rest</td><td>Mudah gabung / pecah</td><td>Array, object, function</td></tr>
+        <tr><td>module</td><td>Modular &amp; rapi</td><td>Aplikasi besar</td></tr>
+        <tr><td>promise / async</td><td>Tidak blocking</td><td>Fetching API</td></tr>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>📌 Kesimpulan</h2>
+      <p>ES6+ membuat JavaScript lebih modern, efisien, dan cocok untuk aplikasi web saat ini. Konsep inti yang penting dipelajari antara lain: <code>let/const</code>, arrow function, destructuring, modules, dan async/await. Pemahaman ES6+ sangat membantu ketika menggunakan framework modern seperti React, Vue, atau Angular.</p>
+      <p class="small">Mau dilanjutkan dengan contoh proyek mini (to-do list), latihan soal, atau konversi ke PDF / DOCX?</p>
+    </section>
+
+    <footer>MHS</footer>
+  </div>
+</body>
+</html>

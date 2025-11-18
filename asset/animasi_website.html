@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+
+
+ <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <meta name="description" content="Portofolio M. Hasymi Somaida — developer / designer dengan fokus pada front-end, UI/UX, dan project modern." />
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%92%BB%3C/text%3E%3C/svg%3E">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <style>
+        /* --- Bagian CSS (Styling) --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        /* Styling untuk Accordion Header */
+        .accordion {
+            background-color: #f8f8f8;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 18px;
+            transition: 0.4s;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Warna saat aktif/hover */
+        .active, .accordion:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Styling untuk Panel Konten */
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0; /* Awalnya tersembunyi */
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-left: 3px solid #007bff;
+            margin-bottom: 10px;
+        }
+
+        .panel p {
+            padding-top: 10px;
+        }
+
+        /* Styling untuk simbol */
+        .accordion::after {
+            content: '\002B'; /* Simbol Plus */
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active::after {
+            content: "\2212"; /* Simbol Minus */
+        }
+    </style>
+
+
+
+
+<title>Teori Animasi pada Pengembangan Website</title>
+<style>
+body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+h1, h2, h3 { color: #333; }
+code { background: #f4f4f4; padding: 4px; display: block; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+
+
+
+ <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">MHS</a>
+      <nav class="nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="#">Mudah Progremer</a></li>
+    
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-pressed="false" aria-label="Toggle dark mode">🌙</button>
+        <button class="burger" aria-label="Buka navigasi" aria-expanded="false" id="burger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+
+
+
+
+<h1>Teori Animasi dalam Pengembangan Website</h1>
+<p>Animasi pada website adalah pergerakan atau perubahan visual yang dibuat untuk meningkatkan pengalaman pengguna (UI/UX), memperjelas informasi, atau membuat tampilan web lebih menarik.</p>
+
+<h2>1. Animasi sebagai Visual Feedback</h2>
+<p>Animasi membantu memberi tahu pengguna bahwa suatu aksi berhasil atau sedang berlangsung.</p>
+<h3>Contoh:</h3>
+<code>
+&lt;button class="btn"&gt;Klik Saya&lt;/button&gt;
+
+&lt;style&gt;
+.btn {
+  padding: 10px 20px;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  transition: 0.2s;
+}
+
+.btn:active {
+  transform: scale(0.9);
+}
+&lt;/style&gt;
+</code>
+
+<h2>2. Animasi sebagai Guiding Attention</h2>
+<p>Animasi membantu mengarahkan perhatian pengguna ke elemen penting.</p>
+<h3>Contoh:</h3>
+<code>
+&lt;p class="fade"&gt;Selamat datang di website kami!&lt;/p&gt;
+
+&lt;style&gt;
+.fade {
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+&lt;/style&gt;
+</code>
+
+<h2>3. Animasi sebagai Navigation Aid</h2>
+<p>Animasi memberikan transisi halus antar bagian website.</p>
+<h3>Contoh:</h3>
+<code>
+&lt;div class="menu"&gt;Menu Samping&lt;/div&gt;
+
+&lt;style&gt;
+.menu {
+  width: 200px;
+  height: 100vh;
+  background: #2ecc71;
+  position: fixed;
+  left: -200px;
+  top: 0;
+  transition: 0.3s;
+}
+
+.menu:hover {
+  left: 0;
+}
+&lt;/style&gt;
+</code>
+
+<h2>4. Animasi untuk Estetika</h2>
+<h3>Contoh:</h3>
+<code>
+&lt;div class="float"&gt;✨&lt;/div&gt;
+
+&lt;style&gt;
+.float {
+  font-size: 30px;
+  animation: floatUp 3s infinite ease-in-out;
+}
+
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+&lt;/style&gt;
+</code>
+
+<h2>5. Animasi untuk Storytelling</h2>
+<h3>Contoh:</h3>
+<code>
+&lt;div class="loading"&gt;&lt;/div&gt;
+
+&lt;style&gt;
+.loading {
+  width: 0;
+  height: 5px;
+  background: #f39c12;
+  animation: load 3s forwards;
+}
+
+@keyframes load {
+  to {
+    width: 100%;
+  }
+}
+&lt;/style&gt;
+</code>
+
+<h2>6. Prinsip Dasar Animasi Web</h2>
+<ul>
+<li>Sederhana</li>
+<li>Cepat (200–500ms)</li>
+<li>Konsisten</li>
+<li>Tujuan Jelas</li>
+</ul>
+
+<h2>7. Teknologi Animasi dalam Website</h2>
+<ul>
+<li>CSS Animations & Transitions</li>
+<li>JavaScript Animations</li>
+<li>SVG Animations</li>
+</ul>
+
+</body>
+</html>

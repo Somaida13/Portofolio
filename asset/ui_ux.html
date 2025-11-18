@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <meta name="description" content="Portofolio M. Hasymi Somaida — developer / designer dengan fokus pada front-end, UI/UX, dan project modern." />
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%92%BB%3C/text%3E%3C/svg%3E">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <style>
+        /* --- Bagian CSS (Styling) --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        /* Styling untuk Accordion Header */
+        .accordion {
+            background-color: #f8f8f8;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 18px;
+            transition: 0.4s;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Warna saat aktif/hover */
+        .active, .accordion:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Styling untuk Panel Konten */
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0; /* Awalnya tersembunyi */
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-left: 3px solid #007bff;
+            margin-bottom: 10px;
+        }
+
+        .panel p {
+            padding-top: 10px;
+        }
+
+        /* Styling untuk simbol */
+        .accordion::after {
+            content: '\002B'; /* Simbol Plus */
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active::after {
+            content: "\2212"; /* Simbol Minus */
+        }
+    </style>
+
+
+
+
+
+<title> UI/UX</title>
+<style>
+body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; background:#fafafa; }
+h1, h2, h3 { color: #333; }
+section { background:#fff; padding:15px; border-radius:10px; margin-bottom:15px; box-shadow:0 2px 6px rgba(0,0,0,0.07); }
+ul { margin-left:20px; }
+code { background:#f4f4f4; padding:6px; display:block; border-radius:6px; white-space:pre-wrap; }
+</style>
+</head>
+<body>
+
+ <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">MHS</a>
+      <nav class="nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="#">Mudah Progremer</a></li>
+    
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-pressed="false" aria-label="Toggle dark mode">🌙</button>
+        <button class="burger" aria-label="Buka navigasi" aria-expanded="false" id="burger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+
+<h1>Teori UI/UX (Bahasa Mudah + Contoh Praktis)</h1>
+
+<section>
+<h2>1. Apa Itu UI (User Interface)?</h2>
+<p>UI adalah tampilan visual yang dilihat pengguna, seperti warna, tombol, ikon, layout, dan font.</p>
+<h3>Contoh UI yang Baik</h3>
+<ul>
+<li>Tombol warna kontras</li>
+<li>Font jelas</li>
+<li>Layout rapi</li>
+</ul>
+
+<h3>Contoh UI Buruk</h3>
+<ul>
+<li>Warna terlalu mencolok</li>
+<li>Font kecil</li>
+<li>Elemen berantakan</li>
+</ul>
+</section>
+
+<section>
+<h2>2. Apa Itu UX (User Experience)?</h2>
+<p>UX adalah pengalaman pengguna saat memakai website atau aplikasi, termasuk kenyamanan dan kemudahan.</p>
+
+<h3>Contoh UX yang Baik</h3>
+<ul>
+<li>Proses mudah</li>
+<li>Loading cepat</li>
+<li>Error jelas</li>
+</ul>
+
+<h3>Contoh UX Buruk</h3>
+<ul>
+<li>Form terlalu banyak</li>
+<li>Menu membingungkan</li>
+<li>Error tanpa penjelasan</li>
+</ul>
+</section>
+
+<section>
+<h2>3. Perbedaan UI & UX</h2>
+<table border="1" cellpadding="8" cellspacing="0">
+<tr><th>UI</th><th>UX</th></tr>
+<tr><td>Tampilan visual</td><td>Pengalaman</td></tr>
+<tr><td>Warna, ikon, layout</td><td>Alur, kenyamanan</td></tr>
+<tr><td>Bagian yang dilihat</td><td>Bagian yang dirasa</td></tr>
+</table>
+</section>
+
+<section>
+<h2>4. Prinsip Dasar UI</h2>
+<ul>
+<li>Konsistensi</li>
+<li>Font mudah dibaca</li>
+<li>Kontras warna</li>
+<li>Hirarki visual</li>
+</ul>
+</section>
+
+<section>
+<h2>5. Prinsip Dasar UX</h2>
+<ul>
+<li>Sederhana</li>
+<li>Mudah dipahami</li>
+<li>Cepat</li>
+<li>Minim error</li>
+<li>Ada feedback</li>
+</ul>
+</section>
+
+<section>
+<h2>6. Contoh UI/UX pada Halaman Login</h2>
+<h3>Contoh UI</h3>
+<code>
+&lt;input type="email" placeholder="Masukkan email" /&gt;
+&lt;input type="password" placeholder="Masukkan password" /&gt;
+&lt;button&gt;Login&lt;/button&gt;
+</code>
+<p>UX baik: tombol jelas, form sedikit, error mudah dimengerti.</p>
+</section>
+
+<section>
+<h2>7. Contoh UI/UX Buruk</h2>
+<ul>
+<li>Form 10 input</li>
+<li>Tombol kecil dan warna tidak terlihat</li>
+<li>Loading lama</li>
+</ul>
+</section>
+
+<section>
+<h2>Kesimpulan</h2>
+<p>UI = tampilan. UX = pengalaman. Keduanya harus bekerja bersama agar website enak dilihat dan digunakan.</p>
+</section>
+
+</body>
+</html>

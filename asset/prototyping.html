@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <meta name="description" content="Portofolio M. Hasymi Somaida — developer / designer dengan fokus pada front-end, UI/UX, dan project modern." />
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%92%BB%3C/text%3E%3C/svg%3E">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <style>
+        /* --- Bagian CSS (Styling) --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        /* Styling untuk Accordion Header */
+        .accordion {
+            background-color: #f8f8f8;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 18px;
+            transition: 0.4s;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Warna saat aktif/hover */
+        .active, .accordion:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Styling untuk Panel Konten */
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0; /* Awalnya tersembunyi */
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-left: 3px solid #007bff;
+            margin-bottom: 10px;
+        }
+
+        .panel p {
+            padding-top: 10px;
+        }
+
+        /* Styling untuk simbol */
+        .accordion::after {
+            content: '\002B'; /* Simbol Plus */
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active::after {
+            content: "\2212"; /* Simbol Minus */
+        }
+    </style>
+
+
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title> Prototyping </title>
+<style>
+  :root{
+    --bg:#f7f9fc; --card:#ffffff; --muted:#6b7280; --accent:#0ea5a4;
+    --maxw:900px;
+  }
+  body{
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:var(--bg);
+    color:#0f172a;
+    margin:0;
+    padding:36px 18px;
+  }
+  .container{max-width:var(--maxw); margin:0 auto;}
+  header{margin-bottom:20px;}
+  h1{font-size:26px; margin:0 0 6px;}
+  p.lead{color:var(--muted); margin:0 0 18px;}
+  section{background:var(--card); padding:18px; border-radius:12px; box-shadow:0 6px 18px rgba(2,6,23,0.06); margin-bottom:14px;}
+  h2{font-size:18px; margin:0 0 8px;}
+  h3{font-size:15px; margin:10px 0 6px; color:#064e3b;}
+  ul{margin:6px 0 0 20px;}
+  pre{background:#0b1220; color:#e6eef8; padding:12px; border-radius:8px; overflow:auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace; font-size:13px;}
+  .badge{display:inline-block; background:var(--accent); color:white; padding:4px 8px; border-radius:999px; font-size:12px;}
+  .note{font-size:13px; color:var(--muted); margin-top:8px;}
+  .example{background:#f1f5f9; padding:10px; border-radius:8px; margin-top:8px;}
+  footer{font-size:13px; color:var(--muted); text-align:center; margin-top:14px;}
+  table{width:100%; border-collapse:collapse; margin-top:8px;}
+  td, th{border:1px solid #eef2f7; padding:8px; text-align:left;}
+</style>
+</head>
+<body>
+
+
+ <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">MHS</a>
+      <nav class="nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="#">Mudah Progremer</a></li>
+    
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-pressed="false" aria-label="Toggle dark mode">🌙</button>
+        <button class="burger" aria-label="Buka navigasi" aria-expanded="false" id="burger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+
+
+  <div class="container">
+    <header>
+      <h1> Prototyping (Bahasa Mudah + Contoh Praktis)</h1>
+      <p class="lead">Versi ringkas dan mudah dimengerti tentang apa itu prototyping, mengapa penting, jenis-jenis, tahapan, dan contoh nyata.</p>
+    </header>
+
+    <section>
+      <h2>1. Apa Itu Prototyping?</h2>
+      <p>Prototyping adalah proses membuat versi awal (contoh kasar) dari suatu produk sebelum benar-benar dibangun. Bentuknya bisa berupa sketsa kertas, wireframe, mockup visual, atau prototype interaktif.</p>
+      <p class="note">Tujuan utama: menguji ide lebih cepat, murah, dan mendapatkan masukan sebelum membangun produk final.</p>
+    </section>
+
+    <section>
+      <h2>2. Mengapa Prototyping Penting?</h2>
+      <ul>
+        <li><strong>Menghemat waktu:</strong> tidak perlu langsung membangun fitur penuh.</li>
+        <li><strong>Menghindari kesalahan mahal:</strong> koreksi desain di tahap awal lebih murah.</li>
+        <li><strong>Mendapat masukan pengguna:</strong> user testing pada prototype memberikan insight berharga.</li>
+        <li><strong>Memvisualisasikan ide:</strong> tim dan klien jadi memiliki gambaran yang sama.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. Bentuk-Bentuk Prototype</h2>
+
+      <h3><span class="badge">Lo-Fi</span> Low Fidelity Prototype</h3>
+      <p>Sketsa sederhana dan cepat, fokus pada struktur dan alur, biasanya tanpa warna dan tidak interaktif.</p>
+      <div class="example">
+        <strong>Contoh Lo-Fi (sketsa):</strong>
+        <pre>
+[Logo]
+[Input Nama]
+[Input Password]
+[Button Login]
+[Lupa Password]
+        </pre>
+      </div>
+
+      <h3><span class="badge">Hi-Fi</span> High Fidelity Prototype</h3>
+      <p>Lebih mendekati produk akhir: memiliki warna, tipografi, ikon, dan sering kali interaktif (bisa diklik).</p>
+      <div class="example">
+        <strong>Contoh Hi-Fi:</strong>
+        <ul>
+          <li>Halaman login berwarna, tombol interaktif, pesan error jelas.</li>
+          <li>Aplikasi dengan foto produk, animasi, dan navigasi yang berfungsi.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Tahapan Prototyping</h2>
+      <ol>
+        <li><strong>Mengumpulkan kebutuhan:</strong> masalah apa yang ingin diselesaikan dan siapa pengguna target.</li>
+        <li><strong>Membuat sketsa awal:</strong> gambar kasar ide dan alur.</li>
+        <li><strong>Membuat wireframe:</strong> struktur visual halaman tanpa detail desain.</li>
+        <li><strong>Membuat prototype:</strong> low-fi atau high-fi sesuai kebutuhan.</li>
+        <li><strong>Menguji dengan pengguna:</strong> observasi dan kumpulkan feedback.</li>
+        <li><strong>Revisi:</strong> perbaiki prototype sampai siap untuk desain akhir atau development.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>5. Contoh Prototyping (Praktis)</h2>
+
+      <h3>Contoh 1: Halaman Login</h3>
+      <p><strong>Kebutuhan:</strong> membuat login yang mudah dan cepat.</p>
+      <div class="example">
+        <strong>Lo-Fi:</strong> kotak input email, kotak input password, tombol login.<br>
+        <strong>Hi-Fi:</strong> desain berwarna, ikon, hover pada tombol, pesan error saat password salah.
+      </div>
+
+      <h3>Contoh 2: Aplikasi Pesan Makanan</h3>
+      <div class="example">
+        <strong>Lo-Fi:</strong> list menu, tombol "Tambah ke keranjang", halaman checkout sederhana.<br>
+        <strong>Hi-Fi:</strong> foto makanan, harga, filter kategori, animasi saat menambah item.
+      </div>
+
+      <h3>Contoh 3: Website Portofolio</h3>
+      <div class="example">
+        <strong>Lo-Fi:</strong> header, foto profil, list karya, tombol kontak.<br>
+        <strong>Hi-Fi:</strong> layout elegan, efek hover pada kartu portofolio, tombol WhatsApp aktif.
+      </div>
+    </section>
+
+    <section>
+      <h2>6. Tips Praktis Saat Membuat Prototype</h2>
+      <ul>
+        <li>Mulai dari Lo-Fi → lanjut ke Hi-Fi jika diperlukan.</li>
+        <li>Fokus pada fitur inti terlebih dahulu (MVP).</li>
+        <li>Uji dengan pengguna nyata sesering mungkin.</li>
+        <li>Gunakan tools prototyping populer: Figma, Adobe XD, Sketch, atau InVision.</li>
+        <li>Catat feedback dan lakukan iterasi cepat.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>7. Kesimpulan</h2>
+      <p>Prototyping membantu membuat produk yang lebih baik dengan lebih cepat dan lebih murah. Dengan membuat prototype — baik sederhana maupun mendekati produk akhir — tim dapat menguji ide, mengumpulkan masukan, dan memperbaiki desain sebelum development penuh dimulai.</p>
+    </section>
+
+    <footer>MHS</footer>
+  </div>
+</body>
+</html>

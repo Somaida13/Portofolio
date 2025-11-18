@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <meta name="description" content="Portofolio M. Hasymi Somaida — developer / designer dengan fokus pada front-end, UI/UX, dan project modern." />
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%92%BB%3C/text%3E%3C/svg%3E">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <style>
+        /* --- Bagian CSS (Styling) --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        /* Styling untuk Accordion Header */
+        .accordion {
+            background-color: #f8f8f8;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 18px;
+            transition: 0.4s;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Warna saat aktif/hover */
+        .active, .accordion:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Styling untuk Panel Konten */
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0; /* Awalnya tersembunyi */
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-left: 3px solid #007bff;
+            margin-bottom: 10px;
+        }
+
+        .panel p {
+            padding-top: 10px;
+        }
+
+        /* Styling untuk simbol */
+        .accordion::after {
+            content: '\002B'; /* Simbol Plus */
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active::after {
+            content: "\2212"; /* Simbol Minus */
+        }
+    </style>
+
+
+<title> Figma dan Contohnya</title>
+<style>
+    body { 
+        font-family: Arial, sans-serif; 
+        line-height: 1.7; 
+        padding: 25px; 
+        max-width: 900px; 
+        margin: auto; 
+        background: #fafafa;
+    }
+    h1, h2, h3 {
+        color: #333;
+    }
+    h1 {
+        border-bottom: 3px solid #4a90e2;
+        padding-bottom: 10px;
+    }
+    pre {
+        background: #f0f0f0;
+        padding: 12px;
+        border-radius: 6px;
+        overflow-x: auto;
+    }
+    ul, ol {
+        margin-left: 20px;
+    }
+    .box {
+        background: white;
+        padding: 18px;
+        border-radius: 8px;
+        margin: 20px 0;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+</style>
+</head>
+<body>
+
+
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">MHS</a>
+      <nav class="nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="#">Mudah Progremer</a></li>
+    
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-pressed="false" aria-label="Toggle dark mode">🌙</button>
+        <button class="burger" aria-label="Buka navigasi" aria-expanded="false" id="burger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+
+<h1> Figma dan Contohnya (Bahasa Mudah Dimengerti)</h1>
+
+<div class="box">
+<h2>1. Apa Itu Figma?</h2>
+<p>Figma adalah <strong>alat desain berbasis web</strong> yang digunakan untuk membuat UI, UX, prototype, dan wireframe. Karena berbasis online, Figma bisa digunakan langsung dari browser tanpa instal aplikasi.</p>
+</div>
+
+<div class="box">
+<h2>2. Mengapa Banyak Orang Menggunakan Figma?</h2>
+<ul>
+    <li><strong>Bisa kolaborasi real-time</strong> seperti Google Docs</li>
+    <li><strong>Ringan</strong> karena berbasis web</li>
+    <li><strong>Mudah melakukan export</strong> (PNG, JPG, SVG, PDF)</li>
+    <li><strong>Banyak plugin gratis</strong> untuk icon, ilustrasi, warna, dsb.</li>
+</ul>
+</div>
+
+<div class="box">
+<h2>3. Fitur Utama Figma</h2>
+
+<h3>1) Frame</h3>
+<p>Frame adalah “halaman kerja” tempat desain dibuat. Contoh: ukuran layar HP 390×844 px.</p>
+
+<h3>2) Components</h3>
+<p>Elemen reusable seperti tombol, card, atau navbar. Jika component induk berubah, semua salinannya ikut berubah.</p>
+
+<h3>3) Auto Layout</h3>
+<p>Fitur untuk menyusun elemen secara otomatis, mirip <i>flexbox</i> di CSS. Memudahkan membuat tombol atau card yang responsif.</p>
+
+<h3>4) Prototype</h3>
+<p>Menghubungkan halaman agar desain bisa diklik seperti aplikasi nyata. Cocok untuk presentasi ke user.</p>
+</div>
+
+<div class="box">
+<h2>4. Alur Kerja Mendesain di Figma</h2>
+<ol>
+    <li>Menentukan ukuran frame</li>
+    <li>Membuat wireframe (hitam-putih)</li>
+    <li>Menambahkan warna, icon, typography</li>
+    <li>Membuat prototype interaktif</li>
+</ol>
+</div>
+
+<div class="box">
+<h2>5. Contoh Penggunaan Figma</h2>
+
+<h3>Contoh 1: Halaman Login</h3>
+<p><strong>Wireframe:</strong> input email, password, tombol login.</p>
+<p><strong>UI Final:</strong> warna, icon, logo.</p>
+<p><strong>Prototype:</strong> klik login → pindah ke halaman Home.</p>
+
+<h3>Contoh 2: Aplikasi Food Delivery</h3>
+<p>Elemen: header, search bar, carousel promo, card makanan.</p>
+<p><strong>Prototype:</strong> klik produk → masuk ke halaman detail.</p>
+
+<h3>Contoh 3: Dashboard Admin</h3>
+<p>Menggunakan auto layout untuk sidebar, tabel, dan grafik agar rapi dan presisi.</p>
+</div>
+
+<div class="box">
+<h2>6. Kesimpulan</h2>
+<p>Figma adalah alat desain modern yang mudah digunakan, mendukung kolaborasi real-time, dan memiliki fitur lengkap untuk membuat UI/UX profesional.</p>
+</div>
+
+</body>
+</html>
