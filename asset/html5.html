@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <meta name="description" content="Portofolio M. Hasymi Somaida — developer / designer dengan fokus pada front-end, UI/UX, dan project modern." />
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%92%BB%3C/text%3E%3C/svg%3E">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <style>
+        /* --- Bagian CSS (Styling) --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        /* Styling untuk Accordion Header */
+        .accordion {
+            background-color: #f8f8f8;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 18px;
+            transition: 0.4s;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Warna saat aktif/hover */
+        .active, .accordion:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Styling untuk Panel Konten */
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0; /* Awalnya tersembunyi */
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-left: 3px solid #007bff;
+            margin-bottom: 10px;
+        }
+
+        .panel p {
+            padding-top: 10px;
+        }
+
+        /* Styling untuk simbol */
+        .accordion::after {
+            content: '\002B'; /* Simbol Plus */
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active::after {
+            content: "\2212"; /* Simbol Minus */
+        }
+    </style>
+  
+  
+  
+  
+  
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengantar HTML5 </title>
+    <style>
+        /* CSS Dasar untuk Tampilan Materi */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #0056b3;
+        }
+        code, pre {
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        pre {
+            display: block;
+            padding: 15px;
+            overflow-x: auto;
+            border: 1px solid #ccc;
+            white-space: pre-wrap; /* Memastikan kode wrapping jika terlalu panjang */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .tutorial {
+            border-left: 5px solid #28a745;
+            padding-left: 15px;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+<body>
+   
+    <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">MHS</a>
+      <nav class="nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="#">Mudah Progremer</a></li>
+    
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-pressed="false" aria-label="Toggle dark mode">🌙</button>
+        <button class="burger" aria-label="Buka navigasi" aria-expanded="false" id="burger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+   
+   
+    <div class="container">
+        <header>
+            <h1>🖥️  Pengantar HTML5</h1>
+        </header>
+
+        <section>
+            <p>HTML5 adalah versi terbaru dari <strong>HyperText Markup Language</strong> (HTML), bahasa <em>markup</em> standar yang digunakan untuk membuat dan menyusun konten di World Wide Web (WWW). Sebagai Calon Progremer, memahami HTML5 sangat penting karena ini adalah <strong>fondasi</strong> dari semua pengembangan <em>front-end</em> web modern.</p>
+        </section>
+
+        <section>
+            <h2>1. Apa Itu HTML5?</h2>
+            <p>HTML5 bukan sekadar pembaruan kecil; ini adalah revisi besar yang memperkenalkan banyak fitur baru, elemen, dan API (Application Programming Interfaces) yang dirancang untuk memungkinkan pengembangan aplikasi web yang lebih kaya dan interaktif.</p>
+            <ul>
+                <li><strong>HTML:</strong> Berfungsi untuk <strong>menyusun struktur</strong> dan <strong>konten</strong> dari sebuah halaman web (teks, gambar, tautan, dll.).</li>
+                <li><strong>CSS (Cascading Style Sheets):</strong> Berfungsi untuk <strong>menentukan tampilan</strong> (warna, <em>font</em>, <em>layout</em>, dll.).</li>
+                <li><strong>JavaScript:</strong> Berfungsi untuk <strong>menambahkan interaktivitas</strong> dan perilaku dinamis.</li>
+            </ul>
+            <p>HTML5 bertujuan untuk mengurangi kebutuhan akan <em>plugin</em> pihak ketiga (seperti Flash) dengan menyediakan fungsionalitas media dan grafik secara <em>native</em> di <em>browser</em>.</p>
+        </section>
+
+        <section>
+            <h2>2. Struktur Dasar Dokumen HTML5</h2>
+            <p>Setiap dokumen HTML5 harus diawali dengan deklarasi <em>doctype</em> yang sederhana:</p>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Judul Halaman Saya&lt;/title&gt;
+    &lt;!-- Di sini tempat menautkan CSS dan JavaScript --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Konten yang terlihat oleh pengguna ada di sini --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            <ul>
+                <li><strong><code>&lt;!DOCTYPE html&gt;</code>:</strong> Deklarasi ini mendefinisikan dokumen sebagai HTML5. Ini harus selalu ada di baris pertama.</li>
+                <li><strong><code>&lt;html lang="id"&gt;</code>:</strong> Elemen <em>root</em> dari halaman. Atribut <code>lang="id"</code> membantu <em>browser</em> dan mesin pencari mengetahui bahasa konten.</li>
+                <li><strong><code>&lt;head&gt;</code>:</strong> Berisi metadata tentang dokumen (informasi yang tidak ditampilkan langsung di halaman).</li>
+                <li><strong><code>&lt;body&gt;</code>:</strong> Berisi semua konten yang akan ditampilkan kepada pengguna.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>3. Elemen Semantik Baru di HTML5</h2>
+            <p>Salah satu pembaruan terbesar adalah pengenalan <strong>elemen semantik</strong>. Elemen semantik memberikan <strong>arti</strong> pada kontennya, membantu <em>browser</em>, <em>search engine</em>, dan pengembang lain memahami struktur halaman.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Elemen HTML5</th>
+                        <th>Fungsi (Semantik)</th>
+                        <th>Analog Struktur Tradisional</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong><code>&lt;header&gt;</code></strong></td>
+                        <td>Konten pengantar, biasanya berisi logo dan <em>heading</em> situs.</td>
+                        <td><code>&lt;div&gt;</code> dengan <code>id="header"</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong><code>&lt;nav&gt;</code></strong></td>
+                        <td>Berisi tautan navigasi utama situs.</td>
+                        <td><code>&lt;div&gt;</code> dengan <code>id="nav"</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong><code>&lt;main&gt;</code></strong></td>
+                        <td>Konten utama dan unik dari dokumen.</td>
+                        <td><code>&lt;div&gt;</code> dengan <code>id="main-content"</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong><code>&lt;article&gt;</code></strong></td>
+                        <td>Konten yang berdiri sendiri (misalnya, postingan blog, berita).</td>
+                        <td><code>&lt;div&gt;</code> dengan <code>class="post"</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong><code>&lt;section&gt;</code></strong></td>
+                        <td>Bagian tematik yang mengelompokkan konten.</td>
+                        <td><code>&lt;div&gt;</code> dengan <code>class="section"</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong><code>&lt;aside&gt;</code></strong></td>
+                        <td>Konten yang kurang terkait, sering digunakan untuk <em>sidebar</em>.</td>
+                        <td><code>&lt;div&gt;</code> dengan <code>id="sidebar"</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong><code>&lt;footer&gt;</code></strong></td>
+                        <td>Konten penutup (informasi hak cipta, kontak, dll.).</td>
+                        <td><code>&lt;div&gt;</code> dengan <code>id="footer"</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>4. Elemen Media dan Grafik</h2>
+            <p>HTML5 memungkinkan integrasi media tanpa <em>plugin</em> eksternal:</p>
+            <ul>
+                <li><strong><code>&lt;video&gt;</code>:</strong> Untuk menanamkan video.
+                    <pre><code>&lt;video width="320" height="240" controls&gt;
+  &lt;source src="video-kuliah.mp4" type="video/mp4"&gt;
+  Browser Anda tidak mendukung tag video.
+&lt;/video&gt;</code></pre>
+                </li>
+                <li><strong><code>&lt;audio&gt;</code>:</strong> Untuk menanamkan audio.
+                    <pre><code>&lt;audio controls&gt;
+  &lt;source src="musik-intro.mp3" type="audio/mp3"&gt;
+  Browser Anda tidak mendukung tag audio.
+&lt;/audio&gt;</code></pre>
+                </li>
+                <li><strong><code>&lt;canvas&gt;</code>:</strong> Menyediakan area grafis di mana gambar dapat digambar menggunakan JavaScript.</li>
+                <li><strong><code>&lt;svg&gt;</code>:</strong> Untuk grafik vektor yang dapat diskalakan (*Scalable Vector Graphics*).</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>5. Peningkatan pada <em>Form</em></h2>
+            <p>HTML5 memperkenalkan tipe input baru untuk <em>form</em> yang meningkatkan pengalaman pengguna dan validasi data secara otomatis oleh <em>browser</em>.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipe Input Baru</th>
+                        <th>Deskripsi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong><code>type="email"</code></strong></td>
+                        <td>Memastikan input berbentuk format email yang benar.</td>
+                    </tr>
+                    <tr>
+                        <td><strong><code>type="url"</code></strong></td>
+                        <td>Memastikan input berbentuk URL.</td>
+                    </tr>
+                    <tr>
+                        <td><strong><code>type="number"</code></strong></td>
+                        <td>Hanya menerima angka.</td>
+                    </tr>
+                    <tr>
+                        <td><strong><code>type="date"</code></strong></td>
+                        <td>Menampilkan pemilih tanggal (*date picker*).</td>
+                    </tr>
+                    <tr>
+                        <td><strong><code>type="range"</code></strong></td>
+                        <td>Menampilkan *slider* untuk memilih nilai dalam rentang tertentu.</td>
+                    </tr>
+                    <tr>
+                        <td><strong><code>required</code></strong></td>
+                        <td>Atribut yang memastikan *field* tidak boleh kosong.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <hr>
+
+        <section class="tutorial">
+            <h2>👨‍💻 Contoh dan Tutorial Singkat: Membuat Struktur Web Semantik</h2>
+            <p>Berikut adalah kerangka sederhana dari sebuah halaman berita menggunakan elemen semantik HTML5.</p>
+
+            <h3>Langkah 1 & 2: Struktur Dasar dan Penerapan Elemen Semantik</h3>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Berita Teknologi Terbaru&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- 1. Header untuk Judul dan Logo Situs --&gt;
+    &lt;header&gt;
+        &lt;h1&gt;SI News Center&lt;/h1&gt;
+        &lt;p&gt;Berita &amp; Informasi Sistem Informasi Terkini&lt;/p&gt;
+    &lt;/header&gt;
+
+    &lt;!-- 2. Navigasi Utama --&gt;
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Programming&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Database&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+
+    &lt;!-- 3. Konten Utama --&gt;
+    &lt;main&gt;
+        &lt;!-- Konten Berdiri Sendiri (Artikel) --&gt;
+        &lt;article&gt;
+            &lt;h2&gt;Judul Artikel: Dampak AI pada Analisis Data&lt;/h2&gt;
+            &lt;section&gt;
+                &lt;h3&gt;Pengantar&lt;/h3&gt;
+                &lt;p&gt;Kecerdasan buatan telah merevolusi cara kita memproses dan menganalisis data...&lt;/p&gt;
+            &lt;/section&gt;
+            &lt;section&gt;
+                &lt;h3&gt;Kesimpulan&lt;/h3&gt;
+                &lt;p&gt;Penting bagi mahasiswa SI untuk menguasai alat-alat AI baru ini.&lt;/p&gt;
+            &lt;/section&gt;
+        &lt;/article&gt;
+    &lt;/main&gt;
+
+    &lt;!-- 4. Sidebar/Konten Samping --&gt;
+    &lt;aside&gt;
+        &lt;h3&gt;Artikel Populer&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Web Semantik&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Deep Learning Basics&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/aside&gt;
+
+    &lt;!-- 5. Footer untuk Hak Cipta dan Info Kontak --&gt;
+    &lt;footer&gt;
+        &lt;p&gt;&amp;copy; 2025 SI News Center. Dibuat dengan HTML5.&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            <p><strong>Hasil:</strong> Struktur dokumen Anda sudah sangat jelas dan terorganisir berkat elemen-elemen semantik HTML5.</p>
+        </section>
+
+        <footer>
+            <h2>📚 Kesimpulan</h2>
+            <p>HTML5 adalah bahasa <em>markup</em> yang <strong>esensial</strong> bagi setiap pengembang web. Sebagai calon progremer, kuasai elemen semantik, media <em>native</em>, dan peningkatan <em>form</em> untuk membangun aplikasi web yang <strong>terstruktur, <em>accessible</em> (mudah diakses), dan modern</strong>.</p>
+        </footer>
+    </div>
+</body>
+</html>
