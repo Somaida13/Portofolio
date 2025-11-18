@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+
+
+ <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <meta name="description" content="Portofolio M. Hasymi Somaida — developer / designer dengan fokus pada front-end, UI/UX, dan project modern." />
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%92%BB%3C/text%3E%3C/svg%3E">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+   <style>
+        /* --- Bagian CSS (Styling) --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        /* Styling untuk Accordion Header */
+        .accordion {
+            background-color: #f8f8f8;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 18px;
+            transition: 0.4s;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Warna saat aktif/hover */
+        .active, .accordion:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Styling untuk Panel Konten */
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0; /* Awalnya tersembunyi */
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-left: 3px solid #007bff;
+            margin-bottom: 10px;
+        }
+
+        .panel p {
+            padding-top: 10px;
+        }
+
+        /* Styling untuk simbol */
+        .accordion::after {
+            content: '\002B'; /* Simbol Plus */
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active::after {
+            content: "\2212"; /* Simbol Minus */
+        }
+    </style>
+  
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teori CSS3 Flexbox dan Grid</title>
+<style>
+    body {font-family: Arial, Helvetica, sans-serif; line-height: 1.6; padding: 20px; background: #f9fafb;}
+    h1, h2, h3 {color: #1f2937;}
+    code {background: #f3f4f6; padding: 3px 6px; border-radius: 4px;}
+    pre {background: #111827; color: #f8fafc; padding: 15px; border-radius: 6px; overflow-x: auto;}
+    .box {background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,.1);}
+    table {width:100%; border-collapse:collapse;}
+    th,td {border:1px solid #d1d5db; padding:8px;}
+    th {background:#e5e7eb;}
+</style>
+</head>
+<body>
+
+
+
+
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">MHS</a>
+      <nav class="nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="#">Mudah Progremer</a></li>
+    
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-pressed="false" aria-label="Toggle dark mode">🌙</button>
+        <button class="burger" aria-label="Buka navigasi" aria-expanded="false" id="burger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+<h1>Teori CSS3: Flexbox dan Grid</h1>
+<p>CSS3 menyediakan dua sistem layout modern untuk membantu proses penataan elemen pada halaman website, yaitu <strong>Flexbox</strong> dan <strong>Grid</strong>. Keduanya dirancang untuk menggantikan teknik lama seperti <em>float</em>, <em>table</em>, dan <em>position</em>.</p>
+
+<div class="box">
+<h2>1. Flexbox (Flexible Box Layout)</h2>
+<p>Flexbox adalah metode layout yang sangat fleksibel dan dibuat untuk mengatur tata letak elemen baik secara horizontal maupun vertikal dalam satu dimensi.</p>
+
+<h3>Istilah Penting Flexbox</h3>
+<table>
+<tr><th>Istilah</th><th>Penjelasan</th></tr>
+<tr><td>Flex Container</td><td>Elemen pembungkus yang diberi property <code>display: flex</code></td></tr>
+<tr><td>Flex Items</td><td>Semua elemen di dalam container</td></tr>
+<tr><td>Main Axis</td><td>Arah utama (bisa horizontal atau vertikal tergantung setting)</td></tr>
+<tr><td>Cross Axis</td><td>Arah silang dari main axis</td></tr>
+<tr><td>justify-content</td><td>Mengatur posisi item secara horizontal (main axis)</td></tr>
+<tr><td>align-items</td><td>Mengatur posisi item secara vertikal (cross axis)</td></tr>
+</table>
+
+<h3>Contoh Flexbox Dasar</h3>
+<pre>
+&lt;div class="flex-container"&gt;
+  &lt;div class="item"&gt;A&lt;/div&gt;
+  &lt;div class="item"&gt;B&lt;/div&gt;
+  &lt;div class="item"&gt;C&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<pre>
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #eef1ff;
+  padding: 20px;
+}
+
+.item {
+  background: #4e73df;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+}
+</pre>
+</div>
+
+<div class="box">
+<h2>2. CSS Grid Layout</h2>
+<p>Grid merupakan metode layout dua dimensi yang dapat mengatur elemen baik dalam bentuk baris (rows) maupun kolom (columns). Grid sangat cocok untuk membangun layout halaman website yang kompleks.</p>
+
+<h3>Istilah Penting CSS Grid</h3>
+<table>
+<tr><th>Istilah</th><th>Penjelasan</th></tr>
+<tr><td>Grid Container</td><td>Elemen utama yang diberi <code>display: grid</code></td></tr>
+<tr><td>Grid Items</td><td>Elemen-elemen yang berada di dalam grid container</td></tr>
+<tr><td>grid-template-columns</td><td>Mendefinisikan jumlah kolom serta ukurannya</td></tr>
+<tr><td>grid-template-rows</td><td>Mendefinisikan jumlah baris serta ukurannya</td></tr>
+<tr><td>gap</td><td>Jarak antar item dalam grid</td></tr>
+</table>
+
+<h3>Contoh CSS Grid Dasar</h3>
+<pre>
+&lt;div class="grid-container"&gt;
+  &lt;div class="item"&gt;1&lt;/div&gt;
+  &lt;div class="item"&gt;2&lt;/div&gt;
+  &lt;div class="item"&gt;3&lt;/div&gt;
+  &lt;div class="item"&gt;4&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<pre>
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  background: #e7f7e7;
+  padding: 20px;
+}
+
+.item {
+  background: #22c55e;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+}
+</pre>
+</div>
+
+<div class="box">
+<h2>3. Perbandingan Flexbox vs Grid</h2>
+<table>
+<tr><th>Perbandingan</th><th>Flexbox</th><th>Grid</th></tr>
+<tr><td>Dimensi</td><td>1 Dimensi</td><td>2 Dimensi</td></tr>
+<tr><td>Arah Susunan</td><td>Hanya baris atau kolom</td><td>Baris dan kolom</td></tr>
+<tr><td>Kegunaan</td><td>Komponen kecil / navbar</td><td>Layout halaman</td></tr>
+<tr><td>Contoh</td><td>Menu, Card, Button</td><td>Dashboard, Gallery</td></tr>
+</table>
+</div>
+
+<p><strong>Kesimpulan:</strong> Gunakan <strong>Flexbox</strong> jika mengatur komponen satu arah seperti menu atau tombol, dan gunakan <strong>Grid</strong> untuk layout dua dimensi seperti tampilan dashboard atau galeri foto.</p>
+
+</body>
+</html>
