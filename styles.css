@@ -92,7 +92,7 @@ input:focus,textarea:focus{box-shadow:0 4px 18px rgba(0,0,0,0.5)}
 .btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 0.9rem;border-radius:10px;border:1px solid transparent;cursor:pointer;transition:var(--transition)}
 .btn.primary{background:linear-gradient(90deg,var(--accent),#4dd9b0);color:#002;box-shadow:0 8px 24px rgba(11,12,15,0.5)}
 .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04)}
-.btn.oren{background:linear-gradient(90deg,var(--accent),#fcd602);color:#002;box-shadow:0 8px 24px rgba(11,12,15,0.5)}
+.btn.oren{background:linear-gradient(90deg,var(--accent),#fcd602);color:#fcd602(238, 186, 16);box-shadow:0 8px 24px rgba(11,12,15,0.5)}
 
 /* Reveal animations */
 .reveal-anim{opacity:0;transform:translateY(10px);transition:opacity 480ms var(--transition), transform 480ms var(--transition)}
