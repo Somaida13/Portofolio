@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teori AI Engineering (Rekayasa AI)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 40px;
+            background-color: #f4f7f9;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        h2 {
+            color: #28a745;
+            margin-top: 30px;
+            border-left: 5px solid #28a745;
+            padding-left: 10px;
+        }
+        h3 {
+            color: #6c757d;
+            margin-top: 20px;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            padding-left: 0;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .section-summary {
+            font-style: italic;
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 5px solid #ffc107;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Teori Inti yang Mendasari Rekayasa AI (AI Engineering)</h1>
+
+    <p>Rekayasa AI adalah disiplin ilmu yang mengintegrasikan teori Kecerdasan Buatan (AI), Pembelajaran Mesin (ML), dan prinsip Rekayasa Perangkat Lunak untuk membangun sistem AI yang terukur, andal, dan etis.</p>
+
+    <hr>
+
+    <section>
+        <h2>💡 Konsep Dasar Kecerdasan Buatan (Artificial Intelligence / AI)</h2>
+        <p>Teori ini berfokus pada penciptaan mesin yang dapat <strong>berpikir</strong>, <strong>belajar</strong>, dan <strong>bertindak</strong> secara mandiri.</p>
+
+        <h3>Prinsip Utama AI:</h3>
+        <ul>
+            <li><strong>Representasi Pengetahuan:</strong> Bagaimana pengetahuan dikodekan agar dapat diproses (logika, aturan, jaringan saraf tiruan).</li>
+            <li><strong>Pemrosesan Informasi:</strong> Mekanisme komputasi untuk pengambilan keputusan dan penyelesaian masalah.</li>
+            <li><strong>Pembelajaran dan Adaptasi:</strong> Kemampuan sistem untuk memperoleh pengetahuan dari data (*Machine Learning*) dan beradaptasi.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>🧠 Teori Pembelajaran Mesin (Machine Learning / ML)</h2>
+        <p>ML adalah inti dari AI modern, menyediakan metode bagi sistem untuk belajar langsung dari data.</p>
+
+        <h3>1. Model Pembelajaran</h3>
+        <ul>
+            <li>
+                <strong>Pembelajaran Terawasi (*Supervised Learning*):</strong>
+                <p>Dilatih dengan data berlabel. Tujuannya adalah memprediksi label. Teori inti meliputi **Regresi** (memprediksi nilai kontinu) dan **Klasifikasi** (memprediksi kategori).</p>
+            </li>
+            <li>
+                <strong>Pembelajaran Tidak Terawasi (*Unsupervised Learning*):</strong>
+                <p>Dilatih tanpa data berlabel. Tujuannya adalah menemukan pola atau struktur tersembunyi. Teori inti meliputi **Clustering** dan **Dimensionality Reduction**.</p>
+            </li>
+            <li>
+                <strong>Pembelajaran Penguatan (*Reinforcement Learning* / RL):</strong>
+                <p>Sistem belajar melalui interaksi lingkungan untuk memaksimalkan <em>reward</em>. Dimodelkan oleh **Markov Decision Process (MDP)**.</p>
+            </li>
+        </ul>
+
+        <h3>2. Teori Jaringan Saraf Tiruan (ANNs)</h3>
+        <ul>
+            <li><strong>ANNs:</strong> Model komputasi yang meniru struktur otak manusia.</li>
+            <li><strong>Deep Learning:</strong> Menggunakan jaringan saraf dengan banyak lapisan untuk memproses data kompleks (gambar, teks, suara). Algoritma kuncinya adalah **Backpropagation**.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>🔧 Prinsip Rekayasa Perangkat Lunak (Software Engineering)</h2>
+        <p>Prinsip yang memastikan sistem AI dapat diandalkan, skalabel, dan dapat dipelihara dalam lingkungan produksi.</p>
+
+        <h3>1. Rekayasa Data (*Data Engineering*)</h3>
+        <ul>
+            <li><strong>Pipelining Data:</strong> Merancang proses <strong>ETL/ELT</strong> (Extract, Transform, Load) untuk memastikan ketersediaan dan kualitas data.</li>
+            <li><strong>Skalabilitas dan Infrastruktur:</strong> Membangun infrastruktur yang dapat menangani volume data dan komputasi yang besar.</li>
+        </ul>
+
+        <h3>2. MLOps (Machine Learning Operations)</h3>
+        <ul>
+            <li><strong>Otomasi:</strong> Mengotomatisasi pelatihan, pengujian, dan <em>deployment</em> model.</li>
+            <li><strong>Pemantauan Model:</strong> Melakukan pemantauan kinerja model setelah di-<em>deploy</em> untuk mendeteksi <em>data drift</em>.</li>
+            <li><strong>Reproduksibilitas:</strong> Memastikan hasil model dapat direproduksi untuk tujuan pengujian dan audit.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>⚖️ Teori Etika dan Tanggung Jawab AI</h2>
+        <p>Prinsip-prinsip untuk memastikan dampak positif dan etis dari sistem AI.</p>
+        <ul>
+            <li><strong>Keadilan (*Fairness*):</strong> Mengidentifikasi dan memitigasi **Bias Algoritma** dalam data pelatihan.</li>
+            <li><strong>Transparansi (XAI):</strong> Membangun model yang dapat dijelaskan (Explainable AI) untuk memahami proses pengambilan keputusannya.</li>
+            <li><strong>Akuntabilitas:</strong> Menetapkan tata kelola dan tanggung jawab atas hasil sistem AI.</li>
+            <li><strong>Keamanan (*Robustness*):</strong> Membangun model yang tahan terhadap manipulasi dan serangan.</li>
+        </ul>
+    </section>
+
+    <div class="section-summary">
+        <p><strong>Ringkasan:</strong> Rekayasa AI adalah aplikasi prinsip Rekayasa Perangkat Lunak dan Rekayasa Data untuk membangun, <em>deploy</em>, dan memelihara sistem Pembelajaran Mesin yang terukur, andal, dan etis, berdasarkan teori-teori inti dari Ilmu Komputer dan Statistika.</p>
+    </div>
+</div>
+
+</body>
+</html>
