@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Metode Pengembangan Sistem</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #0056b3;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 5px;
+            margin-top: 25px;
+        }
+        h3 {
+            color: #333;
+            margin-top: 15px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #0056b3;
+            color: white;
+        }
+        .note {
+            background-color: #e6f7ff;
+            border-left: 5px solid #0056b3;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        .image-placeholder {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px dashed #ccc;
+            background-color: #fafafa;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>💻 Materi Metode Pengembangan Sistem (System Development Methodology)</h1>
+
+        <p>Metode Pengembangan Sistem adalah serangkaian <strong>tahapan, aktivitas, dan teknik</strong> yang digunakan untuk merancang, membangun, mengimplementasikan, dan memelihara sistem informasi. Tujuannya adalah memastikan sistem yang dikembangkan <strong>berkualitas, tepat waktu, dan sesuai dengan kebutuhan pengguna</strong> (stakeholder).</p>
+
+        <hr>
+
+        <h2>🛠️ Siklus Hidup Pengembangan Sistem (SDLC)</h2>
+        
+        <p>Hampir semua metode pengembangan sistem didasarkan pada konsep <strong>Siklus Hidup Pengembangan Sistem (System Development Life Cycle - SDLC)</strong>, yang secara umum terdiri dari tahapan-tahapan berikut:</p>
+        
+        <ul>
+            <li><strong>Perencanaan (Planning):</strong> Mendefinisikan masalah, ruang lingkup proyek, kelayakan (feasibility), dan membentuk tim proyek.</li>
+            <li><strong>Analisis (Analysis):</strong> Memahami kebutuhan pengguna dan sistem (requirements gathering), dan membuat model fungsional sistem.</li>
+            <li><strong>Desain (Design):</strong> Merancang arsitektur sistem, *database*, antarmuka pengguna, dan komponen teknis lainnya.</li>
+            <li><strong>Implementasi/Konstruksi (Implementation/Construction):</strong> Proses pengkodean (programming) sistem dan pengujian unit (unit testing).</li>
+            <li><strong>Pengujian (Testing):</strong> Menguji seluruh sistem (integrasi, sistem, dan pengujian penerimaan pengguna/UAT) untuk memastikan bebas dari *bug* dan memenuhi persyaratan.</li>
+            <li><strong>Penerapan (Deployment):</strong> Menginstal dan menerapkan sistem baru ke lingkungan produksi.</li>
+            <li><strong>Pemeliharaan (Maintenance):</strong> Memperbaiki *bug*, meningkatkan kinerja, dan menyesuaikan sistem dengan perubahan kebutuhan setelah sistem berjalan.</li>
+        </ul>
+
+        <div class="image-placeholder">
+            
+
+        <img src="URL_gambar_anda" alt="Deskripsi Gambar">
+
+            <p><em>Diagram Siklus Hidup Pengembangan Sistem (SDLC) model Air Terjun.</em></p>
+        </div>
+        
+        <hr>
+
+        <h2>🌊 Jenis-Jenis Metode Pengembangan Sistem</h2>
+
+        <h3>1. Model Air Terjun (Waterfall Model)</h3>
+        <p><strong>Konsep:</strong> Setiap fase harus <strong>selesai sepenuhnya</strong> sebelum fase berikutnya dimulai. Aliran prosesnya bergerak satu arah seperti air terjun.</p>
+        <ul>
+            <li><strong>Kelebihan:</strong> Mudah dipahami, cocok untuk proyek yang persyaratannya <strong>sangat jelas dan stabil</strong>.</li>
+            <li><strong>Kekurangan:</strong> Tidak fleksibel terhadap perubahan persyaratan di tengah jalan.</li>
+        </ul>
+
+        <h3>2. Model Prototipe (Prototyping Model)</h3>
+        <p><strong>Konsep:</strong> Membuat versi awal sistem yang disebut <strong>prototipe</strong> untuk dievaluasi dan disempurnakan berulang kali oleh pengguna.</p>
+        <ul>
+            <li><strong>Kelebihan:</strong> Melibatkan pengguna secara intensif, mengurangi risiko kesalahpahaman persyaratan.</li>
+            <li><strong>Kekurangan:</strong> Pengembangan bisa jadi tanpa akhir jika *stakeholder* terus meminta perubahan.</li>
+        </ul>
+        
+        <h3>3. Model *Spiral* (Spiral Model)</h3>
+        <p><strong>Konsep:</strong> Menggabungkan iterasi dari prototipe dengan fokus utama pada <strong>analisis risiko</strong> di setiap putaran. Cocok untuk proyek besar dan kompleks.</p>
+        <ul>
+            <li><strong>Kelebihan:</strong> Cocok untuk proyek <strong>besar, kompleks, dan berisiko tinggi</strong>.</li>
+            <li><strong>Kekurangan:</strong> Sangat kompleks dan membutuhkan keahlian analisis risiko yang tinggi.</li>
+        </ul>
+
+        <h3>4. Metode *Agile* (Agile Methodologies)</h3>
+        <p>Pendekatan **iteratif dan inkremental** yang fokus pada <strong>pengiriman perangkat lunak yang berfungsi secara cepat dan berkelanjutan</strong>.</p>
+        <p class="note"><strong>Prinsip Utama (Berdasarkan *Agile Manifesto*):</strong> Menanggapi perubahan lebih penting daripada mengikuti rencana.</p>
+        
+        <h4>Contoh *Agile*: Scrum dan Kanban</h4>
+        <ul>
+            <li><strong>Scrum:</strong> Menggunakan <strong>Sprint</strong> (periode waktu singkat) untuk menghasilkan peningkatan produk yang berfungsi. Peran Kunci: *Product Owner*, *Scrum Master*, *Development Team*.</li>
+            <div class="image-placeholder">
+                 <p><em>Diagram Kerangka Kerja Scrum (Scrum Framework), menunjukkan alur kerja dari Product Backlog, Sprint Planning, Daily Scrum, Sprint, hingga Increment.</em></p>
+            </div>
+            <li><strong>Kanban:</strong> Berfokus pada <strong>visualisasi alur kerja</strong> dan membatasi pekerjaan yang sedang berlangsung (*Work In Progress* - WIP).</li>
+        </ul>
+
+        <hr>
+
+        <h2>💡 Perbandingan Metode Utama</h2>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Kriteria</th>
+                        <th>Waterfall</th>
+                        <th>Prototyping</th>
+                        <th>Scrum (Agile)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Persyaratan</strong></td>
+                        <td>Stabil, jelas, dan didefinisikan di awal.</td>
+                        <td>Tidak jelas, *evolves* (berkembang) seiring waktu.</td>
+                        <td>Berubah-ubah, *evolving* (terus berkembang).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fleksibilitas</strong></td>
+                        <td>Rendah (Kaku)</td>
+                        <td>Sedang</td>
+                        <td>Tinggi</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pengiriman Produk</strong></td>
+                        <td>Satu kali, di akhir proyek.</td>
+                        <td>Bertahap, setelah persetujuan prototipe.</td>
+                        <td>Iteratif, setiap akhir *Sprint*.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <h2>🎯 Pilihan Metode</h2>
+        <p>Pemilihan metode sangat bergantung pada faktor-faktor seperti:</p>
+        <ol>
+            <li><strong>Kejelasan Persyaratan:</strong> Jika persyaratan sangat jelas, *Waterfall*. Jika sering berubah, *Agile*.</li>
+            <li><strong>Ukuran dan Kompleksitas Proyek:</strong> Proyek besar seringkali menggunakan *Spiral* atau *Agile*.</li>
+            <li><strong>Tenggat Waktu:</strong> Jika perlu pengiriman produk yang cepat, *Agile* adalah pilihan terbaik.</li>
+        </ol>
+
+    </div>
+
+</body>
+</html>
