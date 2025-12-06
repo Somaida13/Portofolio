@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring & Manajemen Service Kendaraan V4</title>
+    <style>
+        /* CSS Umum */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1, h2 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, textarea, button { 
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            width: auto !important;
+            padding: 8px 15px !important;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px 8px;
+            text-align: left;
+            font-size: 14px;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Style Khusus */
+        #notification-box { background-color: #ffc107; color: #333; padding: 15px; border-radius: 5px; margin-bottom: 20px; font-weight: bold; display: none; border: 2px solid #e0a800; }
+        .warning { background-color: #f8d7da; color: #721c24; font-weight: bold; }
+        .completed { background-color: #d4edda; text-decoration: line-through; color: #6c757d; }
+        .filter-controls { display: flex; gap: 20px; margin-bottom: 20px; }
+        .filter-controls > div { width: 50%; }
+
+        /* Style untuk Login Page */
+        #login-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .login-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 350px;
+        }
+        .login-box h2 { border-bottom: none; text-align: center; }
+        #error-message { color: red; text-align: center; margin-top: 10px; display: none; }
+    </style>
+</head>
+<body>
+
+<div id="login-page">
+    <div class="login-box">
+        <h2>🔑 Login Sistem Monitoring</h2>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Masukkan username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Masukkan password">
+        </div>
+        <button onclick="handleLogin()">Login</button>
+        <p id="error-message">Username atau Password salah!</p>
+        <p style="text-align: center; margin-top: 20px; font-size: small; color: #666;">
+            Demo Login: User: **admin**, Pass: **123**
+        </p>
+    </div>
+</div>
+
+<div id="monitoring-page" class="container" style="display: none;">
+    <h1>🚗 Monitoring & Manajemen Service Kendaraan</h1>
+    <button onclick="handleLogout()" style="float: right; margin-top: -50px; background-color: #dc3545;">Logout</button>
+    <div style="clear: both;"></div>
+
+    <div id="notification-box">
+        🚨 **Peringatan Deadline Service:** Beberapa kendaraan yang **Belum Selesai** mendekati jadwal service atau sudah terlewat! Silakan cek tabel di bawah.
+    </div>
+    
+    <section>
+        <h2>➕ Tambah Jadwal Service</h2>
+        <div class="form-group">
+            <label for="nopol">Nomor Polisi (Nopol):</label>
+            <input type="text" id="nopol" placeholder="Contoh: B 1234 ABC" required>
+        </div>
+        <div class="form-group">
+            <label for="namaKendaraan">Nama Kendaraan:</label>
+            <input type="text" id="namaKendaraan" placeholder="Contoh: Toyota Avanza / Truk Fuso" required>
+        </div>
+        <div class="form-group">
+            <label for="jenisService">Jenis Service:</label>
+            <select id="jenisService" required>
+                <option value="Servis Rutin">Servis Rutin (Oli, Filter)</option>
+                <option value="Perbaikan Mesin">Perbaikan Mesin</option>
+                <option value="Ganti Ban">Ganti Ban</option>
+                <option value="Lainnya">Lainnya</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tglJadwal">Tanggal Jadwal Service:</label>
+            <input type="date" id="tglJadwal" required>
+        </div>
+        <div class="form-group">
+            <label for="keterangan">Keterangan (Contoh: KM 45.000, Bengkel A, dll.):</label>
+            <textarea id="keterangan" rows="3" placeholder="Masukkan detail tambahan"></textarea>
+        </div>
+        <button onclick="tambahJadwal()">Simpan Jadwal</button>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>🔎 Filter Jadwal</h2>
+        <div class="filter-controls">
+            <div class="form-group">
+                <label for="filterStatus">Status Selesai:</label>
+                <select id="filterStatus" onchange="renderTable()">
+                    <option value="all">Semua Status</option>
+                    <option value="pending">Belum Selesai</option>
+                    <option value="completed">Selesai</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="filterDeadline">Status Deadline:</label>
+                <select id="filterDeadline" onchange="renderTable()">
+                    <option value="all">Semua Deadline</option>
+                    <option value="warning">Mendekati Deadline / Terlewat</option>
+                    <option value="safe">Aman (> 7 Hari)</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>📋 Daftar Jadwal Service</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nopol</th>
+                    <th>Nama Kendaraan</th>
+                    <th>Jenis Service</th>
+                    <th>Tanggal Jadwal</th>
+                    <th>Keterangan</th>
+                    <th>Deadline Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="serviceTableBody">
+                </tbody>
+        </table>
+    </section>
+</div>
+
+<script>
+    // --- KONSTANTA & INISIALISASI ---
+    const LOGIN_CREDENTIALS = {
+        username: 'admin',
+        password: '123'
+    };
+    const IS_LOGGED_IN_KEY = 'isLoggedIn';
+    let serviceSchedules = JSON.parse(localStorage.getItem('serviceSchedules')) || [];
+
+    // --- FUNGSI UTILITY ---
+    function getDayDifference(dateString) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); 
+        const targetDate = new Date(dateString);
+        targetDate.setHours(0, 0, 0, 0);
+
+        const diffTime = targetDate - today;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays;
+    }
+
+    // --- FUNGSI AUTENTIKASI (SIMULASI LOGIN) ---
+
+    /**
+     * Memeriksa status login saat halaman dimuat
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+        if (localStorage.getItem(IS_LOGGED_IN_KEY) === 'true') {
+            showMonitoringPage();
+            renderTable();
+            checkDeadlines();
+        } else {
+            showLoginPage();
+        }
+    });
+
+    function showMonitoringPage() {
+        document.getElementById('login-page').style.display = 'none';
+        document.getElementById('monitoring-page').style.display = 'block';
+    }
+
+    function showLoginPage() {
+        document.getElementById('login-page').style.display = 'flex';
+        document.getElementById('monitoring-page').style.display = 'none';
+    }
+
+    function handleLogin() {
+        const usernameInput = document.getElementById('username').value;
+        const passwordInput = document.getElementById('password').value;
+        const errorMsg = document.getElementById('error-message');
+
+        if (usernameInput === LOGIN_CREDENTIALS.username && passwordInput === LOGIN_CREDENTIALS.password) {
+            localStorage.setItem(IS_LOGGED_IN_KEY, 'true');
+            showMonitoringPage();
+            renderTable();
+            checkDeadlines();
+            errorMsg.style.display = 'none';
+        } else {
+            errorMsg.style.display = 'block';
+        }
+    }
+
+    function handleLogout() {
+        localStorage.removeItem(IS_LOGGED_IN_KEY);
+        showLoginPage();
+        // Reset input login
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+    }
+
+    // --- FUNGSI MANAJEMEN DATA ---
+
+    function tambahJadwal() {
+        const nopol = document.getElementById('nopol').value.trim();
+        const namaKendaraan = document.getElementById('namaKendaraan').value.trim(); // <-- Ambil Nama Kendaraan
+        const jenisService = document.getElementById('jenisService').value;
+        const tglJadwal = document.getElementById('tglJadwal').value;
+        const keterangan = document.getElementById('keterangan').value.trim();
+
+        if (nopol && namaKendaraan && jenisService && tglJadwal) {
+            const newSchedule = {
+                id: Date.now(), 
+                nopol: nopol,
+                nama: namaKendaraan, // <-- Simpan Nama Kendaraan
+                jenis: jenisService,
+                tanggal: tglJadwal,
+                keterangan: keterangan, 
+                isCompleted: false 
+            };
+            
+            serviceSchedules.push(newSchedule);
+            localStorage.setItem('serviceSchedules', JSON.stringify(serviceSchedules));
+
+            // Reset formulir
+            document.getElementById('nopol').value = '';
+            document.getElementById('namaKendaraan').value = '';
+            document.getElementById('tglJadwal').value = '';
+            document.getElementById('keterangan').value = '';
+
+            renderTable();
+            checkDeadlines();
+            alert('Jadwal service berhasil ditambahkan!');
+        } else {
+            alert('Mohon lengkapi data Nopol, Nama Kendaraan, Jenis Service, dan Tanggal Jadwal!');
+        }
+    }
+
+    function markAsCompleted(id) {
+        const index = serviceSchedules.findIndex(s => s.id === id);
+        if (index !== -1) {
+            serviceSchedules[index].isCompleted = true;
+            localStorage.setItem('serviceSchedules', JSON.stringify(serviceSchedules));
+            
+            renderTable(); // Render ulang setelah update
+            checkDeadlines();
+            alert(`Service untuk Nopol ${serviceSchedules[index].nopol} berhasil ditandai sebagai Selesai.`);
+        }
+    }
+
+    // --- FUNGSI FILTERING DAN RENDERING ---
+
+    function renderTable() {
+        const filterStatus = document.getElementById('filterStatus').value;
+        const filterDeadline = document.getElementById('filterDeadline').value;
+        const tableBody = document.getElementById('serviceTableBody');
+        tableBody.innerHTML = ''; 
+
+        // 1. Proses Filtering
+        const filteredSchedules = serviceSchedules.filter(schedule => {
+            
+            // Filter Status Selesai
+            if (filterStatus === 'pending' && schedule.isCompleted) {
+                return false;
+            }
+            if (filterStatus === 'completed' && !schedule.isCompleted) {
+                return false;
+            }
+
+            // Filter Deadline (Hanya berlaku untuk yang Belum Selesai)
+            if (!schedule.isCompleted) {
+                const diffDays = getDayDifference(schedule.tanggal);
+                const isWarning = diffDays <= 7;
+
+                if (filterDeadline === 'warning' && !isWarning) {
+                    return false;
+                }
+                if (filterDeadline === 'safe' && isWarning) {
+                    return false;
+                }
+            } else if (filterDeadline !== 'all') {
+                // Jangan tampilkan yang selesai jika filter deadline aktif
+                return false;
+            }
+            
+            return true;
+        });
+
+        // 2. Proses Rendering
+        filteredSchedules.forEach(schedule => {
+            let statusText = 'Belum Service';
+            let rowClass = '';
+            let actionHtml = `<button onclick="markAsCompleted(${schedule.id})">Selesai</button>`;
+
+            if (schedule.isCompleted) {
+                statusText = '✅ Selesai';
+                rowClass = 'completed';
+                actionHtml = '<button disabled>—</button>';
+            } else {
+                const diffDays = getDayDifference(schedule.tanggal);
+                
+                if (diffDays < 0) {
+                    statusText = '❌ Jadwal Terlewat';
+                    rowClass = 'warning'; 
+                } else if (diffDays <= 7) { 
+                    statusText = `⚠️ Deadline: ${diffDays} Hari Lagi`;
+                    rowClass = 'warning';
+                } else {
+                    statusText = `⏳ ${diffDays} Hari Lagi`;
+                }
+            }
+            
+            const displayKeterangan = schedule.keterangan || '—';
+
+            const row = tableBody.insertRow();
+            row.className = rowClass;
+            row.innerHTML = `
+                <td>${schedule.nopol}</td>
+                <td>${schedule.nama}</td> <td>${schedule.jenis}</td>
+                <td>${schedule.tanggal}</td>
+                <td>${displayKeterangan}</td>
+                <td>${statusText}</td>
+                <td>${actionHtml}</td>
+            `;
+        });
+    }
+
+    function checkDeadlines() {
+        const notificationBox = document.getElementById('notification-box');
+        let deadlineApproaching = false;
+
+        serviceSchedules.forEach(schedule => {
+            if (schedule.isCompleted) {
+                return; 
+            }
+
+            const diffDays = getDayDifference(schedule.tanggal);
+            
+            if (diffDays <= 7) { 
+                deadlineApproaching = true;
+            }
+        });
+
+        if (deadlineApproaching) {
+            notificationBox.style.display = 'block';
+        } else {
+            notificationBox.style.display = 'none';
+        }
+    }
+</script>
+
+</body>
+</html>
