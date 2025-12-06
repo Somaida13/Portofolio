@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIM Service AC </title>
+    <style>
+        /* --- GLOBAL STYLES & LAYOUT --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f7;
+            margin: 0;
+            color: #333;
+        }
+
+        /* --- LOGIN SECTION --- */
+        #login-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .login-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+        }
+        .login-container h2 {
+            color: #1a73e8;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        #login-section button {
+            background-color: #1a73e8;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        #login-section button:hover {
+            background-color: #155bb5;
+        }
+        .error-message {
+            color: #dc3545;
+            margin-top: 15px;
+            display: none;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        /* --- DASHBOARD STYLES --- */
+        #dashboard-section {
+            display: none;
+        }
+        header {
+            background-color: #1a73e8;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 22px;
+        }
+        .logout-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+        .container {
+            padding: 20px 30px;
+        }
+
+        /* --- NAVIGATION/TABS --- */
+        .tabs {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .tabs button {
+            background-color: #e3f2fd;
+            border: 1px solid #bbdefb;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a73e8;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+        .tabs button.active {
+            background-color: #1a73e8;
+            color: white;
+            border-color: #1a73e8;
+        }
+        .tab-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* --- FORM & TABLE STYLES --- */
+        .form-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px dashed #ccc;
+            border-radius: 6px;
+        }
+        .form-section h4 {
+            color: #3f51b5;
+            margin-top: 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .form-section label, .form-section select, .form-section input {
+            display: block;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        .form-section input[type="text"], .form-section select, .form-section input[type="date"], .form-section input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: content-box;
+        }
+        .form-section button {
+            background-color: #00bcd4;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+        .form-section button:hover {
+            background-color: #0097a7;
+        }
+
+        /* --- TABLE STYLES --- */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .data-table th, .data-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+        .data-table th {
+            background-color: #f7f7f7;
+            font-weight: bold;
+        }
+        
+        /* --- Action Buttons --- */
+        .action-container {
+            display: flex;
+            gap: 5px;
+        }
+        .btn-selesai {
+            background-color: #28a745;
+            color: white;
+            padding: 5px 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: background-color 0.3s;
+        }
+        .btn-selesai:hover {
+            background-color: #1e7e34;
+        }
+        .btn-rusak {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: background-color 0.3s;
+        }
+        .btn-rusak:hover {
+            background-color: #c82333;
+        }
+
+        /* --- Status Deadline Badges --- */
+        .status-badge {
+            padding: 5px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 12px;
+            color: white;
+            display: inline-block;
+        }
+        .status-terlambat { background-color: #dc3545; }
+        .status-terjadwal { background-color: #007bff; }
+        .status-selesai { background-color: #28a745; }
+        .status-rusak { background-color: #ff9800; color: #333; }
+        .status-baik { background-color: #28a745; }
+
+
+        /* --- Delete Button Specific --- */
+        .btn-delete {
+            background-color: #ff5722 !important;
+            padding: 10px 15px !important;
+        }
+        .btn-delete:hover {
+            background-color: #e64a19 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-section">
+        <div class="login-container">
+            <h2>🛠️ SIM Service AC</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required value="admin">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required value="devloper">
+                </div>
+                <p class="error-message" id="errorMessage">Username atau password salah. Coba: admin / devloper</p>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="dashboard-section">
+        <header>
+            <h1>SIM Data & Service AC</h1>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </header>
+
+        <div class="container">
+            <h2 style="color: #1a73e8; margin-bottom: 25px;">Manajemen Aset & Jadwal</h2>
+            
+            <div class="tabs">
+                <button class="tab-button active" onclick="openTab('master-data', this)">1. Data Master</button>
+                <button class="tab-button" onclick="openTab('schedule', this)">2. Jadwal Service</button>
+                <button class="tab-button" onclick="openTab('total-ac', this)">3. Total AC</button> 
+            </div>
+            
+            <div id="master-data" class="tab-content active">
+                <h3>Master Data Gedung, Lantai & Ruang</h3>
+
+                <div style="display: flex; gap: 20px;">
+                    <div style="flex: 1;">
+                        <div class="form-section">
+                            <h4>➕ Tambah Gedung/Lokasi Utama</h4>
+                            <form id="add-building-form">
+                                <label for="building-name">Nama Gedung:</label>
+                                <input type="text" id="building-name" required placeholder="Contoh: Gedung A">
+                                <button type="submit">Tambah Gedung</button>
+                            </form>
+                        </div>
+                        <h4>Daftar Gedung</h4>
+                        <table class="data-table">
+                            <thead><tr><th>ID</th><th>Nama Gedung</th></tr></thead>
+                            <tbody id="building-list"></tbody>
+                        </table>
+                    </div>
+                    
+                    <div style="flex: 1;">
+                        <div class="form-section">
+                            <h4>➕ Tambah Lantai Baru</h4>
+                            <form id="add-floor-form">
+                                <label for="floor-name">Nama/Nomor Lantai:</label>
+                                <input type="text" id="floor-name" required placeholder="Contoh: Lantai 3 atau Basement 1">
+                                <button type="submit">Tambah Lantai</button>
+                            </form>
+                        </div>
+                        <h4>Daftar Lantai</h4>
+                        <table class="data-table">
+                            <thead><tr><th>Nama Lantai</th></tr></thead>
+                            <tbody id="floor-list"></tbody>
+                        </table>
+                    </div>
+                    
+                    <div style="flex: 1;">
+                        <div class="form-section">
+                            <h4>➕ Tambah Ruang Baru</h4>
+                            <form id="add-room-form">
+                                <label for="room-name">Nama Ruang:</label>
+                                <input type="text" id="room-name" required placeholder="Contoh: Ruang Arsip / R-201">
+                                <button type="submit">Tambah Ruang</button>
+                            </form>
+                        </div>
+                        <h4>Daftar Ruang</h4>
+                        <table class="data-table">
+                            <thead><tr><th>Nama Ruang</th></tr></thead>
+                            <tbody id="room-list"></tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <hr style="margin: 20px 0;">
+
+                <div class="form-section">
+                    <h4>➕ Tambah Unit AC Baru</h4>
+                    <form id="add-asset-form">
+                        <label for="asset-id">ID Unit AC (Unik):</label>
+                        <input type="text" id="asset-id" required placeholder="Contoh: AC-A01-101">
+
+                        <label for="asset-building">Pilih Gedung/Lokasi Utama:</label>
+                        <select id="asset-building" required></select>
+
+                        <label for="asset-floor">Pilih Lantai:</label>
+                        <select id="asset-floor" required>
+                            <option value="" disabled selected>Pilih Lantai</option>
+                        </select>
+                        
+                        <label for="asset-room">Pilih Nama Ruang:</label>
+                        <select id="asset-room" required>
+                            <option value="" disabled selected>Pilih Ruang</option>
+                        </select>
+
+                        <label for="asset-type">Tipe/Merk:</label>
+                        <input type="text" id="asset-type" required placeholder="Contoh: Split 2PK Daikin">
+
+                        <button type="submit">Tambah Unit AC</button>
+                    </form>
+                </div>
+                
+                <hr style="margin: 20px 0;">
+
+                <div style="display: flex; gap: 20px;">
+                    <div style="flex: 1;">
+                        <div class="form-section">
+                            <h4>❌ Hapus Unit AC</h4>
+                            <label for="delete-asset-id">Pilih Unit AC yang akan dihapus:</label>
+                            <select id="delete-asset-id" required></select>
+                            <button class="btn-delete" type="button" onclick="deleteAsset()">Hapus Unit AC Ini</button>
+                        </div>
+                    </div>
+                    <div style="flex: 1;">
+                        <div class="form-section">
+                            <h4>❌ Hapus Gedung/Lokasi Permanen</h4>
+                            <label for="delete-building-id">Pilih Gedung yang akan dihapus:</label>
+                            <select id="delete-building-id" required></select>
+                            <button class="btn-rusak btn-delete" type="button" onclick="deleteBuilding()">Hapus Gedung Ini</button>
+                            <p style="color: #ff5722; font-size: 12px; margin-top: 10px;">*Menghapus gedung akan menghapus SEMUA Unit AC dan jadwal terkait di gedung tersebut.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <hr style="margin: 20px 0;">
+
+                <div style="display: flex; gap: 20px;">
+                    <div style="flex: 1;">
+                        <div class="form-section">
+                            <h4>❌ Hapus Lantai</h4>
+                            <label for="delete-floor-name">Pilih Lantai yang akan dihapus:</label>
+                            <select id="delete-floor-name" required>
+                                <option value="" disabled selected>Pilih Lantai</option>
+                            </select>
+                            <button class="btn-rusak btn-delete" type="button" onclick="deleteFloor()">Hapus Lantai Ini</button>
+                            <p style="color: #ff5722; font-size: 12px; margin-top: 10px;">*Catatan: Tidak menghapus Unit AC yang sudah menggunakan data lantai ini.</p>
+                        </div>
+                    </div>
+                    <div style="flex: 1;">
+                        <div class="form-section">
+                            <h4>❌ Hapus Ruang</h4>
+                            <label for="delete-room-name">Pilih Ruang yang akan dihapus:</label>
+                            <select id="delete-room-name" required>
+                                <option value="" disabled selected>Pilih Ruang</option>
+                            </select>
+                            <button class="btn-rusak btn-delete" type="button" onclick="deleteRoom()">Hapus Ruang Ini</button>
+                            <p style="color: #ff5722; font-size: 12px; margin-top: 10px;">*Catatan: Tidak menghapus Unit AC yang sudah menggunakan data ruang ini.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div id="schedule" class="tab-content">
+                <h3>Daftar Jadwal Service Preventive</h3>
+                
+                <div class="form-section">
+                    <h4>🗓️ Buat Jadwal Service Baru</h4>
+                    <form id="add-schedule-form">
+                        <label for="schedule-unit-id">Unit AC:</label>
+                        <select id="schedule-unit-id" required></select>
+
+                        <label for="schedule-date">Tanggal Service:</label>
+                        <input type="date" id="schedule-date" required>
+                        
+                        <label for="schedule-type">Tipe Maintenance:</label>
+                        <select id="schedule-type" required>
+                            <option value="Cuci Rutin (3 Bulanan)">Cuci Rutin (3 Bulanan)</option>
+                            <option value="Cek Kondisi (6 Bulanan)">Cek Kondisi (6 Bulanan)</option>
+                        </select>
+
+                        <button type="submit">Simpan Jadwal Service</button>
+                    </form>
+                </div>
+
+                <h4>Jadwal yang Terdaftar</h4>
+                <div class="form-section" style="margin-top: 25px; border: 1px dashed #bbdefb; background-color: #f8fbff;">
+                    <h4>Filter & Sortir Jadwal</h4>
+                    <label for="schedule-sort-select">Urutkan Berdasarkan:</label>
+                    <select id="schedule-sort-select" onchange="sortSchedules(this.value)" style="width: 250px;">
+                        <option value="deadline-asc">Status Deadline (Terlambat Dulu)</option>
+                        <option value="date-asc">Tanggal Service (Terlama Dulu)</option>
+                        <option value="date-desc">Tanggal Service (Terbaru Dulu)</option>
+                        <option value="status-asc">Status Service (Pending Dulu)</option>
+                    </select>
+                </div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID Jadwal</th>
+                            <th>Unit AC</th>
+                            <th>Lokasi (Gedung/Lantai/Ruang)</th>
+                            <th>Tanggal Service</th>
+                            <th>Tipe</th>
+                            <th>Status Deadline</th> 
+                            <th>Catatan</th> 
+                            <th>Aksi</th>
+                            <th>Hapus</th> 
+                        </tr>
+                    </thead>
+                    <tbody id="schedule-list">
+                        </tbody>
+                </table>
+            </div>
+
+            <div id="total-ac" class="tab-content">
+                <h3>Ringkasan Aset Unit AC</h3>
+
+                <div class="form-section" style="display: flex; gap: 20px; justify-content: space-around;">
+                    <div style="text-align: center; background-color: #e8f5e9; padding: 15px; border-radius: 8px; width: 30%;">
+                        <h4 style="color: #28a745; border-bottom: none;">✅ AC Normal/Terjadwal</h4>
+                        <p id="total-normal-ac" style="font-size: 36px; font-weight: bold; margin: 0; color: #28aa45;">0</p>
+                    </div>
+                    <div style="text-align: center; background-color: #ffe0b2; padding: 15px; border-radius: 8px; width: 30%;">
+                        <h4 style="color: #ff9800; border-bottom: none;">⚠️ AC Rusak/Perlu Perbaikan</h4>
+                        <p id="total-breakdown-ac" style="font-size: 36px; font-weight: bold; margin: 0; color: #ff9800;">0</p>
+                    </div>
+                    <div style="text-align: center; background-color: #e3f2fd; padding: 15px; border-radius: 8px; width: 30%;">
+                        <h4 style="color: #1a73e8; border-bottom: none;">∑ Total Unit AC</h4>
+                        <p id="total-ac-count" style="font-size: 36px; font-weight: bold; margin: 0; color: #1a73e8;">0</p>
+                    </div>
+                </div>
+
+                <div class="form-section" style="margin-top: 25px; border: 1px dashed #bbdefb; background-color: #f8fbff;">
+                    <h4>Filter & Sortir Data</h4>
+                    <label for="asset-sort-select">Urutkan Berdasarkan:</label>
+                    <select id="asset-sort-select" onchange="sortAssets(this.value)" style="width: 250px;">
+                        <option value="id-asc">ID Unit AC (A-Z)</option>
+                        <option value="id-desc">ID Unit AC (Z-A)</option>
+                        <option value="status-desc">Status (Rusak Dulu)</option>
+                        <option value="status-asc">Status (Normal Dulu)</option>
+                        <option value="lastservice-desc">Service Terakhir (Terbaru)</option>
+                        <option value="lastservice-asc">Service Terakhir (Terlama)</option>
+                    </select>
+                </div>
+                <h4>Daftar Semua Unit AC</h4>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID Unit AC</th>
+                            <th>Lokasi (Gedung/Lantai/Ruang)</th>
+                            <th>Tipe/Merk</th>
+                            <th>Service Terakhir</th>
+                            <th>Status (Next Service)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="asset-list-total">
+                    </tbody
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Helper untuk mendapatkan tanggal hari ini tanpa waktu
+        function getTodayDateString() {
+            return new Date().toISOString().split('T')[0];
+        }
+
+        // --- DATA SIMULASI (Disimpan di browser Session Storage) ---
+        const initialBuildings = [{ id: 'GA', name: 'Gedung A' }, { id: 'GB', name: 'Gedung B' }];
+        
+        // NEW: Inisialisasi Master Data Lantai dan Ruang
+        const initialMasterFloors = [{ name: 'Lantai 1' }, { name: 'Lantai 2' }, { name: 'Lantai 3' }];
+        const initialMasterRooms = [{ name: 'Ruang Server' }, { name: 'Ruang Rapat 1' }, { name: 'Ruang Arsip' }];
+        
+        const initialAssets = [
+            { id: 'AC-A01-101', buildingId: 'GA', floor: 'Lantai 1', room: 'Ruang Server', type: 'Split 2PK Daikin', nextService: '2026-01-20' },
+            { id: 'AC-B05-203', buildingId: 'GB', floor: 'Lantai 2', room: 'Ruang Rapat 1', type: 'Central 5TR', nextService: '2026-02-15' },
+            { id: 'AC-A02-205', buildingId: 'GA', floor: 'Lantai 2', room: 'Ruang Arsip', type: 'Split 1PK Sharp', nextService: '2026-03-01' },
+            { id: 'AC-C03-301', buildingId: 'GA', floor: 'Lantai 3', room: 'Ruang Rapat 1', type: 'Split 3PK Mitsubishi', nextService: 'Belum Dijadwalkan' }, // AC tanpa jadwal
+        ];
+        const initialSchedules = [
+            { id: 'S-001', unitId: 'AC-B05-203', date: '2026-02-15', type: 'Cuci Rutin (3 Bulanan)', status: 'Pending' },
+            { id: 'S-002', unitId: 'AC-A01-101', date: getTodayDateString(), type: 'Cek Kondisi', status: 'Pending' }, 
+            { id: 'S-003', unitId: 'AC-A02-205', date: '2025-01-01', type: 'Cuci Rutin', status: 'Completed', serviceNote: 'Unit normal, filter dibersihkan.' }, // Example with note
+            { id: 'S-004', unitId: 'AC-B05-203', date: '2025-10-10', type: 'Cek Kondisi', status: 'Completed', serviceNote: 'Tekanan freon dicek, normal.' },
+            { id: 'S-005', unitId: 'AC-A01-101', date: '2025-12-01', type: 'Cuci Rutin', status: 'Breakdown', serviceNote: 'Kompresor mati. Perlu ganti unit.' }, // Status Breakdown with note
+        ];
+
+        // Helper untuk mendapatkan/menyimpan data dari Session Storage
+        function getData(key, initialData) {
+            const data = sessionStorage.getItem(key);
+            if (data) return JSON.parse(data);
+            sessionStorage.setItem(key, JSON.stringify(initialData));
+            return initialData;
+        }
+
+        function saveData(key, data) {
+            sessionStorage.setItem(key, JSON.stringify(data));
+        }
+
+        // Deklarasi variabel untuk Master Data baru
+        let buildings, acAssets, schedules, masterFloors, masterRooms; 
+        
+        // NEW: Global state untuk sorting di tab Total AC & Schedule
+        let currentAssetSort = 'id-asc'; 
+        let currentScheduleSort = 'deadline-asc'; // NEW: Default schedule sort
+
+        function loadAllData() {
+            buildings = getData('buildings', initialBuildings);
+            // LOAD NEW MASTER DATA
+            masterFloors = getData('masterFloors', initialMasterFloors);
+            masterRooms = getData('masterRooms', initialMasterRooms);
+            
+            acAssets = getData('acAssets', initialAssets);
+            schedules = getData('schedules', initialSchedules);
+        }
+
+        // --- CORE RENDER & FUNCTIONS ---
+
+        function renderData() {
+            loadAllData();
+            renderSchedules();
+            renderTotalAC(); 
+            renderMasterDataLists(); // Panggil fungsi render master data
+        }
+
+        // Helper untuk mendapatkan string lokasi lengkap
+        function getAssetLocationString(asset) {
+            const building = buildings.find(b => b.id === asset.buildingId);
+            const buildingName = building ? building.name : 'Gedung Dihapus';
+            // Menggunakan properti floor dan room
+            return `${buildingName} / ${asset.floor || '-'} / ${asset.room || 'Ruang Tidak Diketahui'}`;
+        }
+
+        // NEW: Fungsi untuk mengubah kriteria sorting jadwal
+        function sortSchedules(criteria) {
+            currentScheduleSort = criteria;
+            renderSchedules();
+        }
+
+        // Render Jadwal Service (Logika sorting diperbarui)
+        function renderSchedules() {
+            const list = document.getElementById('schedule-list');
+            list.innerHTML = '';
+            
+            // Logika Sorting Jadwal berdasarkan currentScheduleSort
+            schedules.sort((a, b) => {
+                const criteria = currentScheduleSort;
+                
+                // Sort by Date (Terlama Dulu / Terbaru Dulu)
+                if (criteria === 'date-asc' || criteria === 'date-desc') {
+                    const dateA = new Date(a.date);
+                    const dateB = new Date(b.date);
+                    // Jika tanggal sama, urutkan berdasarkan ID agar stabil
+                    if (dateA.getTime() === dateB.getTime()) return a.id.localeCompare(b.id);
+                    return criteria === 'date-asc' ? dateA - dateB : dateB - dateA;
+                }
+                
+                // Sort by Status Service (Pending Dulu)
+                if (criteria === 'status-asc') {
+                    // Beri bobot: Pending (1), Rusak/Breakdown (2), Completed (3)
+                    const statusOrder = { 'Pending': 1, 'Rusak': 2, 'Completed': 3, 'Breakdown': 4 };
+                    const orderA = statusOrder[a.status] || 99;
+                    const orderB = statusOrder[b.status] || 99;
+                    if (orderA !== orderB) return orderA - orderB;
+                    return new Date(a.date) - new Date(b.date); // Secondary sort by date (Terlama Dulu)
+                }
+
+                // Default: Sort by Deadline Status (Terlambat Dulu) - criteria === 'deadline-asc'
+                const statusA = getScheduleDeadlineStatus(a);
+                const statusB = getScheduleDeadlineStatus(b);
+                if (statusA === 'Terlambat' && statusB !== 'Terlambat') return -1;
+                if (statusA !== 'Terlambat' && statusB === 'Terlambat') return 1;
+                return new Date(a.date) - new Date(b.date); // Secondary sort by date (Terlama Dulu)
+            });
+
+            schedules.forEach(s => {
+                const asset = acAssets.find(a => a.id === s.unitId);
+                const locationString = asset ? getAssetLocationString(asset) : 'AC Dihapus';
+                
+                const deadlineStatus = getScheduleDeadlineStatus(s);
+                const statusClass = getStatusClass(deadlineStatus);
+                
+                const row = list.insertRow();
+                row.insertCell().textContent = s.id;
+                row.insertCell().textContent = s.unitId;
+                row.insertCell().textContent = locationString; 
+                row.insertCell().textContent = s.date;
+                row.insertCell().textContent = s.type;
+                row.insertCell().innerHTML = `<span class="status-badge ${statusClass}">${deadlineStatus}</span>`;
+                
+                // Kolom Catatan
+                const notesCell = row.insertCell(); 
+                notesCell.textContent = s.serviceNote || '-'; 
+                
+                // Kolom Aksi
+                const actionCell = row.insertCell();
+                if (s.status === 'Pending') {
+                    const actionContainer = document.createElement('div');
+                    actionContainer.className = 'action-container';
+                    
+                    const btnSelesai = document.createElement('button');
+                    btnSelesai.textContent = 'Selesai';
+                    btnSelesai.className = 'btn-selesai';
+                    btnSelesai.onclick = () => completeSchedule(s.id, s.unitId);
+                    actionContainer.appendChild(btnSelesai);
+                    
+                    const btnRusak = document.createElement('button');
+                    btnRusak.textContent = 'Rusak';
+                    btnRusak.className = 'btn-rusak';
+                    btnRusak.onclick = () => breakdownSchedule(s.id, s.unitId);
+                    actionContainer.appendChild(btnRusak);
+
+                    actionCell.appendChild(actionContainer);
+                } else {
+                    actionCell.textContent = '-';
+                }
+                
+                // Kolom Hapus Jadwal
+                const deleteCell = row.insertCell(); 
+                if (s.status === 'Pending') {
+                    const btnDelete = document.createElement('button');
+                    btnDelete.textContent = 'Hapus';
+                    btnDelete.className = 'btn-rusak'; 
+                    btnDelete.onclick = () => deleteSchedule(s.id, s.unitId); 
+                    deleteCell.appendChild(btnDelete);
+                } else {
+                    deleteCell.textContent = '-';
+                }
+            });
+            saveData('schedules', schedules);
+            
+            // Set ulang nilai dropdown filter agar sesuai dengan sorting yang aktif
+            document.getElementById('schedule-sort-select').value = currentScheduleSort;
+        }
+        
+        // Helper: Tentukan Status Deadline
+        function getScheduleDeadlineStatus(schedule) {
+            if (schedule.status === 'Completed') return 'Selesai';
+            if (schedule.status === 'Breakdown') return 'Rusak';
+            
+            const scheduleDate = new Date(schedule.date);
+            const today = new Date(getTodayDateString());
+
+            if (scheduleDate < today) {
+                return 'Terlambat';
+            }
+            return 'Terjadwal';
+        }
+
+        // Helper: Dapatkan class CSS untuk status badge
+        function getStatusClass(status) {
+            switch (status) {
+                case 'Terlambat': return 'status-terlambat';
+                case 'Terjadwal': return 'status-terjadwal';
+                case 'Selesai': return 'status-selesai';
+                case 'Rusak': return 'status-rusak';
+                default: return '';
+            }
+        }
+
+        // Helper: Dapatkan Status Unit AC (Normal/Rusak)
+        function getAssetStatus(unitId) {
+            const lastBreakdown = schedules
+                .filter(s => s.unitId === unitId && s.status === 'Breakdown')
+                .sort((a, b) => new Date(b.date) - new Date(a.date))[0];
+
+            const lastCompleted = schedules
+                .filter(s => s.unitId === unitId && s.status === 'Completed')
+                .sort((a, b) => new Date(b.date) - new Date(a.date))[0];
+
+            if (lastBreakdown) {
+                // Jika ada breakdown, cek apakah ada completed service yang lebih baru
+                if (lastCompleted && new Date(lastCompleted.date) > new Date(lastBreakdown.date)) {
+                    return 'Normal'; 
+                }
+                return 'Rusak'; 
+            }
+            
+            return 'Normal'; 
+        }
+
+        // Fungsi untuk mengubah kriteria sorting dan me-render ulang Total AC
+        function sortAssets(criteria) {
+            currentAssetSort = criteria;
+            renderTotalAC();
+        }
+
+        // Render Tab Total AC (Logic disempurnakan untuk sorting)
+        function renderTotalAC() {
+            const list = document.getElementById('asset-list-total');
+            list.innerHTML = '';
+            
+            let totalNormal = 0;
+            let totalBreakdown = 0;
+
+            // 0. Tentukan data service terakhir dan status AC untuk setiap aset
+            const assetsWithDetails = acAssets.map(a => {
+                const assetStatus = getAssetStatus(a.id);
+                const lastService = schedules
+                    .filter(s => s.unitId === a.id && s.status === 'Completed')
+                    .sort((s1, s2) => new Date(s2.date) - new Date(s1.date))[0];
+                // Gunakan tanggal 1970-01-01 untuk "Belum Pernah Service" agar bisa disortir
+                const lastServiceDate = lastService ? lastService.date : '1970-01-01'; 
+                
+                return {
+                    ...a,
+                    status: assetStatus,
+                    lastServiceDate: lastServiceDate
+                };
+            });
+            
+            // 1. Lakukan Sorting berdasarkan currentAssetSort
+            assetsWithDetails.sort((a, b) => {
+                const criteria = currentAssetSort;
+                
+                if (criteria === 'id-asc') {
+                    return a.id.localeCompare(b.id);
+                } else if (criteria === 'id-desc') {
+                    return b.id.localeCompare(a.id);
+                } else if (criteria === 'status-desc') {
+                    // Rusak (R) sebelum Normal (N)
+                    const statusA = a.status === 'Rusak' ? 0 : 1;
+                    const statusB = b.status === 'Rusak' ? 0 : 1;
+                    if (statusA !== statusB) return statusA - statusB;
+                    return a.id.localeCompare(b.id); // Secondary sort by ID
+                } else if (criteria === 'status-asc') {
+                    // Normal (N) sebelum Rusak (R)
+                    const statusA = a.status === 'Rusak' ? 1 : 0;
+                    const statusB = b.status === 'Rusak' ? 1 : 0;
+                    if (statusA !== statusB) return statusA - statusB;
+                    return a.id.localeCompare(b.id); // Secondary sort by ID
+                } else if (criteria === 'lastservice-desc') {
+                    // Terbaru dulu
+                    return new Date(b.lastServiceDate) - new Date(a.lastServiceDate);
+                } else if (criteria === 'lastservice-asc') {
+                    // Terlama dulu
+                    return new Date(a.lastServiceDate) - new Date(b.lastServiceDate);
+                }
+                return 0; // Default: no change
+            });
+
+            // 2. Lakukan Rendering
+            assetsWithDetails.forEach(a => {
+                
+                const locationString = getAssetLocationString(a);
+                
+                // Hitung total normal/breakdown
+                if (a.status === 'Rusak') {
+                    totalBreakdown++;
+                } else {
+                    totalNormal++;
+                }
+                
+                const statusText = a.status === 'Rusak' ? 
+                                   '<span class="status-badge status-terlambat">⚠️ Rusak (Perlu Perbaikan)</span>' : 
+                                   '<span class="status-badge status-selesai status-baik">✅ Normal/Baik</span>';
+
+                // Cari Tanggal Service Terakhir yang ditampilkan
+                const lastServiceDisplay = a.lastServiceDate === '1970-01-01' ? 'Belum Pernah Service' : a.lastServiceDate;
+
+                // Cari Next Service (Jadwal Pending Terdekat)
+                const nextService = schedules
+                    .filter(s => s.unitId === a.id && s.status === 'Pending')
+                    .sort((s1, s2) => new Date(s1.date) - new Date(s2.date))[0];
+                const nextServiceText = nextService ? 
+                                        `${nextService.date} (${nextService.type})` : 
+                                        'Belum Dijadwalkan';
+
+                const row = list.insertRow();
+                row.insertCell().textContent = a.id;
+                row.insertCell().textContent = locationString;
+                row.insertCell().textContent = a.type;
+                row.insertCell().textContent = lastServiceDisplay;
+                row.insertCell().innerHTML = `${nextServiceText} / ${statusText}`;
+            });
+
+            // Update Ringkasan di Form Section
+            document.getElementById('total-ac-count').textContent = acAssets.length;
+            document.getElementById('total-normal-ac').textContent = totalNormal;
+            document.getElementById('total-breakdown-ac').textContent = totalBreakdown;
+            
+            // Set ulang nilai dropdown filter agar sesuai dengan sorting yang aktif
+            document.getElementById('asset-sort-select').value = currentAssetSort;
+
+            saveData('acAssets', acAssets); 
+        }
+        
+        // --- MASTER DATA: ADD & RENDER ---
+        
+        function addFloor(e) {
+            e.preventDefault();
+            const name = document.getElementById('floor-name').value.trim();
+            if (!name) return;
+
+            if (masterFloors.some(f => f.name.toLowerCase() === name.toLowerCase())) {
+                alert(`Lantai "${name}" sudah ada.`);
+                return;
+            }
+
+            masterFloors.push({ name: name });
+            saveData('masterFloors', masterFloors);
+            alert(`Lantai "${name}" berhasil ditambahkan.`);
+            document.getElementById('add-floor-form').reset();
+            renderMasterDataLists(); 
+        }
+
+        function addRoom(e) {
+            e.preventDefault();
+            const name = document.getElementById('room-name').value.trim();
+            if (!name) return;
+            
+            if (masterRooms.some(r => r.name.toLowerCase() === name.toLowerCase())) {
+                alert(`Ruang "${name}" sudah ada.`);
+                return;
+            }
+
+            masterRooms.push({ name: name });
+            saveData('masterRooms', masterRooms);
+            alert(`Ruang "${name}" berhasil ditambahkan.`);
+            document.getElementById('add-room-form').reset();
+            renderMasterDataLists(); 
+        }
+
+        document.getElementById('add-floor-form').addEventListener('submit', addFloor);
+        document.getElementById('add-room-form').addEventListener('submit', addRoom);
+        
+        // Render Master Data Tables dan panggil populateSelects
+        function renderMasterDataLists() {
+            // Render Gedung List
+            const buildingList = document.getElementById('building-list');
+            buildingList.innerHTML = '';
+            buildings.forEach(b => {
+                const row = buildingList.insertRow();
+                row.insertCell().textContent = b.id;
+                row.insertCell().textContent = b.name;
+            });
+
+            // Render Lantai List
+            const floorList = document.getElementById('floor-list');
+            floorList.innerHTML = '';
+            masterFloors.forEach(f => {
+                const row = floorList.insertRow();
+                row.insertCell().textContent = f.name;
+            });
+            
+            // Render Ruang List
+            const roomList = document.getElementById('room-list');
+            roomList.innerHTML = '';
+            masterRooms.forEach(r => {
+                const row = roomList.insertRow();
+                row.insertCell().textContent = r.name;
+            });
+            
+            // Panggil fungsi untuk mengisi dropdown setelah Master Data ter-render
+            populateMasterSelects();
+        }
+
+        // Mengisi dropdown Gedung, Lantai, Ruang dan Unit AC
+        function populateMasterSelects() {
+            // Existing selects
+            const assetBuildingSelect = document.getElementById('asset-building');
+            const deleteBuildingSelect = document.getElementById('delete-building-id'); 
+            const scheduleUnitSelect = document.getElementById('schedule-unit-id');
+            const deleteAssetSelect = document.getElementById('delete-asset-id');
+            
+            // NEW SELECTS for ADD
+            const assetFloorSelect = document.getElementById('asset-floor');
+            const assetRoomSelect = document.getElementById('asset-room');
+
+            // NEW SELECTS for DELETE
+            const deleteFloorSelect = document.getElementById('delete-floor-name');
+            const deleteRoomSelect = document.getElementById('delete-room-name');
+            
+            // Clear Options
+            assetBuildingSelect.innerHTML = '<option value="" disabled selected>Pilih Gedung</option>';
+            deleteBuildingSelect.innerHTML = '<option value="" disabled selected>Pilih Gedung</option>'; 
+            scheduleUnitSelect.innerHTML = '<option value="" disabled selected>Pilih Unit AC</option>';
+            deleteAssetSelect.innerHTML = '<option value="" disabled selected>Pilih Unit AC</option>';
+            // NEW Clears
+            assetFloorSelect.innerHTML = '<option value="" disabled selected>Pilih Lantai</option>';
+            assetRoomSelect.innerHTML = '<option value="" disabled selected>Pilih Ruang</option>';
+            deleteFloorSelect.innerHTML = '<option value="" disabled selected>Pilih Lantai</option>';
+            deleteRoomSelect.innerHTML = '<option value="" disabled selected>Pilih Ruang</option>';
+
+            
+            // Isi dropdown Gedung (Add & Delete)
+            buildings.forEach(b => {
+                const optionAsset = document.createElement('option');
+                optionAsset.value = b.id;
+                optionAsset.textContent = b.name;
+                assetBuildingSelect.appendChild(optionAsset);
+
+                const optionDelete = document.createElement('option'); 
+                optionDelete.value = b.id;
+                optionDelete.textContent = `${b.name} (ID: ${b.id})`;
+                deleteBuildingSelect.appendChild(optionDelete);
+            });
+            
+            // NEW: Isi dropdown Lantai (Add & Delete)
+            masterFloors.forEach(f => {
+                const optionAdd = document.createElement('option');
+                optionAdd.value = f.name; 
+                optionAdd.textContent = f.name;
+                assetFloorSelect.appendChild(optionAdd);
+                
+                const optionDelete = document.createElement('option');
+                optionDelete.value = f.name; 
+                optionDelete.textContent = f.name;
+                deleteFloorSelect.appendChild(optionDelete);
+            });
+
+            // NEW: Isi dropdown Ruang (Add & Delete)
+            masterRooms.forEach(r => {
+                const optionAdd = document.createElement('option');
+                optionAdd.value = r.name; 
+                optionAdd.textContent = r.name;
+                assetRoomSelect.appendChild(optionAdd);
+
+                const optionDelete = document.createElement('option');
+                optionDelete.value = r.name; 
+                optionDelete.textContent = r.name;
+                deleteRoomSelect.appendChild(optionDelete);
+            });
+
+
+            // Isi dropdown Unit AC (Schedule & Delete)
+            acAssets.forEach(a => {
+                const locationText = getAssetLocationString(a); 
+                const optionText = `${a.id} (${locationText})`;
+                
+                const schedOption = document.createElement('option');
+                schedOption.value = a.id;
+                schedOption.textContent = optionText;
+                scheduleUnitSelect.appendChild(schedOption);
+
+                const delOption = document.createElement('option');
+                delOption.value = a.id;
+                delOption.textContent = optionText;
+                deleteAssetSelect.appendChild(delOption);
+            });
+        }
+
+        // --- MASTER DATA MANAGEMENT: DELETION ---
+        
+        // 1. Hapus Lantai
+        function deleteFloor() {
+            const floorNameToDelete = document.getElementById('delete-floor-name').value;
+            if (!floorNameToDelete) {
+                alert("Pilih Lantai yang akan dihapus.");
+                return;
+            }
+
+            if (confirm(`Anda yakin ingin menghapus Lantai "${floorNameToDelete}" dari Master Data? \n\nUnit AC yang sudah menggunakan nama lantai ini TIDAK akan terhapus, namun lantai ini tidak akan muncul lagi di pilihan penambahan unit baru.`)) {
+                
+                // Hapus data lantai dari masterFloors
+                masterFloors = masterFloors.filter(f => f.name !== floorNameToDelete);
+                saveData('masterFloors', masterFloors);
+                
+                alert(`Lantai "${floorNameToDelete}" berhasil dihapus dari Master Data.`);
+                document.getElementById('delete-floor-name').value = "";
+                renderData();
+            }
+        }
+        
+        // 2. Hapus Ruang
+        function deleteRoom() {
+            const roomNameToDelete = document.getElementById('delete-room-name').value;
+            if (!roomNameToDelete) {
+                alert("Pilih Ruang yang akan dihapus.");
+                return;
+            }
+
+            if (confirm(`Anda yakin ingin menghapus Ruang "${roomNameToDelete}" dari Master Data? \n\nUnit AC yang sudah menggunakan nama ruang ini TIDAK akan terhapus, namun ruang ini tidak akan muncul lagi di pilihan penambahan unit baru.`)) {
+                
+                // Hapus data ruang dari masterRooms
+                masterRooms = masterRooms.filter(r => r.name !== roomNameToDelete);
+                saveData('masterRooms', masterRooms);
+                
+                alert(`Ruang "${roomNameToDelete}" berhasil dihapus dari Master Data.`);
+                document.getElementById('delete-room-name').value = "";
+                renderData();
+            }
+        }
+
+        // 3. Tambah Gedung Baru (Tidak Berubah)
+        document.getElementById('add-building-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('building-name').value.trim();
+            if (!name) return;
+            
+            if (buildings.some(b => b.name.toLowerCase() === name.toLowerCase())) {
+                alert(`Gedung "${name}" sudah ada.`);
+                return;
+            }
+
+            const newId = name.substring(0, 2).toUpperCase() + String(buildings.length + 1).padStart(2, '0');
+            buildings.push({ id: newId, name: name });
+            saveData('buildings', buildings);
+            alert(`Gedung "${name}" berhasil ditambahkan.`);
+            document.getElementById('add-building-form').reset();
+            renderMasterDataLists(); 
+        });
+
+        // 4. Hapus Gedung Permanen (Tidak Berubah)
+        function deleteBuilding() {
+            const buildingIdToDelete = document.getElementById('delete-building-id').value;
+            if (!buildingIdToDelete) {
+                alert("Pilih Gedung yang akan dihapus.");
+                return;
+            }
+
+            const buildingName = buildings.find(b => b.id === buildingIdToDelete)?.name || buildingIdToDelete;
+
+            if (confirm(`PERINGATAN KERAS! Anda yakin ingin menghapus Gedung "${buildingName}" (ID: ${buildingIdToDelete})?\n\nSemua Unit AC dan Jadwal Service di gedung ini AKAN DIHAPUS PERMANEN.`)) {
+                
+                const assetsToDelete = acAssets.filter(asset => asset.buildingId === buildingIdToDelete);
+                const assetIdsToDelete = assetsToDelete.map(asset => asset.id);
+
+                acAssets = acAssets.filter(asset => asset.buildingId !== buildingIdToDelete);
+                saveData('acAssets', acAssets);
+
+                schedules = schedules.filter(s => !assetIdsToDelete.includes(s.unitId));
+                saveData('schedules', schedules);
+
+                buildings = buildings.filter(b => b.id !== buildingIdToDelete);
+                saveData('buildings', buildings);
+
+                alert(`Gedung "${buildingName}" dan ${assetIdsToDelete.length} unit AC beserta semua riwayatnya berhasil dihapus.`);
+                document.getElementById('delete-building-id').value = "";
+                renderData(); 
+            }
+        }
+
+
+        // 5. Tambah Unit AC Baru (Tidak Berubah)
+        document.getElementById('add-asset-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const id = document.getElementById('asset-id').value.toUpperCase().trim();
+            const buildingId = document.getElementById('asset-building').value;
+            const floor = document.getElementById('asset-floor').value; 
+            const room = document.getElementById('asset-room').value;   
+            const type = document.getElementById('asset-type').value.trim();
+            
+            if (acAssets.some(a => a.id === id)) {
+                alert('ID Unit AC sudah ada. Gunakan ID unik.');
+                return;
+            }
+
+            if (!buildingId || !floor || !room) {
+                 alert('Harap lengkapi pilihan Gedung, Lantai, dan Ruang.');
+                 return;
+            }
+
+            acAssets.push({ id: id, buildingId: buildingId, floor: floor, room: room, type: type, nextService: 'Belum Dijadwalkan' });
+            saveData('acAssets', acAssets);
+            alert(`Unit AC "${id}" (Lantai ${floor}, Ruang ${room}) berhasil ditambahkan.`);
+            document.getElementById('add-asset-form').reset();
+            renderData(); 
+        });
+
+        // 6. Hapus Unit AC Permanen (Tidak Berubah)
+        function deleteAsset() {
+            const unitIdToDelete = document.getElementById('delete-asset-id').value;
+            if (!unitIdToDelete) {
+                alert("Pilih Unit AC yang akan dihapus.");
+                return;
+            }
+            if (confirm(`Anda yakin ingin menghapus Unit AC ${unitIdToDelete} dan semua jadwal terkait?`)) {
+                acAssets = acAssets.filter(asset => asset.id !== unitIdToDelete);
+                saveData('acAssets', acAssets);
+                schedules = schedules.filter(s => s.unitId !== unitIdToDelete);
+                saveData('schedules', schedules);
+                alert(`Unit AC ${unitIdToDelete} berhasil dihapus.`);
+                document.getElementById('delete-asset-id').value = ""; 
+                renderData(); 
+            }
+        }
+
+        // --- JADWAL SERVICE MANAGEMENT ---
+        document.getElementById('add-schedule-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const unitId = document.getElementById('schedule-unit-id').value;
+            const date = document.getElementById('schedule-date').value;
+            const type = document.getElementById('schedule-type').value;
+
+            if (new Date(date) < new Date(getTodayDateString())) {
+                alert("Tanggal service tidak boleh di masa lalu.");
+                return;
+            }
+
+            const newId = 'S-' + String(schedules.length + 1).padStart(3, '0');
+            schedules.push({ id: newId, unitId: unitId, date: date, type: type, status: 'Pending' }); 
+
+            const assetIndex = acAssets.findIndex(a => a.id === unitId);
+            if (assetIndex !== -1) {
+                acAssets[assetIndex].nextService = date;
+                saveData('acAssets', acAssets);
+            }
+
+            saveData('schedules', schedules);
+            alert(`Jadwal service ${newId} untuk Unit ${unitId} berhasil dibuat pada ${date}.`);
+            document.getElementById('add-schedule-form').reset();
+            renderData();
+        });
+        
+        // Fungsi Aksi: Tandai Jadwal Selesai 
+        function completeSchedule(scheduleId, unitId) {
+            
+            // Prompt for note
+            const note = prompt(`Masukkan Catatan Service (Misal: Freon ditambah, filter bersih, dll) untuk Jadwal ${scheduleId}:`);
+            if (note === null) return; // User pressed Cancel
+            
+            if (confirm(`Unit AC ${unitId} sudah selesai di-service hari ini?`)) {
+                const index = schedules.findIndex(s => s.id === scheduleId);
+                
+                if (index !== -1) {
+                    schedules[index].status = 'Completed';
+                    schedules[index].serviceNote = note.trim(); // Store the note
+                    saveData('schedules', schedules);
+                    alert(`Jadwal ${scheduleId} berhasil ditandai Selesai. Catatan: ${note.trim()}`);
+                    renderData(); 
+                }
+            }
+        }
+        
+        // Fungsi Aksi: Tandai Unit Rusak 
+        function breakdownSchedule(scheduleId, unitId) {
+            
+            // Prompt for note
+            const note = prompt(`Masukkan Catatan Kerusakan (Misal: Kompresor mati, bocor parah) untuk Unit AC ${unitId}:`);
+            if (note === null) return; // User pressed Cancel
+
+            if (confirm(`PERINGATAN: Unit AC ${unitId} mengalami kerusakan (Breakdown) saat dijadwalkan? Status akan diubah menjadi Rusak.`)) {
+                const index = schedules.findIndex(s => s.id === scheduleId);
+                
+                if (index !== -1) {
+                    schedules[index].status = 'Breakdown';
+                    schedules[index].serviceNote = note.trim(); // Store the note
+                    saveData('schedules', schedules);
+                    alert(`Jadwal ${scheduleId} berhasil ditandai Rusak (Breakdown). Catatan: ${note.trim()}`);
+                    renderData(); 
+                }
+            }
+        }
+
+        // Fungsi untuk menghapus jadwal service
+        function deleteSchedule(scheduleId, unitId) {
+            if (confirm(`Anda yakin ingin menghapus Jadwal ${scheduleId} untuk Unit AC ${unitId}?`)) {
+                
+                // 1. Hapus jadwal dari array schedules
+                schedules = schedules.filter(s => s.id !== scheduleId);
+                saveData('schedules', schedules);
+                
+                // 2. Perbarui 'nextService' pada AC yang bersangkutan
+                const assetIndex = acAssets.findIndex(a => a.id === unitId);
+                if (assetIndex !== -1) {
+                    // Cari jadwal 'Pending' terdekat yang tersisa
+                    const nextPendingSchedule = schedules
+                        .filter(s => s.unitId === unitId && s.status === 'Pending')
+                        .sort((s1, s2) => new Date(s1.date) - new Date(s2.date))[0];
+                        
+                    acAssets[assetIndex].nextService = nextPendingSchedule ? nextPendingSchedule.date : 'Belum Dijadwalkan';
+                    saveData('acAssets', acAssets);
+                }
+
+                alert(`Jadwal ${scheduleId} berhasil dihapus.`);
+                renderData(); 
+            }
+        }
+
+
+        // --- UI UTILITIES & AUTH (Tidak Berubah) ---
+        function openTab(tabName, button) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            button.classList.add('active');
+            renderData(); 
+        }
+
+        function showLogin() {
+            document.getElementById('login-section').style.display = 'flex';
+            document.getElementById('dashboard-section').style.display = 'none';
+        }
+
+        function showDashboard() {
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('dashboard-section').style.display = 'block';
+        }
+
+        function logout() {
+            if (confirm('Anda yakin ingin logout? Semua data yang Anda masukkan (simulasi) akan hilang.')) {
+                // Hapus data sesi untuk simulasi logout
+                sessionStorage.clear(); 
+                showLogin();
+            }
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (username === 'admin' && password === 'devloper') {
+                sessionStorage.setItem('loggedIn', 'true');
+                showDashboard();
+                renderData();
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (sessionStorage.getItem('loggedIn') === 'true') {
+                showDashboard();
+                renderData();
+            } else {
+                showLogin();
+            }
+        });
+    </script>
+
+</body>
+</html>
