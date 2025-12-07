@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIEP AgriProLearn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset dan Variabel Dasar */
+        :root {
+            --primary-color: #4CAF50; /* Hijau Utama */
+            --secondary-color: #2196F3; /* Biru Aksen */
+            --whatsapp-color: #25D366; /* Warna WhatsApp */
+            --text-color: #333;
+            --bg-light: #f4f4f4;
+            --bg-dark: #1e1e1e;
+            --font-stack: 'Segoe UI', sans-serif;
+            --border-radius-lg: 12px;
+            --border-radius-sm: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Global Sections --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 0;
+            transition: opacity 0.3s;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .nav-links li a:hover {
+            opacity: 0.8;
+        }
+        
+        .search-icon {
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            padding: 0.5rem; /* Area klik lebih besar */
+            border-radius: 50%;
+        }
+
+        .search-icon:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* --- Tombol WhatsApp Khusus --- */
+        .nav-links li .whatsapp-link {
+            background-color: var(--whatsapp-color);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-links li .whatsapp-link:hover {
+            background-color: #1DA851;
+            opacity: 1; /* Override opacity hover */
+        }
+
+
+        /* --- Features Section --- */
+        #features {
+            background-color: var(--bg-light);
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        #features h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        #features p.subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 3.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            font-size: 1.3rem;
+        }
+
+        .feature-item .icon {
+            font-size: 2.2rem;
+            margin-right: 12px;
+            color: var(--secondary-color);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--bg-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+        }
+
+        /* --- POPUP (MODAL) STYLES --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 8% auto;
+            padding: 30px;
+            width: 90%;
+            max-width: 850px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            position: relative;
+        }
+
+        .modal-content h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 10px;
+        }
+
+        /* Grid untuk Kartu Artikel */
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .article-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            border-color: var(--secondary-color);
+        }
+
+        .article-card h4 {
+            color: var(--text-color);
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        .article-card .emoji {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Tombol Tutup */
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 32px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        /* Gaya Khusus Detail Artikel Popup */
+        #detailModal .modal-content, #searchModal .modal-content {
+            max-width: 600px;
+        }
+        #detailModal h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #detailModal ul {
+            list-style: disc;
+            margin-left: 20px;
+            padding-left: 0;
+        }
+        
+        /* Gaya Khusus Popup Pencarian */
+        #searchModal input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        #search-results {
+            text-align: left;
+            padding-top: 1rem;
+            border-top: 1px solid #ddd;
+        }
+        #search-results p {
+            font-style: italic;
+            color: #888;
+        }
+        #search-results ul {
+            list-style: none;
+            padding: 0;
+        }
+        #search-results li {
+            padding: 10px;
+            border-bottom: 1px dashed #eee;
+            cursor: pointer;
+        }
+        #search-results li:hover {
+            background-color: var(--bg-light);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; height: auto; align-items: flex-start; }
+            .nav-links { margin-top: 1rem; width: 100%; justify-content: space-around; gap: 0.5rem; }
+            .nav-links li { width: fit-content; }
+            .search-icon { margin-top: 0; margin-left: auto; margin-right: 0; }
+            #features { padding-top: 3rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .modal-content { margin: 15% 5%; width: 90%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo">🌱 AgriProLearn</a>
+            <ul class="nav-links">
+                <li><a onclick="closeAllModals();">Beranda</a></li>
+                <li><a onclick="openModal('pertanianModal')">Pertanian</a></li>
+                <li><a onclick="openModal('peternakanModal')">Peternakan</a></li>
+                <li><a href="https://wa.me/6289648985071?text=Halo,%20saya%20tertarik%20dengan%20AgriProLearn." target="_blank" class="whatsapp-link">📞 Kontak (WA)</a></li>
+            </ul>
+            <span class="search-icon" onclick="openModal('searchModal')">🔍</span>
+        </div>
+    </header>
+
+    <section id="features" class="section-padding text-center">
+        <div class="container">
+            <h2>🔬 Pilar Pembelajaran Berbasis Data</h2>
+            <p class="subtitle">Kami menyediakan alat analitik dan sosial yang Anda butuhkan untuk sukses.</p>
+            
+            <div class="features-grid">
+                
+                <div class="feature-item">
+                    <h3><span class="icon">📈</span> Analitik Lahan Presisi</h3>
+                    <p>Alat canggih untuk menganalisis kondisi tanah, cuaca mikro, dan kebutuhan nutrisi secara real-time. Ambil keputusan yang tepat, bukan tebakan.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3><span class="icon">📚</span> Konten Terintegrasi</h3>
+                    <p>Akses modul pembelajaran yang tidak hanya teoritis tetapi langsung terhubung dengan data analitik Anda. Pelajari dan terapkan secara instan.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3><span class="icon">💬</span> Jejaring Profesional</h3>
+                    <p>Hubungkan dengan ribuan petani dan ahli agronomi modern. Berbagi data kinerja, strategi, dan praktik terbaik dalam lingkungan terukur.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3><span class="icon">💰</span> Pengukuran ROI</h3>
+                    <p>Ukur dampak setiap praktik pertanian terhadap keuntungan Anda. Visualisasikan Return on Investment (ROI) dari setiap keputusan berbasis data.</p>
+                </div>
+            </div>
+            <p style="margin-top: 3rem; font-size: 0.9rem; color: #666;">silahkan hubungi AgriProLearn</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 AK Comunity. Pertanian Cerdas, Masa Depan Makmur.</p>
+        </div>
+    </footer>
+
+    <div id="pertanianModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('pertanianModal')">&times;</span>
+            <h2>🌱 Artikel & Modul Pertanian Modern</h2>
+            <p>Pilih topik untuk melihat detail:</p>
+            <div class="article-grid">
+                <div class="article-card" onclick="showArticleDetail('Optimasi Irigasi Cerdas', 'Sensor & Analisis Kebutuhan Air', 'Pertanian')">
+                    <span class="emoji">💧</span>
+                    <h4>Optimasi Irigasi Cerdas</h4>
+                    <small>Sensor & Analisis Kebutuhan Air</small>
+                </div>
+                <div class="article-card" onclick="showArticleDetail('Pengendalian Hama Organik', 'Prediksi Dini dan Solusi Biologis', 'Pertanian')">
+                    <span class="emoji">🐞</span>
+                    <h4>Pengendalian Hama Organik</h4>
+                    <small>Prediksi Dini dan Solusi Biologis</small>
+                </div>
+                <div class="article-card" onclick="showArticleDetail('Analisis Nutrisi Tanaman', 'Rekomendasi Pemupukan Presisi', 'Pertanian')">
+                    <span class="emoji">🧪</span>
+                    <h4>Analisis Nutrisi Tanaman</h4>
+                    <small>Rekomendasi Pemupukan Presisi</small>
+                </div>
+                <div class="article-card" onclick="showArticleDetail('Teknik Vertikultur', 'Pemanfaatan Lahan Sempit Kota', 'Pertanian')">
+                    <span class="emoji">⬆️</span>
+                    <h4>Teknik Vertikultur</h4>
+                    <small>Pemanfaatan Lahan Sempit Kota</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="peternakanModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('peternakanModal')">&times;</span>
+            <h2>🐑 Artikel & Modul Peternakan Cerdas</h2>
+            <p>Pilih topik untuk melihat detail:</p>
+            <div class="article-grid">
+                <div class="article-card" onclick="showArticleDetail('Monitoring Kesehatan Ternak', 'Sistem IoT dan Deteksi Dini Penyakit', 'Peternakan')">
+                    <span class="emoji">🩺</span>
+                    <h4>Monitoring Kesehatan Ternak</h4>
+                    <small>Sistem IoT dan Deteksi Dini Penyakit</small>
+                </div>
+                <div class="article-card" onclick="showArticleDetail('Formulasi Pakan Presisi', 'Diet Berdasarkan Data Bobot Badan', 'Peternakan')">
+                    <span class="emoji">⚖️</span>
+                    <h4>Formulasi Pakan Presisi</h4>
+                    <small>Diet Berdasarkan Data Bobot Badan</small>
+                </div>
+                <div class="article-card" onclick="showArticleDetail('Manajemen Limbah', 'Konversi Limbah menjadi Biogas', 'Peternakan')">
+                    <span class="emoji">♻️</span>
+                    <h4>Manajemen Limbah</h4>
+                    <small>Konversi Limbah menjadi Biogas</small>
+                </div>
+                <div class="article-card" onclick="showArticleDetail('Sistem Kandang Tertutup', 'Keunggulan Kontrol Lingkungan', 'Peternakan')">
+                    <span class="emoji">🏠</span>
+                    <h4>Sistem Kandang Tertutup</h4>
+                    <small>Keunggulan Kontrol Lingkungan</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('detailModal')">&times;</span>
+            <h3 id="detail-title"></h3>
+            <p style="font-style: italic; color: #666; margin-bottom: 1.5rem;" id="detail-subtitle"></p>
+            
+            <p id="detail-intro">
+                Artikel ini akan memandu Anda melalui langkah-langkah implementasi teknologi untuk meningkatkan efisiensi dan profitabilitas di sektor Anda. Kami mengombinasikan pengetahuan teoretis dengan data praktik lapangan.
+            </p>
+            
+            <h4 style="margin-top: 1.5rem; color: var(--text-color);">Poin Utama Pembahasan:</h4>
+            <ul id="detail-list">
+                <li>Integrasi Sensor dan IoT pada lahan/kandang.</li>
+                <li>Analisis Data Real-time untuk keputusan cepat.</li>
+                <li>Studi kasus sukses implementasi teknologi ini.</li>
+                <li>Perhitungan potensi peningkatan hasil panen/ternak.</li>
+            </ul>
+            
+            <button onclick="closeModal('detailModal');" class="btn-primary" style="margin-top: 2rem; display: block; width: 100%;">Mulai Modul Pembelajaran</button>
+        </div>
+    </div>
+    
+    <div id="searchModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('searchModal')">&times;</span>
+            <h2>🔎 Cari Modul & Artikel</h2>
+            <input type="text" id="searchInput" placeholder="Ketik kata kunci (misal: Irigasi, Pakan, ROI)" onkeyup="simulateSearch()">
+            
+            <div id="search-results">
+                <p>Ketikkan kata kunci di atas untuk memulai pencarian di konten AgriProLearn.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Data sederhana untuk simulasi pencarian
+        const allArticles = [
+            { title: "Optimasi Irigasi Cerdas", category: "Pertanian", keywords: "irigasi, air, sensor, tanah" },
+            { title: "Pengendalian Hama Organik", category: "Pertanian", keywords: "hama, organik, penyakit, biologi" },
+            { title: "Analisis Nutrisi Tanaman", category: "Pertanian", keywords: "nutrisi, pupuk, presisi, tanaman" },
+            { title: "Teknik Vertikultur", category: "Pertanian", keywords: "vertikultur, lahan sempit, kota" },
+            { title: "Monitoring Kesehatan Ternak", category: "Peternakan", keywords: "ternak, kesehatan, iot, penyakit" },
+            { title: "Formulasi Pakan Presisi", category: "Peternakan", keywords: "pakan, presisi, diet, bobot" },
+            { title: "Manajemen Limbah", category: "Peternakan", keywords: "limbah, biogas, konversi" },
+            { title: "Sistem Kandang Tertutup", category: "Peternakan", keywords: "kandang, tertutup, lingkungan, suhu" },
+            { title: "Pengukuran ROI", category: "Fitur", keywords: "roi, keuntungan, investasi, metrik" },
+        ];
+
+        // Fungsi untuk membuka modal/popup
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            // Fokuskan input saat modal pencarian dibuka
+            if (modalId === 'searchModal') {
+                document.getElementById('searchInput').focus();
+            }
+        }
+
+        // Fungsi untuk menutup modal/popup
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Fungsi untuk menutup semua modal
+        function closeAllModals() {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.style.display = 'none';
+            });
+        }
+
+        // Tutup modal jika user mengklik di luar area modal
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        }
+        
+        // Fungsi untuk menampilkan detail artikel (Popup Kedua)
+        function showArticleDetail(title, subtitle, category) {
+            closeAllModals(); 
+            document.getElementById('detail-title').innerText = title;
+            document.getElementById('detail-subtitle').innerText = 'Kategori: ' + category + ' | Topik: ' + subtitle;
+            
+            let detailList = document.getElementById('detail-list');
+            detailList.innerHTML = ''; 
+
+            if (category === 'Pertanian') {
+                detailList.innerHTML += '<li>Pengaturan dosis pupuk dan air secara otomatis.</li>';
+                detailList.innerHTML += '<li>Identifikasi penyakit tanaman fase awal menggunakan citra satelit.</li>';
+                detailList.innerHTML += '<li>Optimalisasi waktu panen berdasarkan prediksi data.</li>';
+            } else if (category === 'Peternakan') {
+                detailList.innerHTML += '<li>Analisis pola makan dan perilaku ternak secara digital.</li>';
+                detailList.innerHTML += '<li>Pengendalian suhu dan kelembaban kandang tertutup.</li>';
+                detailList.innerHTML += '<li>Pencatatan silsilah dan data reproduksi ternak otomatis.</li>';
+            }
+            detailList.innerHTML += '<li>Integrasi Sensor dan IoT pada lahan/kandang.</li>';
+
+            openModal('detailModal');
+        }
+
+        // Fungsi Simulasi Pencarian
+        function simulateSearch() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const resultsDiv = document.getElementById('search-results');
+            resultsDiv.innerHTML = '';
+            
+            if (input.length < 3) {
+                resultsDiv.innerHTML = '<p>Ketikkan minimal 3 karakter untuk mencari.</p>';
+                return;
+            }
+
+            const filteredResults = allArticles.filter(article => 
+                article.title.toLowerCase().includes(input) || 
+                article.category.toLowerCase().includes(input) || 
+                article.keywords.toLowerCase().includes(input)
+            );
+
+            if (filteredResults.length === 0) {
+                resultsDiv.innerHTML = '<p>Tidak ditemukan hasil yang cocok dengan kata kunci Anda.</p>';
+                return;
+            }
+
+            let resultsList = '<ul>';
+            filteredResults.forEach(article => {
+                resultsList += `<li onclick="alert('Anda memilih: ${article.title} (${article.category})')">
+                                    <strong>${article.title}</strong> (${article.category})
+                                </li>`;
+            });
+            resultsList += '</ul>';
+            resultsDiv.innerHTML = resultsList;
+        }
+
+        // DOM Loaded
+        document.addEventListener('DOMContentLoaded', () => {
+             // Pastikan semua elemen dimuat dengan benar
+        });
+    </script>
+
+</body>
+</html>
