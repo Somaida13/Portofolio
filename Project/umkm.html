@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKP | Anugerah Karya Pertiwi Nusantara</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        /* CSS Kustom AKP (Anugerah Karya Pertiwi) */
+        :root {
+            --primary-color: #A0673A; /* Coklat Emas */
+            --secondary-color: #343a40; /* Hitam Gelap */
+            --light-color: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: var(--light-color);
+        }
+
+        /* Navbar & Tombol Kustom */
+        .navbar-custom { background-color: var(--secondary-color) !important; }
+        .navbar-custom .nav-link, .navbar-custom .navbar-brand { color: white !important; font-weight: 500; }
+        .navbar-custom .nav-link:hover { color: var(--primary-color) !important; }
+        .btn-primary-custom { background-color: var(--primary-color); border-color: var(--primary-color); color: white; transition: background-color 0.3s; }
+        .btn-primary-custom:hover { background-color: #8C5C33; border-color: #8C5C33; }
+
+        /* Hero Banner dengan Gambar */
+        .hero-banner {
+            background-color: #e9ecef;
+            padding: 5rem 0;
+            border-bottom: 5px solid var(--primary-color);
+        }
+        .hero-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .hero-banner h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        /* Styling Umum */
+        .section-title {
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        /* Kartu Kategori */
+        .category-card { border: none; overflow: hidden; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,.05); transition: transform 0.3s ease; cursor: pointer; }
+        .category-card:hover { transform: translateY(-5px); }
+        .category-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 15px; background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)); color: white; }
+
+        /* Kartu Produk Showcase */
+        .product-item {
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: white;
+            text-align: center;
+        }
+
+        /* CSS untuk Carousel di Modal */
+        .modal-carousel-img {
+            height: 350px; /* Tinggi tetap untuk gambar di carousel */
+            object-fit: cover;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom shadow-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">AKP Nusantara</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#kategori">Kategori</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#showcase">Showcase</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#berita">Berita</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#kontak">Hubungi Kami</a></li>
+                </ul>
+
+                <form class="d-flex" role="search" id="search-form">
+                    <input class="form-control me-2" type="search" placeholder="Cari Produk (Batik, Rendang...)" aria-label="Search" id="search-input">
+                    <button class="btn btn-primary-custom" type="submit"><i class="bi bi-search"></i></button>
+                    
+                    <button class="btn btn-primary-custom ms-2" type="button" data-bs-toggle="modal" data-bs-target="#partnershipModal">
+                        <i class="bi bi-handshake-fill"></i> Partnership
+                    </button>
+                </form>
+                
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-banner">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-7 mb-4 mb-md-0">
+                    <h1>Anugerah Karya Pertiwi (AKP)</h1>
+                    <h2 class="display-6 fw-normal">Inovasi Tak Terbatas.</h2>
+                    <p class="lead mt-3">Mendedikasikan diri untuk memajukan UMKM terbaik yang merepresentasikan identitas Nusantara di kancah global.</p>
+                    <a href="#showcase" class="btn btn-primary-custom btn-lg mt-3">Lihat Showcase <i class="bi bi-arrow-right"></i></a>
+                </div>
+                <div class="col-md-5">
+                    <img src="../Portofolio-main/Img/AKPAN.png" class="hero-image" alt="Visual Karya Pertiwi">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="search-results-section" class="py-5" style="display:none;">
+        <div class="container">
+            <h2 class="section-title mb-5">Hasil Pencarian untuk: "<span id="search-term-display" class="text-primary-custom"></span>"</h2>
+            <div id="search-results-container" class="row row-cols-1 row-cols-md-4 g-4">
+                </div>
+            <div id="no-results-message" class="alert alert-warning text-center mt-4" style="display:none;">
+                <i class="bi bi-exclamation-triangle-fill"></i> Tidak ditemukan produk yang cocok dengan kata kunci tersebut.
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary" onclick="hideSearchResults()">Tutup Hasil Pencarian</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="kategori" class="py-5">
+        <div class="container">
+            <h2 class="section-title mb-5">Kategori Pilihan Produk</h2>
+            <div class="row g-4">
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card category-card text-white">
+                        <img src="../Portofolio-main/Img/Fesyen & Aksesori.jpg" class="card-img" alt="Fesyen">
+                        <div class="category-overlay">
+                            <h3>Fesyen & Aksesori</h3>
+                            <p class="mb-0">Batik, Tenun, dan Perhiasan Etnik</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card category-card text-white">
+                        <img src="../Portofolio-main/Img/MMB.avif" class="card-img" alt="Kuliner">
+                        <div class="category-overlay">
+                            <h3>Kuliner Tradisional</h3>
+                            <p class="mb-0">Makanan, Minuman, dan Bumbu Instan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card category-card text-white">
+                        <img src="../Portofolio-main/Img/PahatanAnyamanKeramik.jpg" class="card-img" alt="Kriya">
+                        <div class="category-overlay">
+                            <h3>Kriya & Kerajinan Tangan</h3>
+                            <p class="mb-0">Pahatan, Anyaman, dan Keramik</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="showcase" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title mb-5">Showcase Produk Unggulan AKP</h2>
+            <div class="row row-cols-1 row-cols-md-4 g-4" id="product-list-container">
+                
+                <div class="col product-card" data-keywords="batik sutera fesyen yogyakarta parang kusumo">
+                    <div class="product-item">
+                        <img src="../Portofolio-main/Img/Batik Sutera.jpg" class="img-fluid rounded mb-3" alt="Produk 1">
+                        <h5 class="fw-bold">Batik Sutera Parang Kusumo</h5>
+                        <p class="text-muted">Desainer: Puspita Batik</p>
+                        <button type="button" class="btn btn-primary-custom btn-sm w-100" 
+                                data-bs-toggle="modal" data-bs-target="#productDetailModal"
+                                data-title="Batik Sutera Parang Kusumo"
+                                data-desc="Batik tulis sutera asli dari Yogyakarta, motif Parang Kusumo yang melambangkan semangat dan harapan baik. Dibuat dengan pewarna alami, ukuran 200x120 cm."
+                                data-umkm="Puspita Batik (Yogyakarta)"
+                                data-harga="Rp 1.500.000"
+                                data-images="https://via.placeholder.com/400x400/A0673A/ffffff?text=Batik+Sutera+Utama,https://via.placeholder.com/400x400/80503A/ffffff?text=Detail+Motif+Batik,https://via.placeholder.com/400x400/90603A/ffffff?text=Contoh+Dipakai">
+                            Lihat Detail
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col product-card" data-keywords="rendang sapi kuliner instan padang daging">
+                    <div class="product-item">
+                        <img src="../Portofolio-main/Img/Rendang.png" class="img-fluid rounded mb-3" alt="Produk 2">
+                        <h5 class="fw-bold">Rendang Sapi Premium Instan</h5>
+                        <p class="text-muted">UMKM: Dapur Minang</p>
+                         <button type="button" class="btn btn-primary-custom btn-sm w-100" 
+                                data-bs-toggle="modal" data-bs-target="#productDetailModal"
+                                data-title="Rendang Sapi Premium Instan"
+                                data-desc="Rendang sapi siap saji, dimasak selama 8 jam dengan rempah lengkap khas Sumatera Barat. Daya tahan 6 bulan tanpa pengawet. Berat bersih 500gr."
+                                data-umkm="Dapur Minang (Padang)"
+                                data-harga="Rp 95.000"
+                                data-images="https://via.placeholder.com/400x400/90603A/ffffff?text=Rendang+Utama,https://via.placeholder.00x400/80503A/ffffff?text=Rendang+Packaging">
+                            Lihat Detail
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col product-card" data-keywords="tas anyaman bambu kriya bandung handbag">
+                    <div class="product-item">
+                        <img src="../Portofolio-main/Img/Tas Anyaman.webp" class="img-fluid rounded mb-3" alt="Produk 3">
+                        <h5 class="fw-bold">Tas Anyaman Bambu Eksklusif</h5>
+                        <p class="text-muted">Pengrajin: Sentra Anyam</p>
+                        <button type="button" class="btn btn-primary-custom btn-sm w-100" 
+                                data-bs-toggle="modal" data-bs-target="#productDetailModal"
+                                data-title="Tas Anyaman Bambu Eksklusif"
+                                data-desc="Tas tangan (handbag) dari anyaman bambu pilihan, dilapisi kulit sintetis premium. Desain modern, ringan, dan ramah lingkungan."
+                                data-umkm="Sentra Anyam (Bandung)"
+                                data-harga="Rp 450.000"
+                                data-images="https://via.placeholder.com/400x400/A0703A/ffffff?text=Tas+Anyaman+Utama">
+                            Lihat Detail
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col product-card" data-keywords="cincin perak filigree perhiasan bali cincin">
+                    <div class="product-item">
+                        <img src="../Portofolio-main/Img/Cincin Perak.jpg" class="img-fluid rounded mb-3" alt="Produk 4">
+                        <h5 class="fw-bold">Cincin Perak Filigree Bali</h5>
+                        <p class="text-muted">Studio: Silver Dewata</p>
+                        <button type="button" class="btn btn-primary-custom btn-sm w-100" 
+                                data-bs-toggle="modal" data-bs-target="#productDetailModal"
+                                data-title="Cincin Perak Filigree Bali"
+                                data-desc="Cincin perak 925 handmade dengan teknik Filigree khas Bali. Ukuran all size (dapat disesuaikan). Berat 10 gram."
+                                data-umkm="Silver Dewata (Bali)"
+                                data-harga="Rp 380.000"
+                                data-images="https://via.placeholder.com/400x400/A0673A/ffffff?text=Cincin+Depan,https://via.placeholder.com/400x400/80503A/ffffff?text=Cincin+Samping,https://via.placeholder.com/400x400/90603A/ffffff?text=Cincin+Pakai">
+                            Lihat Detail
+                        </button>
+                    </div>
+                </div>
+                
+                </div>
+        </div>
+    </section>
+
+    <section id="berita" class="py-5">
+        <div class="container">
+            <h2 class="section-title mb-5">Berita Terbaru & Event AKP</h2>
+            <div class="p-4 bg-white rounded shadow-sm text-center">
+                <p class="lead">Informasi Event & Berita terbaru dari Anugerah Karya Pertiwi akan ditampilkan di sini.</p>
+                <a href="#" class="btn btn-outline-secondary">Arsip Berita</a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="kontak" class="bg-dark text-white py-5 mt-5">
+        <div class="container text-center">
+            <h5 class="fw-bold text-primary-custom mb-3">Kontak Anugerah Karya Pertiwi</h5>
+            <p><i class="bi bi-envelope-fill me-2"></i> info@akpnusantara.id | <i class="bi bi-phone-fill me-2"></i> +62 21 1234 567</p>
+            <hr class="mt-4 mb-3">
+            <p class="mb-0 text-muted">© 2025 Anugerah Karya Pertiwi (AKP). Dibuat dengan cinta untuk UMKM Indonesia.</p>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="productDetailModalLabel">Detail Produk</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div id="productCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                                <div class="carousel-inner" id="carousel-inner-container">
+                                    <div class="carousel-item active">
+                                        <img src="../Portofolio-main/Img/Batik Sutera.jpg" class="d-block w-100 rounded modal-carousel-img" alt="Gambar 1">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <h3 id="modal-title" class="fw-bold text-primary-custom">Judul Produk</h3>
+                            <p class="text-muted mb-3">Oleh: <span id="modal-umkm">Nama UMKM</span></p>
+                            <hr>
+                            <h5>Deskripsi Produk</h5>
+                            <p id="modal-desc" class="lead"></p>
+                            <hr>
+                            <h4 class="text-danger fw-bold">Harga: <span id="modal-harga">Rp 0</span></h4>
+                            <div class="mt-4">
+                                <a href="#" class="btn btn-success btn-lg me-2"><i class="bi bi-whatsapp"></i> Pesan Via WA</a>
+                                <button type="button" class="btn btn-outline-secondary btn-lg" data-bs-dismiss="modal">Tutup</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="partnershipModal" tabindex="-1" aria-labelledby="partnershipModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary-custom text-white">
+                    <h5 class="modal-title" id="partnershipModalLabel"><i class="bi bi-handshake-fill"></i> Pendaftaran Partnership AKP</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center text-muted">Isi formulir di bawah ini untuk bergabung dalam komunitas AKP.</p>
+                    
+                    <form action="YOUR_GOOGLE_FORM_ACTION_URL" method="POST" target="_blank" id="partnership-form">
+                        
+                        <div class="mb-3">
+                            <label for="nama_bisnis" class="form-label">Nama Bisnis/UMKM Anda</label>
+                            <input type="text" class="form-control" id="nama_bisnis" name="entry.123456789" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="nama_kontak" class="form-label">Nama Kontak Person</label>
+                            <input type="text" class="form-control" id="nama_kontak" name="entry.987654321" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Aktif</label>
+                            <input type="email" class="form-control" id="email" name="entry.112233445" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="jenis_produk" class="form-label">Jenis Produk Utama</label>
+                            <select class="form-select" id="jenis_produk" name="entry.556677889" required>
+                                <option value="">-- Pilih Kategori --</option>
+                                <option value="Fesyen">Fesyen & Aksesori</option>
+                                <option value="Kuliner">Kuliner Tradisional</option>
+                                <option value="Kriya">Kriya & Kerajinan Tangan</option>
+                                <option value="Jasa">Layanan Jasa</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary-custom w-100 mt-3">Kirim Pendaftaran</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // =======================================
+        // 1. FUNGSI PENCARIAN (SEARCH)
+        // =======================================
+        const searchForm = document.getElementById('search-form');
+        const searchInput = document.getElementById('search-input');
+        const searchResultsSection = document.getElementById('search-results-section');
+        const searchResultsContainer = document.getElementById('search-results-container');
+        const searchTermDisplay = document.getElementById('search-term-display');
+        const noResultsMessage = document.getElementById('no-results-message');
+        const showcaseSection = document.getElementById('showcase');
+        const allProductCards = document.querySelectorAll('.product-card');
+
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            performSearch(searchTerm);
+        });
+
+        function performSearch(term) {
+            if (term.length === 0) {
+                hideSearchResults();
+                return;
+            }
+
+            showcaseSection.style.display = 'none';
+            searchResultsSection.style.display = 'block';
+            searchResultsContainer.innerHTML = '';
+            searchTermDisplay.textContent = term;
+
+            let resultsFound = 0;
+
+            allProductCards.forEach(card => {
+                const keywords = card.getAttribute('data-keywords').toLowerCase();
+                
+                if (keywords.includes(term)) {
+                    const clonedCard = card.cloneNode(true);
+                    searchResultsContainer.appendChild(clonedCard);
+                    resultsFound++;
+                }
+            });
+
+            if (resultsFound > 0) {
+                noResultsMessage.style.display = 'none';
+            } else {
+                noResultsMessage.style.display = 'block';
+            }
+
+            searchResultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideSearchResults() {
+            searchResultsSection.style.display = 'none';
+            showcaseSection.style.display = 'block';
+            searchInput.value = '';
+            showcaseSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+
+        // =======================================
+        // 2. FUNGSI MODAL DENGAN CAROUSEL
+        // =======================================
+        const productDetailModal = document.getElementById('productDetailModal');
+            
+        productDetailModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget; 
+            
+            const title = button.getAttribute('data-title');
+            const desc = button.getAttribute('data-desc');
+            const umkm = button.getAttribute('data-umkm');
+            const harga = button.getAttribute('data-harga');
+            const imagesString = button.getAttribute('data-images'); 
+
+            // --- 1. Isi Konten Teks Modal ---
+            const modalTitle = productDetailModal.querySelector('#modal-title');
+            const modalDesc = productDetailModal.querySelector('#modal-desc');
+            const modalUmkm = productDetailModal.querySelector('#modal-umkm');
+            const modalHarga = productDetailModal.querySelector('#modal-harga');
+            
+            modalTitle.textContent = title;
+            modalDesc.textContent = desc;
+            modalUmkm.textContent = umkm;
+            modalHarga.textContent = harga;
+            
+            // --- 2. Isi Carousel Gambar ---
+            const carouselInner = document.getElementById('carousel-inner-container');
+            carouselInner.innerHTML = ''; 
+            
+            const images = imagesString.split(','); 
+
+            images.forEach((url, index) => {
+                const carouselItem = document.createElement('div');
+                carouselItem.className = 'carousel-item';
+                if (index === 0) {
+                    carouselItem.classList.add('active'); 
+                }
+                
+                const img = document.createElement('img');
+                img.src = url.trim(); 
+                img.alt = `Gambar Produk ${index + 1}`;
+                img.className = 'd-block w-100 rounded modal-carousel-img';
+
+                carouselItem.appendChild(img);
+                carouselInner.appendChild(carouselItem);
+            });
+
+            // Tampilkan atau sembunyikan kontrol navigasi carousel
+            const carouselPrev = productDetailModal.querySelector('.carousel-control-prev');
+            const carouselNext = productDetailModal.querySelector('.carousel-control-next');
+            
+            if (images.length > 1) {
+                carouselPrev.style.display = 'flex';
+                carouselNext.style.display = 'flex';
+            } else {
+                carouselPrev.style.display = 'none';
+                carouselNext.style.display = 'none';
+            }
+
+            // Inisialisasi ulang carousel
+            const carouselElement = document.getElementById('productCarousel');
+            let carousel = bootstrap.Carousel.getInstance(carouselElement);
+            if (!carousel) {
+                 carousel = new bootstrap.Carousel(carouselElement);
+            }
+            carousel.to(0);
+        });
+
+        // =======================================
+        // 3. FUNGSI PENGIRIMAN PARTNERSHIP FORM
+        // =======================================
+        // Setelah formulir disubmit, kita bisa menambahkan pesan sukses 
+        // (Namun, karena menggunakan Google Form action, biasanya formulir akan 
+        // membuka tab baru dengan konfirmasi Google Form. Kita biarkan target="_blank" untuk simplicity.)
+        const partnershipForm = document.getElementById('partnership-form');
+        partnershipForm.addEventListener('submit', function() {
+            // Opsional: Tutup modal setelah pengiriman (karena target="_blank", tab baru akan terbuka)
+            const modalElement = document.getElementById('partnershipModal');
+            const modalInstance = bootstrap.Modal.getInstance(modalElement);
+            if (modalInstance) {
+                modalInstance.hide();
+            }
+            alert("Terima kasih! Formulir pendaftaran partnership Anda telah kami terima. Anda akan diarahkan ke halaman konfirmasi.");
+        });
+
+    </script>
+</body>
+</html>
