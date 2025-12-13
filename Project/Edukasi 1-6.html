@@ -1,0 +1,969 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Belajar SD</title>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+
+/* Palet Warna Ceria */
+:root {
+    --color-primary: #FF7043; /* Oranye Ceria (Primary Action) */
+    --color-secondary: #42A5F5; /* Biru Langit (Header/Secondary Action) */
+    --color-background: #F8F9FA; /* Putih Gading */
+    --color-surface: #FFFFFF; /* Putih Bersih */
+    --color-text: #263238; /* Abu Gelap */
+    --color-success: #66BB6A; /* Hijau Sukses */
+    --color-error: #EF5350; /* Merah Error */
+    --color-shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    box-sizing: border-box;
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+/* --- Animasi Tetap Dipertahankan --- */
+@keyframes bounce-in {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes slide-in {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-bounce-in {
+    animation: bounce-in 0.5s ease-out;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-slide-in {
+    animation: slide-in 0.5s ease-out;
+}
+
+/* --- Style Peningkatan Visual --- */
+
+/* Kartu dan Container */
+.shadow-lg {
+    box-shadow: 0 10px 15px -3px var(--color-shadow), 0 4px 6px -2px var(--color-shadow);
+}
+
+/* Hover Kartu */
+.card-hover {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background-color: var(--color-surface); /* Pastikan kartu subjek menggunakan warna bawaan dari JS */
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Tombol Aksi */
+.btn-hover {
+    transition: all 0.2s ease;
+    background-color: var(--color-primary);
+    color: var(--color-surface) !important; /* Force text color to white for better contrast */
+    border: none;
+}
+
+.btn-hover:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.btn-hover:active {
+    transform: scale(0.98);
+}
+
+/* Tombol Jawaban */
+.answer-btn {
+    transition: all 0.2s ease;
+    cursor: pointer;
+    background-color: #E3F2FD; /* Biru Muda Pastel */
+    color: var(--color-text);
+    border: 3px solid var(--color-secondary);
+}
+
+.answer-btn:hover {
+    transform: scale(1.02);
+    background-color: #BBDEFB; /* Biru Sedang Pastel */
+    box-shadow: 0 5px 10px var(--color-shadow);
+}
+
+.answer-btn:active {
+    transform: scale(0.99);
+}
+
+/* Header */
+#header {
+    background: linear-gradient(135deg, var(--color-secondary), #81C784); /* Gradien Biru-Hijau */
+    color: var(--color-surface);
+}
+
+#main-title {
+    text-shadow: 2px 2px 4px var(--color-shadow);
+}
+
+/* Input Form */
+#student-form input, #student-form select {
+    border-color: var(--color-primary) !important;
+    background-color: #FFF3E0; /* Kuning Muda Pastel */
+    color: var(--color-text);
+    border-width: 4px;
+}
+
+/* Dashboard Info */
+#dashboard-section section {
+    background-color: var(--color-surface);
+}
+
+/* Feedback */
+#feedback {
+    border-radius: 20px;
+}
+
+/* Toast */
+#toast {
+    background-color: var(--color-success); /* Toast sukses default */
+    border-radius: 10px;
+}
+
+/* Kustomisasi Tampilan Benar/Salah */
+.correct-flash {
+    animation: bounce-in 0.5s ease-out;
+    background-color: var(--color-success) !important;
+}
+
+.incorrect-flash { /* Tambahkan style untuk jawaban salah agar lebih jelas */
+    background-color: var(--color-error) !important;
+}
+
+/* Perubahan JS yang Perlu Diperhatikan:
+   - Warna default pada `defaultConfig` harus disesuaikan dengan skema warna baru
+   - Logika `applyConfig` harus diarahkan ke variabel CSS jika memungkinkan atau
+     langsung ke warna baru.
+*/
+
+
+        body {
+            box-sizing: border-box;
+        }
+        
+        @keyframes bounce-in {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes slide-in {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-bounce-in {
+            animation: bounce-in 0.5s ease-out;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-slide-in {
+            animation: slide-in 0.5s ease-out;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-hover {
+            transition: all 0.2s ease;
+        }
+        
+        .btn-hover:hover {
+            transform: scale(1.05);
+        }
+        
+        .btn-hover:active {
+            transform: scale(0.95);
+        }
+        
+        .answer-btn {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .answer-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .answer-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .correct-flash {
+            animation: bounce-in 0.5s ease-out;
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto"><!-- Header -->
+   <header id="header" class="text-white py-8 px-6 text-center shadow-lg">
+    <div class="animate-float inline-block text-6xl mb-4">
+     🎓
+    </div>
+    <h1 id="main-title" class="text-5xl font-bold mb-2">Portal Belajar SD</h1>
+    <p id="subtitle" class="text-2xl">Belajar Seru Kelas 1 - 6</p>
+   </header><!-- Main Content -->
+   <main class="px-4 py-8 max-w-7xl mx-auto"><!-- Welcome Section -->
+    <section id="welcome-section" class="mb-8 p-8 rounded-3xl shadow-lg text-center">
+     <h2 id="welcome-text" class="text-3xl font-bold mb-6">Selamat datang di Portal Belajar SD!</h2>
+     <form id="student-form" class="max-w-lg mx-auto">
+      <div class="mb-4"><label for="student-name" class="block text-xl font-bold mb-2">Nama Siswa:</label> <input type="text" id="student-name" placeholder="Tulis nama kamu..." class="w-full px-6 py-3 rounded-full text-lg border-4 focus:outline-none" required>
+      </div>
+      <div class="mb-6"><label for="student-grade" class="block text-xl font-bold mb-2">Pilih Kelas:</label> <select id="student-grade" class="w-full px-6 py-3 rounded-full text-lg border-4 focus:outline-none" required> <option value="">-- Pilih Kelas --</option> <option value="1">Kelas 1</option> <option value="2">Kelas 2</option> <option value="3">Kelas 3</option> <option value="4">Kelas 4</option> <option value="5">Kelas 5</option> <option value="6">Kelas 6</option> </select>
+      </div><button type="submit" class="btn-hover px-10 py-4 rounded-full text-white font-bold text-xl shadow-lg"> Mulai Belajar! 🚀 </button>
+     </form>
+    </section><!-- Dashboard Section -->
+    <div id="dashboard-section" style="display: none;"><!-- Student Info -->
+     <section class="mb-8 p-6 rounded-3xl shadow-lg">
+      <div class="flex flex-wrap justify-between items-center gap-4">
+       <div>
+        <h3 class="text-3xl font-bold">Halo, <span id="display-name"></span>! 👋</h3>
+        <p class="text-xl mt-2">Kelas: <span id="display-grade" class="font-bold"></span></p>
+       </div>
+       <div class="text-right">
+        <div class="text-3xl font-bold">
+         ⭐ Total Poin: <span id="total-score">0</span>
+        </div><button onclick="logout()" class="mt-2 px-6 py-2 rounded-full font-bold text-sm btn-hover"> Ganti Siswa </button>
+       </div>
+      </div>
+     </section><!-- Subjects Grid -->
+     <section class="mb-8">
+      <h2 class="text-3xl font-bold mb-6 text-center">📚 Pilih Mata Pelajaran</h2>
+      <div id="subjects-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      </div>
+     </section><!-- Activity Section -->
+     <section id="activity-section" style="display: none;" class="p-8 rounded-3xl shadow-lg animate-slide-in"><button onclick="backToSubjects()" class="mb-6 px-6 py-3 rounded-full font-bold shadow btn-hover"> ← Kembali ke Mata Pelajaran </button>
+      <div class="text-center mb-8">
+       <div class="text-6xl mb-4" id="activity-emoji"></div>
+       <h3 class="text-4xl font-bold mb-2" id="activity-title"></h3>
+       <p class="text-xl" id="activity-description"></p>
+      </div><!-- Question Display -->
+      <div id="question-container" class="max-w-3xl mx-auto">
+       <div class="p-8 rounded-2xl shadow-lg mb-6">
+        <p class="text-2xl font-bold mb-2">Soal <span id="question-number"></span>:</p>
+        <p class="text-3xl mb-6" id="question-text"></p>
+       </div><!-- Answer Options -->
+       <div id="answers-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+       </div><!-- Feedback -->
+       <div id="feedback" class="text-center text-2xl font-bold p-4 rounded-2xl" style="display: none;"></div><!-- Next Button -->
+       <div class="text-center mt-6"><button id="next-btn" onclick="nextQuestion()" style="display: none;" class="px-10 py-4 rounded-full font-bold text-xl shadow-lg btn-hover"> Soal Berikutnya → </button>
+       </div>
+      </div>
+     </section>
+    </div>
+   </main><!-- Toast Notification -->
+   <div id="toast" class="fixed top-6 right-6 px-6 py-4 rounded-2xl shadow-2xl text-white font-bold text-xl" style="display: none; z-index: 1000;"></div>
+  </div>
+  <script>
+
+
+  
+        // Default Config
+        const defaultConfig = {
+            background_color: "#E0F2FE",
+            surface_color: "#FFFFFF",
+            text_color: "#1E293B",
+            primary_action_color: "#3B82F6",
+            secondary_action_color: "#8B5CF6",
+            font_family: "Arial",
+            font_size: 16,
+            main_title: "Portal Belajar SD",
+            subtitle: "Belajar Seru Kelas 1 - 6",
+            welcome_text: "Selamat datang di Portal Belajar SD!"
+        };
+
+        // Application State
+        let currentStudent = "";
+        let currentGrade = 0;
+        let totalScore = 0;
+        let currentSubject = "";
+        let currentQuestionIndex = 0;
+        let currentQuestions = [];
+        let isProcessing = false;
+
+        // Subject Data with detailed curriculum
+        const subjectsData = {
+            1: [
+                { name: "Matematika", emoji: "🔢", color: "#3B82F6" },
+                { name: "Bahasa Indonesia", emoji: "📖", color: "#10B981" },
+                { name: "IPA", emoji: "🔬", color: "#F59E0B" },
+                { name: "Bahasa Inggris", emoji: "🗣️", color: "#EF4444" },
+                { name: "Seni Budaya", emoji: "🎨", color: "#8B5CF6" },
+                { name: "PJOK", emoji: "⚽", color: "#EC4899" }
+            ],
+            2: [
+                { name: "Matematika", emoji: "🔢", color: "#3B82F6" },
+                { name: "Bahasa Indonesia", emoji: "📖", color: "#10B981" },
+                { name: "IPA", emoji: "🔬", color: "#F59E0B" },
+                { name: "IPS", emoji: "🌍", color: "#06B6D4" },
+                { name: "Bahasa Inggris", emoji: "🗣️", color: "#EF4444" },
+                { name: "Seni Budaya", emoji: "🎨", color: "#8B5CF6" }
+            ],
+            3: [
+                { name: "Matematika", emoji: "🔢", color: "#3B82F6" },
+                { name: "Bahasa Indonesia", emoji: "📖", color: "#10B981" },
+                { name: "IPA", emoji: "🔬", color: "#F59E0B" },
+                { name: "IPS", emoji: "🌍", color: "#06B6D4" },
+                { name: "Bahasa Inggris", emoji: "🗣️", color: "#EF4444" },
+                { name: "PKn", emoji: "🇮🇩", color: "#DC2626" }
+            ],
+            4: [
+                { name: "Matematika", emoji: "🔢", color: "#3B82F6" },
+                { name: "Bahasa Indonesia", emoji: "📖", color: "#10B981" },
+                { name: "IPA", emoji: "🔬", color: "#F59E0B" },
+                { name: "IPS", emoji: "🌍", color: "#06B6D4" },
+                { name: "Bahasa Inggris", emoji: "🗣️", color: "#EF4444" },
+                { name: "PKn", emoji: "🇮🇩", color: "#DC2626" }
+            ],
+            5: [
+                { name: "Matematika", emoji: "🔢", color: "#3B82F6" },
+                { name: "Bahasa Indonesia", emoji: "📖", color: "#10B981" },
+                { name: "IPA", emoji: "🔬", color: "#F59E0B" },
+                { name: "IPS", emoji: "🌍", color: "#06B6D4" },
+                { name: "Bahasa Inggris", emoji: "🗣️", color: "#EF4444" },
+                { name: "PKn", emoji: "🇮🇩", color: "#DC2626" }
+            ],
+            6: [
+                { name: "Matematika", emoji: "🔢", color: "#3B82F6" },
+                { name: "Bahasa Indonesia", emoji: "📖", color: "#10B981" },
+                { name: "IPA", emoji: "🔬", color: "#F59E0B" },
+                { name: "IPS", emoji: "🌍", color: "#06B6D4" },
+                { name: "Bahasa Inggris", emoji: "🗣️", color: "#EF4444" },
+                { name: "PKn", emoji: "🇮🇩", color: "#DC2626" }
+            ]
+        };
+
+        // Questions Database by Grade and Subject
+        const questionsDatabase = {
+            1: {
+                "Matematika": [
+                    { q: "Berapa hasil dari 2 + 3?", a: ["4", "5", "6", "7"], correct: 1 },
+                    { q: "Berapa hasil dari 10 - 4?", a: ["5", "6", "7", "8"], correct: 1 },
+                    { q: "Berapa hasil dari 3 + 4?", a: ["6", "7", "8", "9"], correct: 1 },
+                    { q: "Berapa hasil dari 8 - 3?", a: ["4", "5", "6", "7"], correct: 1 },
+                    { q: "Berapa hasil dari 1 + 1?", a: ["1", "2", "3", "4"], correct: 1 }
+                ],
+                "Bahasa Indonesia": [
+                    { q: "Huruf pertama dalam alfabet adalah?", a: ["A", "B", "C", "D"], correct: 0 },
+                    { q: "Kata 'ibu' memiliki berapa huruf?", a: ["2", "3", "4", "5"], correct: 1 },
+                    { q: "Vokal dalam bahasa Indonesia ada berapa?", a: ["3", "4", "5", "6"], correct: 2 },
+                    { q: "Lawan kata 'besar' adalah?", a: ["Kecil", "Tinggi", "Lebar", "Panjang"], correct: 0 },
+                    { q: "Kata untuk menyapa di pagi hari?", a: ["Selamat malam", "Selamat pagi", "Selamat siang", "Selamat tidur"], correct: 1 }
+                ],
+                "IPA": [
+                    { q: "Matahari terbit dari arah?", a: ["Barat", "Timur", "Utara", "Selatan"], correct: 1 },
+                    { q: "Hewan yang bisa terbang adalah?", a: ["Ikan", "Burung", "Kucing", "Anjing"], correct: 1 },
+                    { q: "Tanaman membutuhkan apa untuk tumbuh?", a: ["Air", "Batu", "Tanah saja", "Plastik"], correct: 0 },
+                    { q: "Berapa jumlah kaki kucing?", a: ["2", "3", "4", "6"], correct: 2 },
+                    { q: "Warna langit di siang hari adalah?", a: ["Merah", "Hijau", "Biru", "Hitam"], correct: 2 }
+                ],
+                "Bahasa Inggris": [
+                    { q: "Bahasa Inggris dari 'Satu' adalah?", a: ["One", "Two", "Three", "Four"], correct: 0 },
+                    { q: "Bahasa Inggris dari 'Kucing' adalah?", a: ["Dog", "Cat", "Bird", "Fish"], correct: 1 },
+                    { q: "Good morning artinya?", a: ["Selamat malam", "Selamat pagi", "Selamat siang", "Selamat sore"], correct: 1 },
+                    { q: "Warna merah dalam bahasa Inggris?", a: ["Blue", "Red", "Green", "Yellow"], correct: 1 },
+                    { q: "Bahasa Inggris dari 'Anjing' adalah?", a: ["Cat", "Dog", "Bird", "Fish"], correct: 1 }
+                ],
+                "Seni Budaya": [
+                    { q: "Warna primer adalah?", a: ["Merah, Biru, Kuning", "Hijau, Ungu, Orange", "Hitam, Putih, Abu", "Coklat, Pink, Ungu"], correct: 0 },
+                    { q: "Alat musik yang dipukul adalah?", a: ["Gitar", "Drum", "Seruling", "Biola"], correct: 1 },
+                    { q: "Lagu 'Balonku' memiliki berapa balon?", a: ["3", "4", "5", "6"], correct: 2 },
+                    { q: "Merah dicampur kuning menghasilkan warna?", a: ["Hijau", "Ungu", "Orange", "Coklat"], correct: 2 },
+                    { q: "Tari Kecak berasal dari?", a: ["Jawa", "Bali", "Sumatera", "Kalimantan"], correct: 1 }
+                ],
+                "PJOK": [
+                    { q: "Olahraga yang menggunakan bola basket dimainkan oleh berapa orang dalam satu tim?", a: ["5", "6", "7", "11"], correct: 0 },
+                    { q: "Sebelum berolahraga kita harus?", a: ["Makan", "Tidur", "Pemanasan", "Bermain"], correct: 2 },
+                    { q: "Olahraga renang dilakukan di?", a: ["Lapangan", "Kolam", "Jalan", "Gunung"], correct: 1 },
+                    { q: "Berlari termasuk olahraga untuk melatih?", a: ["Tangan", "Kaki", "Mata", "Telinga"], correct: 1 },
+                    { q: "Berapa jumlah pemain sepak bola dalam satu tim?", a: ["9", "10", "11", "12"], correct: 2 }
+                ]
+            },
+            2: {
+                "Matematika": [
+                    { q: "Berapa hasil dari 15 + 8?", a: ["21", "22", "23", "24"], correct: 2 },
+                    { q: "Berapa hasil dari 20 - 7?", a: ["12", "13", "14", "15"], correct: 1 },
+                    { q: "Berapa hasil dari 5 × 2?", a: ["8", "9", "10", "11"], correct: 2 },
+                    { q: "Berapa hasil dari 16 ÷ 4?", a: ["3", "4", "5", "6"], correct: 1 },
+                    { q: "Berapa hasil dari 12 + 15?", a: ["25", "26", "27", "28"], correct: 2 }
+                ],
+                "Bahasa Indonesia": [
+                    { q: "Kata yang tepat untuk melengkapi: 'Adik ... sepeda'", a: ["makan", "minum", "naik", "tidur"], correct: 2 },
+                    { q: "Kalimat tanya diakhiri dengan tanda?", a: [".", "!", "?", ","], correct: 2 },
+                    { q: "Sinonim kata 'senang' adalah?", a: ["Sedih", "Gembira", "Marah", "Takut"], correct: 1 },
+                    { q: "Huruf kapital digunakan di?", a: ["Tengah kalimat", "Awal kalimat", "Akhir kalimat", "Sembarang"], correct: 1 },
+                    { q: "Kata benda dari kata 'menulis' adalah?", a: ["Tulisan", "Tulis", "Penulis", "Menulis"], correct: 0 }
+                ],
+                "IPA": [
+                    { q: "Bagian tumbuhan yang berfungsi menyerap air adalah?", a: ["Daun", "Batang", "Akar", "Bunga"], correct: 2 },
+                    { q: "Hewan yang bernapas dengan insang adalah?", a: ["Burung", "Ikan", "Kucing", "Sapi"], correct: 1 },
+                    { q: "Proses air berubah menjadi uap disebut?", a: ["Penguapan", "Pencairan", "Pembekuan", "Penyubliman"], correct: 0 },
+                    { q: "Benda yang dapat ditarik magnet adalah?", a: ["Kayu", "Plastik", "Besi", "Kaca"], correct: 2 },
+                    { q: "Metamorfosis kupu-kupu dimulai dari?", a: ["Pupa", "Telur", "Ulat", "Kupu-kupu"], correct: 1 }
+                ],
+                "IPS": [
+                    { q: "Ibu kota Indonesia adalah?", a: ["Surabaya", "Bandung", "Jakarta", "Medan"], correct: 2 },
+                    { q: "Pancasila memiliki berapa sila?", a: ["3", "4", "5", "6"], correct: 2 },
+                    { q: "Hari kemerdekaan Indonesia diperingati tanggal?", a: ["17 Agustus", "1 Juni", "2 Mei", "10 November"], correct: 0 },
+                    { q: "Mata uang Indonesia adalah?", a: ["Dollar", "Ringgit", "Rupiah", "Yen"], correct: 2 },
+                    { q: "Pulau terbesar di Indonesia adalah?", a: ["Jawa", "Sumatera", "Kalimantan", "Papua"], correct: 3 }
+                ],
+                "Bahasa Inggris": [
+                    { q: "What is 'Sepuluh' in English?", a: ["Nine", "Ten", "Eleven", "Twelve"], correct: 1 },
+                    { q: "I ... a student (am/is/are)", a: ["am", "is", "are", "be"], correct: 0 },
+                    { q: "'Apple' artinya?", a: ["Apel", "Jeruk", "Mangga", "Pisang"], correct: 0 },
+                    { q: "Hari Senin dalam bahasa Inggris?", a: ["Sunday", "Monday", "Tuesday", "Wednesday"], correct: 1 },
+                    { q: "'Thank you' artinya?", a: ["Maaf", "Terima kasih", "Permisi", "Tolong"], correct: 1 }
+                ],
+                "Seni Budaya": [
+                    { q: "Gamelan adalah alat musik dari?", a: ["Sumatera", "Jawa", "Papua", "Kalimantan"], correct: 1 },
+                    { q: "Angklung terbuat dari?", a: ["Kayu", "Bambu", "Besi", "Plastik"], correct: 1 },
+                    { q: "Tari Saman berasal dari?", a: ["Jawa", "Bali", "Aceh", "Sulawesi"], correct: 2 },
+                    { q: "Campuran warna biru dan kuning menghasilkan?", a: ["Hijau", "Ungu", "Orange", "Merah"], correct: 0 },
+                    { q: "Patung Garuda Wisnu Kencana ada di?", a: ["Jakarta", "Bali", "Yogyakarta", "Bandung"], correct: 1 }
+                ]
+            },
+            3: {
+                "Matematika": [
+                    { q: "Berapa hasil dari 25 × 4?", a: ["90", "95", "100", "105"], correct: 2 },
+                    { q: "Berapa hasil dari 144 ÷ 12?", a: ["10", "11", "12", "13"], correct: 2 },
+                    { q: "Pecahan 1/2 sama dengan?", a: ["0.25", "0.5", "0.75", "1"], correct: 1 },
+                    { q: "Sudut siku-siku besarnya?", a: ["45°", "60°", "90°", "180°"], correct: 2 },
+                    { q: "Keliling persegi dengan sisi 5 cm adalah?", a: ["15 cm", "20 cm", "25 cm", "30 cm"], correct: 1 }
+                ],
+                "Bahasa Indonesia": [
+                    { q: "Kalimat yang mengandung perintah disebut kalimat?", a: ["Tanya", "Berita", "Perintah", "Seru"], correct: 2 },
+                    { q: "Kata ulang dari 'buku' adalah?", a: ["Buku", "Buku-buku", "Membuku", "Perbukuan"], correct: 1 },
+                    { q: "Awalan 'ber-' pada kata 'berlari' menunjukkan?", a: ["Sedang melakukan", "Sudah melakukan", "Akan melakukan", "Tidak melakukan"], correct: 0 },
+                    { q: "Kata depan yang tepat: 'Dia pergi ... sekolah'", a: ["di", "ke", "dari", "pada"], correct: 1 },
+                    { q: "Puisi anak yang memiliki 4 baris disebut?", a: ["Pantun", "Syair", "Gurindam", "Sajak"], correct: 0 }
+                ],
+                "IPA": [
+                    { q: "Energi yang dihasilkan matahari adalah?", a: ["Energi listrik", "Energi cahaya", "Energi bunyi", "Energi kimia"], correct: 1 },
+                    { q: "Benda yang dapat menghasilkan bunyi adalah?", a: ["Buku", "Gitar", "Penggaris", "Kertas"], correct: 1 },
+                    { q: "Makanan sehat 4 sehat 5 sempurna memiliki tambahan?", a: ["Nasi", "Sayur", "Susu", "Buah"], correct: 2 },
+                    { q: "Gaya yang menarik benda ke bawah disebut gaya?", a: ["Magnet", "Listrik", "Gravitasi", "Gesek"], correct: 2 },
+                    { q: "Hewan yang berkembang biak dengan bertelur adalah?", a: ["Kucing", "Sapi", "Ayam", "Kambing"], correct: 2 }
+                ],
+                "IPS": [
+                    { q: "Presiden pertama Indonesia adalah?", a: ["Soeharto", "Soekarno", "BJ Habibie", "Megawati"], correct: 1 },
+                    { q: "Organisasi pemuda yang mempelopori Sumpah Pemuda?", a: ["BUDI", "Jong Java", "Trikoro Dharmo", "Semua benar"], correct: 3 },
+                    { q: "Benua terbesar di dunia adalah?", a: ["Afrika", "Amerika", "Asia", "Eropa"], correct: 2 },
+                    { q: "Pekerjaan yang menghasilkan barang adalah?", a: ["Guru", "Petani", "Dokter", "Pilot"], correct: 1 },
+                    { q: "Denah termasuk jenis peta?", a: ["Peta umum", "Peta khusus", "Peta dunia", "Globe"], correct: 1 }
+                ],
+                "Bahasa Inggris": [
+                    { q: "She ... reading a book (am/is/are)", a: ["am", "is", "are", "be"], correct: 1 },
+                    { q: "'Saya suka apel' dalam bahasa Inggris?", a: ["I like apple", "I like apples", "I likes apple", "I am like apple"], correct: 1 },
+                    { q: "Kata ganti 'Mereka' dalam bahasa Inggris?", a: ["We", "You", "They", "He"], correct: 2 },
+                    { q: "Bulan Januari dalam bahasa Inggris?", a: ["January", "February", "June", "July"], correct: 0 },
+                    { q: "'How are you?' artinya?", a: ["Siapa kamu?", "Apa kabar?", "Berapa umurmu?", "Dimana kamu?"], correct: 1 }
+                ],
+                "PKn": [
+                    { q: "Lambang negara Indonesia adalah?", a: ["Garuda", "Elang", "Burung Cendrawasih", "Merak"], correct: 0 },
+                    { q: "Sila pertama Pancasila berbunyi?", a: ["Kemanusiaan yang adil", "Ketuhanan Yang Maha Esa", "Persatuan Indonesia", "Kerakyatan"], correct: 1 },
+                    { q: "Hak dan kewajiban harus dilaksanakan secara?", a: ["Bergantian", "Seimbang", "Hak dulu", "Kewajiban dulu"], correct: 1 },
+                    { q: "Gotong royong mencerminkan sila ke?", a: ["1", "2", "3", "4"], correct: 2 },
+                    { q: "Pemilu dilaksanakan setiap berapa tahun?", a: ["3 tahun", "4 tahun", "5 tahun", "6 tahun"], correct: 2 }
+                ]
+            },
+            4: {
+                "Matematika": [
+                    { q: "Hasil dari 456 + 789 adalah?", a: ["1.245", "1.345", "1.145", "1.235"], correct: 0 },
+                    { q: "FPB dari 12 dan 18 adalah?", a: ["3", "6", "9", "12"], correct: 1 },
+                    { q: "KPK dari 4 dan 6 adalah?", a: ["10", "12", "24", "36"], correct: 1 },
+                    { q: "Luas persegi panjang dengan panjang 8 cm dan lebar 5 cm?", a: ["30 cm²", "35 cm²", "40 cm²", "45 cm²"], correct: 2 },
+                    { q: "0.75 jika diubah ke pecahan biasa menjadi?", a: ["1/4", "1/2", "3/4", "2/3"], correct: 2 }
+                ],
+                "Bahasa Indonesia": [
+                    { q: "Kalimat utama dalam paragraf disebut?", a: ["Kalimat penjelas", "Kalimat utama", "Kalimat penutup", "Kalimat pembuka"], correct: 1 },
+                    { q: "Unsur intrinsik cerita meliputi?", a: ["Tema, tokoh, alur", "Penulis, penerbit", "Tahun terbit", "Jumlah halaman"], correct: 0 },
+                    { q: "Kata yang menunjukkan tempat adalah?", a: ["Kapan", "Mengapa", "Di mana", "Bagaimana"], correct: 2 },
+                    { q: "Imbuhan 'me-kan' pada kata 'membersihkan' artinya?", a: ["Melakukan untuk orang lain", "Melakukan sendiri", "Sudah selesai", "Belum dilakukan"], correct: 0 },
+                    { q: "Majas yang membandingkan dua hal menggunakan kata 'seperti' adalah?", a: ["Metafora", "Simile", "Personifikasi", "Hiperbola"], correct: 1 }
+                ],
+                "IPA": [
+                    { q: "Bagian bunga yang berfungsi sebagai alat kelamin jantan?", a: ["Putik", "Benang sari", "Mahkota", "Kelopak"], correct: 1 },
+                    { q: "Sumber energi terbesar di bumi adalah?", a: ["Air", "Angin", "Matahari", "Batu bara"], correct: 2 },
+                    { q: "Perubahan wujud dari padat ke gas disebut?", a: ["Menyublim", "Mengembun", "Menguap", "Mencair"], correct: 0 },
+                    { q: "Tulang terkuat dalam tubuh manusia adalah?", a: ["Tulang paha", "Tulang lengan", "Tulang kering", "Tulang rusuk"], correct: 0 },
+                    { q: "Gerhana matahari terjadi saat?", a: ["Bulan di antara bumi dan matahari", "Bumi di antara bulan dan matahari", "Matahari tertutup awan", "Matahari terbit"], correct: 0 }
+                ],
+                "IPS": [
+                    { q: "Jalur rempah-rempah menarik bangsa Eropa ke Indonesia untuk?", a: ["Berwisata", "Berdagang", "Berperang", "Belajar"], correct: 1 },
+                    { q: "Sumber daya alam yang dapat diperbaharui adalah?", a: ["Minyak bumi", "Batu bara", "Hutan", "Gas alam"], correct: 2 },
+                    { q: "Aktivitas ekonomi yang mengolah bahan mentah menjadi barang jadi disebut?", a: ["Produksi", "Distribusi", "Konsumsi", "Perdagangan"], correct: 0 },
+                    { q: "Koperasi berlandaskan pada?", a: ["Pancasila dan UUD 1945", "Hukum perdagangan", "Kesepakatan anggota", "Undang-undang koperasi"], correct: 0 },
+                    { q: "Pahlawan yang dijuluki Macan Asia adalah?", a: ["Diponegoro", "Sudirman", "Pattimura", "Sisingamangaraja"], correct: 1 }
+                ],
+                "Bahasa Inggris": [
+                    { q: "The opposite of 'hot' is?", a: ["Warm", "Cold", "Cool", "Fresh"], correct: 1 },
+                    { q: "We ... to school every day (go/goes)", a: ["go", "goes", "going", "went"], correct: 0 },
+                    { q: "'Saya sedang membaca' dalam bahasa Inggris?", a: ["I read", "I am reading", "I was reading", "I will read"], correct: 1 },
+                    { q: "What time is it? (10:30)", a: ["Ten thirty", "Half past ten", "Both A and B", "Ten and thirty"], correct: 2 },
+                    { q: "'How many books do you have?' means?", a: ["Berapa buku yang kamu punya?", "Buku apa yang kamu punya?", "Dimana bukumu?", "Siapa yang punya buku?"], correct: 0 }
+                ],
+                "PKn": [
+                    { q: "UUD 1945 disahkan pada tanggal?", a: ["17 Agustus 1945", "18 Agustus 1945", "19 Agustus 1945", "20 Agustus 1945"], correct: 1 },
+                    { q: "Lembaga tinggi negara yang membuat undang-undang adalah?", a: ["Presiden", "DPR", "MA", "MK"], correct: 1 },
+                    { q: "Hak asasi manusia tercantum dalam UUD 1945 pasal?", a: ["27", "28", "29", "30"], correct: 1 },
+                    { q: "Musyawarah untuk mufakat mencerminkan sila ke?", a: ["2", "3", "4", "5"], correct: 2 },
+                    { q: "Nilai-nilai Pancasila harus diamalkan dalam kehidupan?", a: ["Sehari-hari", "Di sekolah saja", "Sesekali", "Tidak perlu"], correct: 0 }
+                ]
+            },
+            5: {
+                "Matematika": [
+                    { q: "Hasil dari 15² adalah?", a: ["225", "235", "245", "255"], correct: 0 },
+                    { q: "Volume kubus dengan sisi 5 cm adalah?", a: ["100 cm³", "125 cm³", "150 cm³", "175 cm³"], correct: 1 },
+                    { q: "Jika 3x = 15, maka x = ?", a: ["3", "4", "5", "6"], correct: 2 },
+                    { q: "Rata-rata dari 80, 90, 70, 100 adalah?", a: ["80", "85", "90", "95"], correct: 1 },
+                    { q: "Pecahan 3/5 jika diubah ke persen menjadi?", a: ["50%", "60%", "70%", "80%"], correct: 1 }
+                ],
+                "Bahasa Indonesia": [
+                    { q: "Iklan yang baik harus bersifat?", a: ["Menipu", "Informatif", "Membosankan", "Panjang"], correct: 1 },
+                    { q: "Bagian teks laporan yang berisi kesimpulan disebut?", a: ["Pendahuluan", "Isi", "Penutup", "Abstrak"], correct: 2 },
+                    { q: "Kata baku dari 'nggak' adalah?", a: ["Ndak", "Enggak", "Tidak", "Tak"], correct: 2 },
+                    { q: "Kalimat aktif: 'Ibu memasak nasi'. Kalimat pasifnya?", a: ["Nasi memasak ibu", "Nasi dimasak ibu", "Ibu dimasak nasi", "Memasak nasi ibu"], correct: 1 },
+                    { q: "Teks yang menceritakan kembali peristiwa masa lalu disebut?", a: ["Teks deskripsi", "Teks narasi", "Teks eksposisi", "Teks argumentasi"], correct: 1 }
+                ],
+                "IPA": [
+                    { q: "Planet terbesar dalam tata surya adalah?", a: ["Bumi", "Mars", "Jupiter", "Saturnus"], correct: 2 },
+                    { q: "Proses fotosintesis pada tumbuhan menghasilkan?", a: ["CO2", "O2", "N2", "H2"], correct: 1 },
+                    { q: "Alat pernapasan pada serangga adalah?", a: ["Paru-paru", "Insang", "Trakea", "Kulit"], correct: 2 },
+                    { q: "Sifat magnet yang sejenis akan?", a: ["Tarik menarik", "Tolak menolak", "Netral", "Menyatu"], correct: 1 },
+                    { q: "Perpindahan kalor tanpa melalui zat perantara disebut?", a: ["Konduksi", "Konveksi", "Radiasi", "Isolasi"], correct: 2 }
+                ],
+                "IPS": [
+                    { q: "Kerajaan maritim terbesar di Nusantara adalah?", a: ["Majapahit", "Sriwijaya", "Mataram", "Singasari"], correct: 1 },
+                    { q: "ASEAN didirikan pada tanggal?", a: ["8 Agustus 1967", "8 Agustus 1968", "9 Agustus 1967", "10 Agustus 1967"], correct: 0 },
+                    { q: "Negara dengan jumlah penduduk terbanyak di ASEAN adalah?", a: ["Thailand", "Vietnam", "Indonesia", "Filipina"], correct: 2 },
+                    { q: "Faktor pendorong perdagangan internasional adalah?", a: ["Perbedaan sumber daya", "Kesamaan budaya", "Jarak yang dekat", "Bahasa yang sama"], correct: 0 },
+                    { q: "Tokoh proklamator Indonesia adalah?", a: ["Soekarno dan Hatta", "Soekarno dan Soeharto", "Hatta dan Sjahrir", "Tan Malaka dan Soekarno"], correct: 0 }
+                ],
+                "Bahasa Inggris": [
+                    { q: "I have ... English since 2020 (study/studied/been studying)", a: ["study", "studied", "been studying", "studying"], correct: 2 },
+                    { q: "The book ... by my sister yesterday (buy/bought/was bought)", a: ["buy", "bought", "was bought", "is bought"], correct: 2 },
+                    { q: "'Although' termasuk kata hubung yang menyatakan?", a: ["Waktu", "Sebab", "Pertentangan", "Tujuan"], correct: 2 },
+                    { q: "The synonym of 'happy' is?", a: ["Sad", "Angry", "Joyful", "Tired"], correct: 2 },
+                    { q: "'She is the most beautiful girl in the class' adalah kalimat?", a: ["Positive", "Comparative", "Superlative", "Negative"], correct: 2 }
+                ],
+                "PKn": [
+                    { q: "Makna dari lambang 'Rantai' pada Pancasila adalah?", a: ["Ketuhanan", "Kemanusiaan", "Persatuan", "Kerakyatan"], correct: 1 },
+                    { q: "Sistem pemerintahan Indonesia adalah?", a: ["Parlementer", "Presidensial", "Monarki", "Federal"], correct: 1 },
+                    { q: "Kewajiban warga negara dalam bidang pertahanan negara adalah?", a: ["Membayar pajak", "Bela negara", "Memilih pemimpin", "Menaati hukum"], correct: 1 },
+                    { q: "Lambang negara Indonesia terdiri dari ... ruang?", a: ["3", "4", "5", "6"], correct: 2 },
+                    { q: "Norma tertinggi dalam kehidupan berbangsa dan bernegara adalah?", a: ["Norma agama", "Norma hukum", "Norma kesopanan", "Norma kesusilaan"], correct: 1 }
+                ]
+            },
+            6: {
+                "Matematika": [
+                    { q: "Luas lingkaran dengan jari-jari 7 cm (π = 22/7) adalah?", a: ["144 cm²", "154 cm²", "164 cm²", "174 cm²"], correct: 1 },
+                    { q: "Koordinat titik A(3,5) berada di kuadran?", a: ["I", "II", "III", "IV"], correct: 0 },
+                    { q: "Data: 5,7,8,8,9,10,10,10,12. Modus dari data tersebut adalah?", a: ["8", "9", "10", "12"], correct: 2 },
+                    { q: "Skala 1:1.000.000 artinya 1 cm di peta mewakili jarak sebenarnya?", a: ["10 km", "100 km", "1.000 km", "10.000 km"], correct: 0 },
+                    { q: "Jika harga barang Rp50.000 dan mendapat diskon 20%, harga yang dibayar?", a: ["Rp30.000", "Rp35.000", "Rp40.000", "Rp45.000"], correct: 2 }
+                ],
+                "Bahasa Indonesia": [
+                    { q: "Teks yang bertujuan mempengaruhi pembaca disebut?", a: ["Narasi", "Deskripsi", "Persuasi", "Eksposisi"], correct: 2 },
+                    { q: "Unsur berita yang lengkap disebut dengan?", a: ["4W+1H", "5W+1H", "6W+1H", "3W+2H"], correct: 1 },
+                    { q: "Kata penghubung 'karena' menunjukkan hubungan?", a: ["Waktu", "Sebab-akibat", "Pertentangan", "Tujuan"], correct: 1 },
+                    { q: "Pantun yang berisi nasihat disebut pantun?", a: ["Jenaka", "Kiasan", "Teka-teki", "Nasihat"], correct: 3 },
+                    { q: "Ciri kebahasaan teks prosedur adalah menggunakan?", a: ["Kalimat tanya", "Kalimat perintah", "Kalimat seru", "Kalimat berita"], correct: 1 }
+                ],
+                "IPA": [
+                    { q: "Lapisan atmosfer terdekat dengan bumi adalah?", a: ["Troposfer", "Stratosfer", "Mesosfer", "Termosfer"], correct: 0 },
+                    { q: "Benda yang dapat menghantarkan listrik dengan baik disebut?", a: ["Isolator", "Konduktor", "Semikonduktor", "Resistor"], correct: 1 },
+                    { q: "Proses penyerbukan pada bunga dibantu oleh?", a: ["Angin dan serangga", "Air dan tanah", "Matahari dan bulan", "Manusia saja"], correct: 0 },
+                    { q: "Sistem peredaran darah manusia disebut peredaran darah?", a: ["Terbuka", "Tertutup", "Ganda", "Tertutup dan ganda"], correct: 3 },
+                    { q: "Energi alternatif yang ramah lingkungan adalah?", a: ["Batu bara", "Minyak bumi", "Tenaga surya", "Gas alam"], correct: 2 }
+                ],
+                "IPS": [
+                    { q: "Negara ASEAN yang belum pernah dijajah adalah?", a: ["Indonesia", "Thailand", "Malaysia", "Filipina"], correct: 1 },
+                    { q: "Konferensi Asia Afrika diadakan di kota?", a: ["Jakarta", "Bandung", "Bogor", "Yogyakarta"], correct: 1 },
+                    { q: "Faktor alam yang mempengaruhi kegiatan ekonomi adalah?", a: ["Teknologi", "Modal", "Iklim", "Tenaga kerja"], correct: 2 },
+                    { q: "Ekspor adalah kegiatan?", a: ["Menjual ke luar negeri", "Membeli dari luar negeri", "Menukar barang", "Mengangkut barang"], correct: 0 },
+                    { q: "Perang Diponegoro terjadi pada tahun?", a: ["1825-1830", "1830-1835", "1835-1840", "1840-1845"], correct: 0 }
+                ],
+                "Bahasa Inggris": [
+                    { q: "If I ... rich, I would travel the world (am/was/were)", a: ["am", "was", "were", "be"], correct: 2 },
+                    { q: "She asked me ... I had finished my homework (if/that/what/who)", a: ["if", "that", "what", "who"], correct: 0 },
+                    { q: "The antonym of 'ancient' is?", a: ["Old", "Modern", "Historic", "Traditional"], correct: 1 },
+                    { q: "'I have been waiting for an hour' menggunakan tense?", a: ["Present Perfect", "Present Perfect Continuous", "Past Perfect", "Past Continuous"], correct: 1 },
+                    { q: "Passive voice dari 'They will build a house' adalah?", a: ["A house will built", "A house will be built", "A house will building", "A house is built"], correct: 1 }
+                ],
+                "PKn": [
+                    { q: "Amandemen UUD 1945 telah dilakukan sebanyak?", a: ["2 kali", "3 kali", "4 kali", "5 kali"], correct: 2 },
+                    { q: "Tujuan negara Indonesia tercantum dalam pembukaan UUD 1945 alinea ke?", a: ["1", "2", "3", "4"], correct: 3 },
+                    { q: "Masa jabatan Presiden dan Wakil Presiden adalah?", a: ["4 tahun", "5 tahun", "6 tahun", "7 tahun"], correct: 1 },
+                    { q: "Bhinneka Tunggal Ika artinya?", a: ["Berbeda-beda tetapi tetap satu", "Bersatu kita teguh", "Persatuan Indonesia", "Gotong royong"], correct: 0 },
+                    { q: "Kewajiban membayar pajak bertujuan untuk?", a: ["Memperkaya pemerintah", "Pembangunan negara", "Gaji pegawai", "Semua salah"], correct: 1 }
+                ]
+            }
+        };
+
+        // SDK Initialization
+        const dataHandler = {
+            onDataChanged(data) {
+                console.log('Learning progress updated:', data);
+            }
+        };
+
+        async function initializeApp() {
+            const initResult = await window.dataSdk.init(dataHandler);
+            if (!initResult.isOk) {
+                console.error('Failed to initialize Data SDK');
+            }
+
+            if (window.elementSdk) {
+                window.elementSdk.init({
+                    defaultConfig,
+                    onConfigChange: async (config) => {
+                        applyConfig(config);
+                    },
+                    mapToCapabilities: (config) => ({
+                        recolorables: [
+                            {
+                                get: () => config.background_color || defaultConfig.background_color,
+                                set: (value) => {
+                                    config.background_color = value;
+                                    window.elementSdk.setConfig({ background_color: value });
+                                }
+                            },
+                            {
+                                get: () => config.surface_color || defaultConfig.surface_color,
+                                set: (value) => {
+                                    config.surface_color = value;
+                                    window.elementSdk.setConfig({ surface_color: value });
+                                }
+                            },
+                            {
+                                get: () => config.text_color || defaultConfig.text_color,
+                                set: (value) => {
+                                    config.text_color = value;
+                                    window.elementSdk.setConfig({ text_color: value });
+                                }
+                            },
+                            {
+                                get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                                set: (value) => {
+                                    config.primary_action_color = value;
+                                    window.elementSdk.setConfig({ primary_action_color: value });
+                                }
+                            },
+                            {
+                                get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                                set: (value) => {
+                                    config.secondary_action_color = value;
+                                    window.elementSdk.setConfig({ secondary_action_color: value });
+                                }
+                            }
+                        ],
+                        borderables: [],
+                        fontEditable: {
+                            get: () => config.font_family || defaultConfig.font_family,
+                            set: (value) => {
+                                config.font_family = value;
+                                window.elementSdk.setConfig({ font_family: value });
+                            }
+                        },
+                        fontSizeable: {
+                            get: () => config.font_size || defaultConfig.font_size,
+                            set: (value) => {
+                                config.font_size = value;
+                                window.elementSdk.setConfig({ font_size: value });
+                            }
+                        }
+                    }),
+                    mapToEditPanelValues: (config) => new Map([
+                        ["main_title", config.main_title || defaultConfig.main_title],
+                        ["subtitle", config.subtitle || defaultConfig.subtitle],
+                        ["welcome_text", config.welcome_text || defaultConfig.welcome_text]
+                    ])
+                });
+            }
+
+            applyConfig(window.elementSdk ? window.elementSdk.config : defaultConfig);
+        }
+
+        function applyConfig(config) {
+            const bgColor = config.background_color || defaultConfig.background_color;
+            const surfaceColor = config.surface_color || defaultConfig.surface_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+            const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
+            const secondaryColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+            const fontFamily = config.font_family || defaultConfig.font_family;
+            const fontSize = config.font_size || defaultConfig.font_size;
+            const baseFontStack = 'Arial, sans-serif';
+
+            document.getElementById('app').style.backgroundColor = bgColor;
+            document.getElementById('header').style.backgroundColor = secondaryColor;
+            
+            const surfaces = document.querySelectorAll('section');
+            surfaces.forEach(el => {
+                el.style.backgroundColor = surfaceColor;
+                el.style.color = textColor;
+            });
+
+            const primaryButtons = document.querySelectorAll('.btn-hover, .answer-btn');
+            primaryButtons.forEach(btn => {
+                btn.style.backgroundColor = primaryColor;
+                btn.style.color = textColor;
+            });
+
+            document.getElementById('student-name').style.borderColor = primaryColor;
+            document.getElementById('student-grade').style.borderColor = primaryColor;
+
+            document.body.style.fontFamily = `${fontFamily}, ${baseFontStack}`;
+            
+            document.getElementById('main-title').style.fontSize = `${fontSize * 3}px`;
+            document.getElementById('subtitle').style.fontSize = `${fontSize * 1.25}px`;
+            
+            document.querySelectorAll('h2').forEach(el => {
+                el.style.fontSize = `${fontSize * 1.875}px`;
+            });
+            
+            document.querySelectorAll('h3').forEach(el => {
+                el.style.fontSize = `${fontSize * 1.5}px`;
+            });
+            
+            document.querySelectorAll('p, input, button, select, label').forEach(el => {
+                el.style.fontSize = `${fontSize * 1}px`;
+            });
+
+            document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+            document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+            document.getElementById('welcome-text').textContent = config.welcome_text || defaultConfig.welcome_text;
+        }
+
+        // Student Form Handler
+        document.getElementById('student-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            currentStudent = document.getElementById('student-name').value.trim();
+            currentGrade = parseInt(document.getElementById('student-grade').value);
+            
+            if (currentStudent && currentGrade) {
+                document.getElementById('display-name').textContent = currentStudent;
+                document.getElementById('display-grade').textContent = currentGrade;
+                document.getElementById('welcome-section').style.display = 'none';
+                document.getElementById('dashboard-section').style.display = 'block';
+                loadSubjects();
+                showToast('Selamat belajar, ' + currentStudent + '! 🎉', '#10B981');
+            }
+        });
+
+        function loadSubjects() {
+            const grid = document.getElementById('subjects-grid');
+            grid.innerHTML = '';
+            
+            const subjects = subjectsData[currentGrade];
+            subjects.forEach(subject => {
+                const card = document.createElement('article');
+                card.className = 'card-hover p-6 rounded-3xl shadow-lg cursor-pointer';
+                card.style.backgroundColor = subject.color;
+                card.style.color = '#FFFFFF';
+                card.onclick = () => startActivity(subject.name);
+                
+                card.innerHTML = `
+                    <div class="text-center">
+                        <div class="text-6xl mb-4">${subject.emoji}</div>
+                        <h3 class="text-xl font-bold">${subject.name}</h3>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        function startActivity(subjectName) {
+            currentSubject = subjectName;
+            currentQuestionIndex = 0;
+            
+            const questions = questionsDatabase[currentGrade][subjectName];
+            currentQuestions = [...questions].sort(() => Math.random() - 0.5).slice(0, 5);
+            
+            const subject = subjectsData[currentGrade].find(s => s.name === subjectName);
+            document.getElementById('activity-emoji').textContent = subject.emoji;
+            document.getElementById('activity-title').textContent = subjectName;
+            document.getElementById('activity-description').textContent = `Mari belajar ${subjectName} untuk Kelas ${currentGrade}!`;
+            
+            document.getElementById('subjects-grid').parentElement.style.display = 'none';
+            document.getElementById('activity-section').style.display = 'block';
+            
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= currentQuestions.length) {
+                showResults();
+                return;
+            }
+            
+            isProcessing = false;
+            const question = currentQuestions[currentQuestionIndex];
+            
+            document.getElementById('question-number').textContent = `${currentQuestionIndex + 1}/${currentQuestions.length}`;
+            document.getElementById('question-text').textContent = question.q;
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'none';
+            
+            const answersGrid = document.getElementById('answers-grid');
+            answersGrid.innerHTML = '';
+            
+            question.a.forEach((answer, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn p-6 rounded-2xl shadow-lg text-xl font-bold';
+                btn.textContent = answer;
+                btn.onclick = () => checkAnswer(index, question.correct);
+                answersGrid.appendChild(btn);
+            });
+        }
+
+        async function checkAnswer(selected, correct) {
+            if (isProcessing) return;
+            isProcessing = true;
+            
+            const feedback = document.getElementById('feedback');
+            feedback.style.display = 'block';
+            
+            if (selected === correct) {
+                feedback.textContent = '🎉 Benar! Hebat sekali!';
+                feedback.style.backgroundColor = '#10B981';
+                feedback.style.color = '#FFFFFF';
+                feedback.className = 'text-center text-2xl font-bold p-4 rounded-2xl correct-flash';
+                
+                const points = 20;
+                totalScore += points;
+                document.getElementById('total-score').textContent = totalScore;
+                
+                const result = await window.dataSdk.create({
+                    student_name: currentStudent,
+                    grade: currentGrade,
+                    subject: currentSubject,
+                    score: points,
+                    activity_type: 'quiz',
+                    timestamp: new Date().toISOString()
+                });
+                
+                if (!result.isOk) {
+                    console.error('Failed to save score');
+                }
+            } else {
+                feedback.textContent = '❌ Belum tepat. Coba lagi ya!';
+                feedback.style.backgroundColor = '#EF4444';
+                feedback.style.color = '#FFFFFF';
+            }
+            
+            document.getElementById('next-btn').style.display = 'inline-block';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function showResults() {
+            const feedback = document.getElementById('feedback');
+            const maxScore = currentQuestions.length * 20;
+            const percentage = (totalScore / maxScore * 100).toFixed(0);
+            
+            feedback.innerHTML = `
+                <div class="p-8">
+                    <h3 class="text-4xl font-bold mb-4">🎊 Kuis Selesai! 🎊</h3>
+                    <p class="text-3xl mb-4">Skor: ${totalScore} dari ${maxScore}</p>
+                    <p class="text-2xl mb-6">Persentase: ${percentage}%</p>
+                    <button onclick="backToSubjects()" class="px-8 py-4 rounded-full font-bold text-xl shadow-lg btn-hover">
+                        Kembali ke Mata Pelajaran
+                    </button>
+                </div>
+            `;
+            feedback.style.display = 'block';
+            feedback.style.backgroundColor = '#8B5CF6';
+            feedback.style.color = '#FFFFFF';
+            
+            document.getElementById('question-container').querySelector('.p-8').style.display = 'none';
+            document.getElementById('answers-grid').style.display = 'none';
+        }
+
+        function backToSubjects() {
+            document.getElementById('activity-section').style.display = 'none';
+            document.getElementById('subjects-grid').parentElement.style.display = 'block';
+            document.getElementById('question-container').querySelector('.p-8').style.display = 'block';
+            document.getElementById('answers-grid').style.display = 'grid';
+        }
+
+        function logout() {
+            currentStudent = "";
+            currentGrade = 0;
+            totalScore = 0;
+            document.getElementById('student-name').value = '';
+            document.getElementById('student-grade').value = '';
+            document.getElementById('dashboard-section').style.display = 'none';
+            document.getElementById('welcome-section').style.display = 'block';
+        }
+
+        function showToast(message, bgColor) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.backgroundColor = bgColor;
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        initializeApp();
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ad2d337d172a3d0',t:'MTc2NTYwMTI2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
