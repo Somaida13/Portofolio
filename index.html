@@ -60,53 +60,29 @@
     </section>
 
 
-  <!-- Section Utama Aplikasi -->
-    <section id="Jam" class="section">
+  
+  <!-- JAM -->
+    <section id="tentang" class="section">
       <div class="container">
-        <!-- Bagian Kiri: Jam dan Informasi Waktu -->
-        <section id="clock-display-section">
-            <div id="full-date" class="date-text italic">Memuat tanggal...</div>
-            <div id="clock">00.00.00</div>
-            
-            <!-- Tag Lokasi GPS -->
-            <div id="location-tag-section">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
-                </svg>
-                <span id="city-name">Mencari Lokasi...</span>
-            </div>
-   
-        </section>
-
-        <!-- Bagian Rincian Salat Berikutnya (Gaya Warning) -->
-        <section id="next-prayer-section">
-            <div class="next-title">Salat Berikutnya</div>
-            <div id="next-prayer-name">---</div>
-            <div id="next-countdown-timer">00:00:00</div>
-        </section>
-       </div>
-
-        <!-- JAM  -->
-    <section id="jam" class="section">
-      <div class="container">
-        <h2 class="section-title reveal-anim">Pengingat</h2>
+        <h2 class="section-title reveal-anim">Pengingat Kita</h2>
         <div class="grid about-grid">
           <div class="card reveal-anim delay-1">
-            
-              <section id="clock-display-section">
+         
+           <section id="clock-display-section">
             <div id="full-date" class="date-text italic">Memuat tanggal...</div>
             <div id="clock">00.00.00</div>
             
-            <!-- Tag Lokasi GPS -->
-            <div id="location-tag-section">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
-                </svg>
-                <span id="city-name">Mencari Lokasi...</span>
-            </div>
-        </section>
-   <!--  
-        <div class="card reveal-anim delay-2">
+            <div id="location-controls">
+                <!-- Tag Lokasi Aktif -->
+                <div id="location-tag-section">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                    </svg>
+                    <span id="city-name">Mencari Lokasi...</span>
+                </div>
+         
+          </div>
+   <!--        <div class="card reveal-anim delay-2">
             <h3>Skill Utama</h3>
             <ul class="skills">
               <li><a href="asset/html5.html">HTML5</a>, <a href="asset/teori-css3-flexbox-grid.html">CSS3 (Flexbox / Grid)</a></li>
@@ -115,19 +91,38 @@
               <li><a href="asset/ui_ux.html">UI/UX</a>, <a href="asset/prototyping.html">prototyping </a>, <a href="asset/Figma.html">Figma</a></li>
             </ul>
           </div>
--->
+
+    -->
           <div class="card reveal-anim delay-3">
-           
-             <section id="next-prayer-section">
-            <div class="next-title">Salat Berikutnya</div>
-            <div id="next-prayer-name">---</div>
-            <div id="next-prayer-time-display">00:00</div>
-            <div id="next-countdown-timer">00:00:00</div>
-            </section>
+          <select id="city-selector" onchange="handleCityChange(this.value)">
+                    <option value="gps">📍 Gunakan GPS Otomatis</option>
+                    <optgroup label="Kota Besar Indonesia">
+                        <option value="-6.2088,106.8456">Jakarta</option>
+                        <option value="-7.2575,112.7521">Surabaya</option>
+                        <option value="-6.9175,107.6191">Bandung</option>
+                        <option value="-7.7956,110.3695">Yogyakarta</option>
+                        <option value="-6.9667,110.4167">Semarang</option>
+                        <option value="3.5952,98.6722">Medan</option>
+                        <option value="-5.1476,119.4146">Makassar</option>
+                        <option value="-0.9471,100.4172">Padang</option>
+                        <option value="-2.9761,104.7754">Palembang</option>
+                        <option value="1.2654,116.8312">Balikpapan</option>
+                        <option value="-3.3167,114.5833">Banjarmasin</option>
+                        <option value="-8.6705,115.2126">Denpasar</option>
+                        <option value="-0.0263,109.3425">Pontianak</option>
+                        <option value="0.5071,101.4478">Pekanbaru</option>
+                        <option value="-5.3971,105.2667">Bandar Lampung</option>
+                    </optgroup>
+                </select>
+
+
           </div>
         </div>
       </div>
     </section>
+
+
+
         
     <!-- TENTANG SAYA -->
     <section id="tentang" class="section">

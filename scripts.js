@@ -143,8 +143,8 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
  
 
-
- let prayerTimings = {};
+// JAM Solat 
+let prayerTimings = {};
         const prayerNames = {
             Fajr: "Subuh",
             Dhuhr: "Dzuhur",
@@ -153,19 +153,13 @@ document.getElementById('year').textContent = new Date().getFullYear();
             Isha: "Isya"
         };
 
-        /**
-         * Perbarui Jam Real-time
-         */
         function updateClockAndDate() {
             const now = new Date();
-            
-            // Format jam HH.mm.ss
             const hours = String(now.getHours()).padStart(2, '0');
             const mins = String(now.getMinutes()).padStart(2, '0');
             const secs = String(now.getSeconds()).padStart(2, '0');
             document.getElementById('clock').textContent = `${hours}.${mins}.${secs}`;
             
-            // Format tanggal Indonesia
             const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
             document.getElementById('full-date').textContent = now.toLocaleDateString('id-ID', options);
 
@@ -174,9 +168,6 @@ document.getElementById('year').textContent = new Date().getFullYear();
             }
         }
 
-        /**
-         * Mencari, Menampilkan Waktu, dan Hitung Mundur Salat Berikutnya
-         */
         function processNextPrayer(now) {
             const essential = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
             let next = null;
@@ -188,7 +179,6 @@ document.getElementById('year').textContent = new Date().getFullYear();
                 pDate.setHours(h, m, 0, 0);
 
                 let diff = pDate - now;
-                // Jika waktu salat sudah lewat hari ini, arahkan ke besok
                 if (diff < 0) {
                     pDate.setDate(pDate.getDate() + 1);
                     diff = pDate - now;
@@ -206,10 +196,8 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
             if (next) {
                 document.getElementById('next-prayer-name').textContent = next.name;
-                // Menampilkan waktu salatnya (misal 12:15)
                 document.getElementById('next-prayer-time-display').textContent = next.timeStr;
                 
-                // Menghitung mundur (HH:mm:ss)
                 const h = Math.floor(next.countdownMs / 3600000);
                 const m = Math.floor((next.countdownMs % 3600000) / 60000);
                 const s = Math.floor((next.countdownMs % 60000) / 1000);
@@ -219,41 +207,49 @@ document.getElementById('year').textContent = new Date().getFullYear();
             }
         }
 
-        /**
-         * Ambil Data via Aladhan API
-         */
-        async function fetchPrayerTimes(lat, lon) {
+        async function fetchPrayerTimes(lat, lon, cityName = null) {
             try {
-                // Method 20 adalah Kemenag RI
                 const response = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=20`);
                 const data = await response.json();
                 if (data.code === 200) {
                     prayerTimings = data.data.timings;
-                    const locationLabel = data.data.meta.timezone.split('/')[1] || "Lokasi Aktif";
-                    document.getElementById('city-name').textContent = locationLabel.replace('_', ' ');
+                    if (cityName) {
+                        document.getElementById('city-name').textContent = cityName;
+                    } else {
+                        const locationLabel = data.data.meta.timezone.split('/')[1] || "Terdeteksi";
+                        document.getElementById('city-name').textContent = locationLabel.replace('_', ' ');
+                    }
                 }
             } catch (err) {
                 document.getElementById('city-name').textContent = "Gagal memuat data";
             }
         }
 
-        /**
-         * Deteksi Lokasi GPS
-         */
-        function initApp() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (pos) => fetchPrayerTimes(pos.coords.latitude, pos.coords.longitude),
-                    () => fetchPrayerTimes(-6.2088, 106.8456) // Fallback Jakarta
-                );
+        function handleCityChange(value) {
+            if (value === 'gps') {
+                initGPS();
             } else {
-                fetchPrayerTimes(-6.2088, 106.8456);
+                const [lat, lon] = value.split(',').map(Number);
+                const selector = document.getElementById('city-selector');
+                const cityName = selector.options[selector.selectedIndex].text;
+                fetchPrayerTimes(lat, lon, cityName);
             }
         }
 
-        // Loop update UI
+        function initGPS() {
+            document.getElementById('city-name').textContent = "Mencari Lokasi...";
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => fetchPrayerTimes(pos.coords.latitude, pos.coords.longitude),
+                    () => fetchPrayerTimes(-6.2088, 106.8456, "Jakarta (Default)")
+                );
+            } else {
+                fetchPrayerTimes(-6.2088, 106.8456, "Jakarta (Default)");
+            }
+        }
+
         setInterval(updateClockAndDate, 1000);
         window.onload = () => {
-            initApp();
+            initGPS();
             updateClockAndDate();
         };

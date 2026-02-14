@@ -59,7 +59,26 @@ button{background:none;border:0;color:var(--text);cursor:pointer}
 .section-title{font-size:1.4rem;margin:0 0 1rem}
 
 
-    /* Section Jam & Lokasi */
+  /* JAM SOLAT */
+
+
+     /* Container Utama */
+        #main-app-section {
+            background-color: #14b8a6; /* Warna Teal Utama */
+            border-radius: 40px;
+            width: 100%;
+            max-width: 950px;
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Section Jam & Lokasi */
         #clock-display-section {
             display: flex;
             flex-direction: column;
@@ -78,6 +97,13 @@ button{background:none;border:0;color:var(--text);cursor:pointer}
             opacity: 0.9;
         }
 
+        #location-controls {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
         #location-tag-section {
             display: flex;
             align-items: center;
@@ -86,8 +112,30 @@ button{background:none;border:0;color:var(--text);cursor:pointer}
             padding: 4px 16px;
             border-radius: 100px;
             width: fit-content;
-            margin-top: 15px;
             font-size: 0.875rem;
+        }
+
+        /* Styling Dropdown Kota */
+        #city-selector {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 12px;
+            outline: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            width: 220px;
+            transition: all 0.3s;
+        }
+
+        #city-selector:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        #city-selector option {
+            background: #14b8a6;
+            color: white;
         }
 
         /* Section Jadwal Mendatang dengan Warna Warning */
@@ -97,7 +145,7 @@ button{background:none;border:0;color:var(--text);cursor:pointer}
             border: 2px solid rgba(251, 191, 36, 0.4);
             border-radius: 28px;
             padding: 24px 32px;
-            min-width: 260px;
+            min-width: 280px;
             box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
             transition: all 0.3s ease;
             text-align: center;
@@ -127,7 +175,7 @@ button{background:none;border:0;color:var(--text);cursor:pointer}
             font-weight: 700;
             color: #ffffff;
             line-height: 1;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         #next-countdown-timer {
@@ -153,10 +201,13 @@ button{background:none;border:0;color:var(--text);cursor:pointer}
             #clock {
                 font-size: 4rem;
             }
-            #location-tag-section {
-                margin: 15px auto 0;
+            #location-tag-section, #city-selector {
+                margin-left: auto;
+                margin-right: auto;
             }
         }
+
+
 
 
 
