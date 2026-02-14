@@ -149,8 +149,8 @@ button{background:none;border:0;color:var(--text);cursor:pointer}
       margin-top: 10px;
       padding: 8px;
       border-radius: 8px;
-      background: var(--bg-card, #59616e);
->>>>>>> 0617e3d3d4d02bdd4cb4685af8485717ddb3d2a3
+      background: var(--bg-card, #eedf11);
+
       color: inherit;
       border: 1px solid rgba(255,255,255,0.1);
     }
