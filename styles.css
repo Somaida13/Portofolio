@@ -58,6 +58,93 @@ button{background:none;border:0;color:var(--text);cursor:pointer}
 .section{padding:3rem 0}
 .section-title{font-size:1.4rem;margin:0 0 1rem}
 
+
+   /* Section Jam & Lokasi */
+        #clock-display-section {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        #clock {
+            font-size: 6rem;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .date-text {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+
+        #location-tag-section {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 4px 16px;
+            border-radius: 100px;
+            width: fit-content;
+            margin-top: 15px;
+            font-size: 0.875rem;
+        }
+
+        /* Section Jadwal Mendatang dengan Warna Warning */
+        #next-prayer-section {
+            /* Menggunakan warna oranye keemasan untuk efek warning */
+            background: rgba(251, 191, 36, 0.15); 
+            backdrop-filter: blur(12px);
+            border: 2px solid rgba(251, 191, 36, 0.4);
+            border-radius: 28px;
+            padding: 24px 32px;
+            min-width: 260px;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .next-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #fef3c7; /* Kuning sangat muda */
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        #next-prayer-name {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+            color: #fbbf24; /* Warna kuning warning */
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+        }
+
+        #next-countdown-timer {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fbbf24;
+            opacity: 0.9;
+        }
+
+        /* Responsif untuk perangkat mobile */
+        @media (max-width: 768px) {
+            #main-app-section {
+                flex-direction: column;
+                text-align: center;
+                gap: 40px;
+                padding: 30px;
+            }
+            #clock {
+                font-size: 4rem;
+            }
+            #location-tag-section {
+                margin: 15px auto 0;
+            }
+        }
+
 /* About grid */
 .about-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
 .card{background:var(--card);padding:1rem;border-radius:var(--radius);box-shadow:0 4px 20px rgba(0,0,0,0.4)}

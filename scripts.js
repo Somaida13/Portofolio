@@ -140,3 +140,110 @@ if(form){
 
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
+
+  let prayerTimings = {};
+        const prayerNames = {
+            Fajr: "Subuh",
+            Dhuhr: "Dzuhur",
+            Asr: "Ashar",
+            Maghrib: "Maghrib",
+            Isha: "Isya"
+        };
+
+        /**
+         * Perbarui Jam Real-time
+         */
+        function updateClockAndDate() {
+            const now = new Date();
+            
+            // Format jam HH.mm.ss
+            const hours = String(now.getHours()).padStart(2, '0');
+            const mins = String(now.getMinutes()).padStart(2, '0');
+            const secs = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}.${mins}.${secs}`;
+            
+            // Format tanggal Indonesia
+            const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            document.getElementById('full-date').textContent = now.toLocaleDateString('id-ID', options);
+
+            if (Object.keys(prayerTimings).length > 0) {
+                calculateNextPrayer(now);
+            }
+        }
+
+        /**
+         * Hitung Mundur Salat Berikutnya
+         */
+        function calculateNextPrayer(now) {
+            const essential = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+            let next = null;
+            let minDiff = Infinity;
+
+            essential.forEach(id => {
+                const [h, m] = prayerTimings[id].split(':').map(Number);
+                const pDate = new Date();
+                pDate.setHours(h, m, 0, 0);
+
+                let diff = pDate - now;
+                // Jika waktu salat sudah lewat, cek untuk besok
+                if (diff < 0) {
+                    pDate.setDate(pDate.getDate() + 1);
+                    diff = pDate - now;
+                }
+
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    next = { name: prayerNames[id], time: diff };
+                }
+            });
+
+            if (next) {
+                document.getElementById('next-prayer-name').textContent = next.name;
+                
+                const h = Math.floor(next.time / 3600000);
+                const m = Math.floor((next.time % 3600000) / 60000);
+                const s = Math.floor((next.time % 60000) / 1000);
+                
+                document.getElementById('next-countdown-timer').textContent = 
+                    `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            }
+        }
+
+        /**
+         * Ambil Data via Aladhan API
+         */
+        async function fetchPrayerTimes(lat, lon) {
+            try {
+                // Method 20 adalah Kemenag RI
+                const response = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=20`);
+                const data = await response.json();
+                if (data.code === 200) {
+                    prayerTimings = data.data.timings;
+                    const locationLabel = data.data.meta.timezone.split('/')[1] || "Lokasi Aktif";
+                    document.getElementById('city-name').textContent = locationLabel.replace('_', ' ');
+                }
+            } catch (err) {
+                document.getElementById('city-name').textContent = "Gagal memuat data";
+            }
+        }
+
+        /**
+         * Deteksi Lokasi GPS
+         */
+        function initApp() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => fetchPrayerTimes(pos.coords.latitude, pos.coords.longitude),
+                    () => fetchPrayerTimes(-6.2088, 106.8456) // Fallback Jakarta
+                );
+            } else {
+                fetchPrayerTimes(-6.2088, 106.8456);
+            }
+        }
+
+        // Loop update UI
+        setInterval(updateClockAndDate, 1000);
+        window.onload = () => {
+            initApp();
+            updateClockAndDate();
+        };
