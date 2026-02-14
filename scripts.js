@@ -142,114 +142,136 @@ if(form){
 document.getElementById('year').textContent = new Date().getFullYear();
 
  
+ <!-- SCRIPT INTEGRASI JADWAL SALAT & ANALOG CLOCK -->
+ 
+    let prayerTimings = {};
+    const prayerNames = {
+        Fajr: "Subuh",
+        Dhuhr: "Dzuhur",
+        Asr: "Ashar",
+        Maghrib: "Maghrib",
+        Isha: "Isya"
+    };
 
-// JAM Solat 
-let prayerTimings = {};
-        const prayerNames = {
-            Fajr: "Subuh",
-            Dhuhr: "Dzuhur",
-            Asr: "Ashar",
-            Maghrib: "Maghrib",
-            Isha: "Isya"
-        };
+    function updateClockAndDate() {
+        const now = new Date();
+        
+        // Logika Jam Analog
+        const seconds = now.getSeconds();
+        const minutes = now.getMinutes();
+        const hours = now.getHours();
 
-        function updateClockAndDate() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const mins = String(now.getMinutes()).padStart(2, '0');
-            const secs = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clock').textContent = `${hours}.${mins}.${secs}`;
+        const secDeg = (seconds / 60) * 360;
+        const minDeg = ((minutes / 60) * 360) + ((seconds/60)*6);
+        const hourDeg = ((hours / 12) * 360) + ((minutes/60)*30);
+
+        document.getElementById('sec-hand').style.transform = `translateX(-50%) rotate(${secDeg}deg)`;
+        document.getElementById('min-hand').style.transform = `translateX(-50%) rotate(${minDeg}deg)`;
+        document.getElementById('hour-hand').style.transform = `translateX(-50%) rotate(${hourDeg}deg)`;
+
+        // Update Digital untuk aksesibilitas
+        const hDigital = String(hours).padStart(2, '0');
+        const mDigital = String(minutes).padStart(2, '0');
+        const sDigital = String(seconds).padStart(2, '0');
+        document.getElementById('clock-digital').textContent = `${hDigital}:${mDigital}:${sDigital}`;
+        
+        const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+        const dateEl = document.getElementById('full-date');
+        if(dateEl) dateEl.textContent = now.toLocaleDateString('id-ID', options);
+
+        if (Object.keys(prayerTimings).length > 0) {
+            processNextPrayer(now);
+        }
+    }
+
+    function processNextPrayer(now) {
+        const essential = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+        let next = null;
+        let minDiff = Infinity;
+
+        essential.forEach(id => {
+            const [h, m] = prayerTimings[id].split(':').map(Number);
+            const pDate = new Date();
+            pDate.setHours(h, m, 0, 0);
+
+            let diff = pDate - now;
+            if (diff < 0) {
+                pDate.setDate(pDate.getDate() + 1);
+                diff = pDate - now;
+            }
+
+            if (diff < minDiff) {
+                minDiff = diff;
+                next = { 
+                    name: prayerNames[id], 
+                    timeStr: prayerTimings[id],
+                    countdownMs: diff
+                };
+            }
+        });
+
+        if (next) {
+            document.getElementById('next-prayer-name').textContent = next.name;
+            document.getElementById('next-prayer-time-display').textContent = next.timeStr;
             
-            const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-            document.getElementById('full-date').textContent = now.toLocaleDateString('id-ID', options);
-
-            if (Object.keys(prayerTimings).length > 0) {
-                processNextPrayer(now);
-            }
+            const h = Math.floor(next.countdownMs / 3600000);
+            const m = Math.floor((next.countdownMs % 3600000) / 60000);
+            const s = Math.floor((next.countdownMs % 60000) / 1000);
+            
+            document.getElementById('next-countdown-timer').textContent = 
+                `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
         }
+    }
 
-        function processNextPrayer(now) {
-            const essential = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
-            let next = null;
-            let minDiff = Infinity;
-
-            essential.forEach(id => {
-                const [h, m] = prayerTimings[id].split(':').map(Number);
-                const pDate = new Date();
-                pDate.setHours(h, m, 0, 0);
-
-                let diff = pDate - now;
-                if (diff < 0) {
-                    pDate.setDate(pDate.getDate() + 1);
-                    diff = pDate - now;
+    async function fetchPrayerTimes(lat, lon, cityName = null) {
+        try {
+            const response = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=20`);
+            const data = await response.json();
+            if (data.code === 200) {
+                prayerTimings = data.data.timings;
+                const cityEl = document.getElementById('city-name');
+                if (cityName) {
+                    if(cityEl) cityEl.textContent = cityName;
+                } else {
+                    const locationLabel = data.data.meta.timezone.split('/')[1] || "Terdeteksi";
+                    if(cityEl) cityEl.textContent = locationLabel.replace('_', ' ');
                 }
-
-                if (diff < minDiff) {
-                    minDiff = diff;
-                    next = { 
-                        name: prayerNames[id], 
-                        timeStr: prayerTimings[id],
-                        countdownMs: diff
-                    };
-                }
-            });
-
-            if (next) {
-                document.getElementById('next-prayer-name').textContent = next.name;
-                document.getElementById('next-prayer-time-display').textContent = next.timeStr;
-                
-                const h = Math.floor(next.countdownMs / 3600000);
-                const m = Math.floor((next.countdownMs % 3600000) / 60000);
-                const s = Math.floor((next.countdownMs % 60000) / 1000);
-                
-                document.getElementById('next-countdown-timer').textContent = 
-                    `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
             }
+        } catch (err) {
+            const cityEl = document.getElementById('city-name');
+            if(cityEl) cityEl.textContent = "Gagal memuat data";
         }
+    }
 
-        async function fetchPrayerTimes(lat, lon, cityName = null) {
-            try {
-                const response = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=20`);
-                const data = await response.json();
-                if (data.code === 200) {
-                    prayerTimings = data.data.timings;
-                    if (cityName) {
-                        document.getElementById('city-name').textContent = cityName;
-                    } else {
-                        const locationLabel = data.data.meta.timezone.split('/')[1] || "Terdeteksi";
-                        document.getElementById('city-name').textContent = locationLabel.replace('_', ' ');
-                    }
-                }
-            } catch (err) {
-                document.getElementById('city-name').textContent = "Gagal memuat data";
-            }
-        }
-
-        function handleCityChange(value) {
-            if (value === 'gps') {
-                initGPS();
-            } else {
-                const [lat, lon] = value.split(',').map(Number);
-                const selector = document.getElementById('city-selector');
-                const cityName = selector.options[selector.selectedIndex].text;
-                fetchPrayerTimes(lat, lon, cityName);
-            }
-        }
-
-        function initGPS() {
-            document.getElementById('city-name').textContent = "Mencari Lokasi...";
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (pos) => fetchPrayerTimes(pos.coords.latitude, pos.coords.longitude),
-                    () => fetchPrayerTimes(-6.2088, 106.8456, "Jakarta (Default)")
-                );
-            } else {
-                fetchPrayerTimes(-6.2088, 106.8456, "Jakarta (Default)");
-            }
-        }
-
-        setInterval(updateClockAndDate, 1000);
-        window.onload = () => {
+    function handleCityChange(value) {
+        if (value === 'gps') {
             initGPS();
-            updateClockAndDate();
-        };
+        } else {
+            const [lat, lon] = value.split(',').map(Number);
+            const selector = document.getElementById('city-selector');
+            const cityName = selector.options[selector.selectedIndex].text;
+            fetchPrayerTimes(lat, lon, cityName);
+        }
+    }
+
+    function initGPS() {
+        const cityEl = document.getElementById('city-name');
+        if(cityEl) cityEl.textContent = "Mencari Lokasi...";
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (pos) => fetchPrayerTimes(pos.coords.latitude, pos.coords.longitude),
+                () => fetchPrayerTimes(-6.2088, 106.8456, "Jakarta (Default)")
+            );
+        } else {
+            fetchPrayerTimes(-6.2088, 106.8456, "Jakarta (Default)");
+        }
+    }
+
+    setInterval(updateClockAndDate, 1000);
+    window.addEventListener('load', () => {
+        initGPS();
+        updateClockAndDate();
+        const yearEl = document.getElementById('year');
+        if(yearEl) yearEl.textContent = new Date().getFullYear();
+    });
+ 

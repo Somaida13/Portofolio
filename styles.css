@@ -59,154 +59,108 @@ button{background:none;border:0;color:var(--text);cursor:pointer}
 .section-title{font-size:1.4rem;margin:0 0 1rem}
 
 
-  /* JAM SOLAT */
+   /* Jam Analog Styling */
+    .analog-clock {
+      width: 180px;
+      height: 180px;
+      border: 6px solid var(--accent-color, #14b8a6);
+      border-radius: 50%;
+      margin: 20px auto;
+      position: relative;
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 20px rgba(20, 184, 166, 0.2);
+    }
 
+    .analog-clock .dot {
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+    }
 
-     /* Container Utama */
-        #main-app-section {
-            background-color: #14b8a6; /* Warna Teal Utama */
-            border-radius: 40px;
-            width: 100%;
-            max-width: 950px;
-            padding: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
+    .hand {
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      transform-origin: bottom;
+      border-radius: 10px;
+      transform: translateX(-50%) rotate(0deg);
+    }
 
-        /* Section Jam & Lokasi */
-        #clock-display-section {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
+    .hour-hand {
+      width: 5px;
+      height: 50px;
+      background: #fff;
+    }
 
-        #clock {
-            font-size: 6rem;
-            font-weight: 700;
-            line-height: 1;
-            letter-spacing: -2px;
-        }
+    .min-hand {
+      width: 3px;
+      height: 70px;
+      background: #ddd;
+    }
 
-        .date-text {
-            font-size: 1.25rem;
-            opacity: 0.9;
-        }
+    .sec-hand {
+      width: 2px;
+      height: 80px;
+      background: #fbbf24;
+    }
 
-        #location-controls {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+    #clock-digital {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-color, #14b8a6);
+      margin-top: 10px;
+    }
 
-        #location-tag-section {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 4px 16px;
-            border-radius: 100px;
-            width: fit-content;
-            font-size: 0.875rem;
-        }
-
-        /* Styling Dropdown Kota */
-        #city-selector {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 12px;
-            outline: none;
-            cursor: pointer;
-            font-size: 0.875rem;
-            width: 220px;
-            transition: all 0.3s;
-        }
-
-        #city-selector:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        #city-selector option {
-            background: #14b8a6;
-            color: white;
-        }
-
-        /* Section Jadwal Mendatang dengan Warna Warning */
-        #next-prayer-section {
-            background: rgba(251, 191, 36, 0.15); 
-            backdrop-filter: blur(12px);
-            border: 2px solid rgba(251, 191, 36, 0.4);
-            border-radius: 28px;
-            padding: 24px 32px;
-            min-width: 280px;
-            box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .next-title {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #fef3c7; 
-            opacity: 0.9;
-            margin-bottom: 8px;
-        }
-
-        #next-prayer-name {
-            font-size: 2.25rem;
-            font-weight: 800;
-            margin-bottom: 4px;
-            color: #fbbf24; 
-            text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
-        }
-
-        #next-prayer-time-display {
-            font-family: 'Inter', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #ffffff;
-            line-height: 1;
-            margin-bottom: 12px;
-        }
-
-        #next-countdown-timer {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #fbbf24;
-            opacity: 0.85;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 4px 12px;
-            border-radius: 8px;
-            display: inline-block;
-        }
-
-        /* Responsif untuk perangkat mobile */
-        @media (max-width: 768px) {
-            #main-app-section {
-                flex-direction: column;
-                text-align: center;
-                gap: 40px;
-                padding: 30px;
-            }
-            #clock {
-                font-size: 4rem;
-            }
-            #location-tag-section, #city-selector {
-                margin-left: auto;
-                margin-right: auto;
-            }
-        }
-
+    .next-prayer-box {
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      padding: 1.5rem;
+      border-radius: 15px;
+      margin-top: 1rem;
+    }
+    #next-prayer-name {
+      color: #fbbf24;
+      font-weight: 800;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+    }
+    #next-prayer-time-display {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    #next-countdown-timer {
+      display: inline-block;
+      margin-top: 5px;
+      font-family: monospace;
+      background: rgba(0,0,0,0.2);
+      padding: 2px 8px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      color: #fbbf24;
+    }
+    #city-selector {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
+      border-radius: 8px;
+      background: var(--bg-card, #1e293b);
+      color: inherit;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    #location-tag-section {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-top: 10px;
+    }
 
 
 
