@@ -142,7 +142,7 @@ if(form){
 document.getElementById('year').textContent = new Date().getFullYear();
 
  
- <!-- SCRIPT INTEGRASI JADWAL SALAT & ANALOG CLOCK -->
+ //SCRIPT INTEGRASI JADWAL SALAT & ANALOG CLOCK 
  
     let prayerTimings = {};
     const prayerNames = {
