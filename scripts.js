@@ -141,7 +141,10 @@ if(form){
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-  let prayerTimings = {};
+ 
+
+
+ let prayerTimings = {};
         const prayerNames = {
             Fajr: "Subuh",
             Dhuhr: "Dzuhur",
@@ -167,14 +170,14 @@ document.getElementById('year').textContent = new Date().getFullYear();
             document.getElementById('full-date').textContent = now.toLocaleDateString('id-ID', options);
 
             if (Object.keys(prayerTimings).length > 0) {
-                calculateNextPrayer(now);
+                processNextPrayer(now);
             }
         }
 
         /**
-         * Hitung Mundur Salat Berikutnya
+         * Mencari, Menampilkan Waktu, dan Hitung Mundur Salat Berikutnya
          */
-        function calculateNextPrayer(now) {
+        function processNextPrayer(now) {
             const essential = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
             let next = null;
             let minDiff = Infinity;
@@ -185,7 +188,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
                 pDate.setHours(h, m, 0, 0);
 
                 let diff = pDate - now;
-                // Jika waktu salat sudah lewat, cek untuk besok
+                // Jika waktu salat sudah lewat hari ini, arahkan ke besok
                 if (diff < 0) {
                     pDate.setDate(pDate.getDate() + 1);
                     diff = pDate - now;
@@ -193,16 +196,23 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
                 if (diff < minDiff) {
                     minDiff = diff;
-                    next = { name: prayerNames[id], time: diff };
+                    next = { 
+                        name: prayerNames[id], 
+                        timeStr: prayerTimings[id],
+                        countdownMs: diff
+                    };
                 }
             });
 
             if (next) {
                 document.getElementById('next-prayer-name').textContent = next.name;
+                // Menampilkan waktu salatnya (misal 12:15)
+                document.getElementById('next-prayer-time-display').textContent = next.timeStr;
                 
-                const h = Math.floor(next.time / 3600000);
-                const m = Math.floor((next.time % 3600000) / 60000);
-                const s = Math.floor((next.time % 60000) / 1000);
+                // Menghitung mundur (HH:mm:ss)
+                const h = Math.floor(next.countdownMs / 3600000);
+                const m = Math.floor((next.countdownMs % 3600000) / 60000);
+                const s = Math.floor((next.countdownMs % 60000) / 1000);
                 
                 document.getElementById('next-countdown-timer').textContent = 
                     `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
